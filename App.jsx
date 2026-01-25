@@ -148,11 +148,11 @@ const bottomTabs = [
 
 const StatusBar = ({ debugStyle }) => (
   <HStack
-    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]"
+    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-body-m text-[var(--color-text-primary)]"
     style={debugStyle}
   >
     <span className="font-[var(--font-weight-semibold)]">9:30</span>
-    <HStack className="w-[var(--size-status-icons-w)] justify-end gap-[var(--space-0-5)] text-[var(--font-size-caption)]">
+    <HStack className="w-[var(--size-status-icons-w)] justify-end gap-[var(--space-0-5)] text-body-s">
       <span>●</span>
       <span>●</span>
       <span>●</span>
@@ -235,7 +235,7 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
       <Icon name={iconName} alt="" className="h-full w-full" />
     </span>
     {badgeIconName && (
-      <Badge className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] h-[var(--size-badge)] min-w-[var(--size-badge)] p-[var(--space-0-5)] text-[var(--font-size-caption)] font-[var(--font-weight-semibold)]">
+      <Badge className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] h-[var(--size-badge)] min-w-[var(--size-badge)] p-[var(--space-0-5)] text-body-s font-[var(--font-weight-semibold)]">
         <span className="h-[var(--size-badge-icon)] w-[var(--size-badge-icon)]">
           <Icon name={badgeIconName} alt="" className="h-full w-full" />
         </span>
@@ -249,10 +249,10 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
     <span className="flex h-[var(--size-shortcut-icon)] w-[var(--size-shortcut-icon)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
     </span>
-    <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+    <p className="text-title-s text-[var(--color-text-primary)]">
       {title}
     </p>
-    <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+    <p className="text-body-s text-[var(--color-text-secondary)]">
       {subtitle}
     </p>
   </MutedPill>
@@ -264,13 +264,13 @@ const OrderTrackingCard = ({ order }) => (
       ▥
     </div>
     <VStack className="flex-1 justify-center gap-[var(--space-0-5)]">
-      <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+      <p className="text-title-m text-[var(--color-text-primary)]">
         {order.status}
       </p>
-      <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+      <p className="text-body-m text-[var(--color-text-secondary)]">
         {order.carrier}
       </p>
-      <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+      <p className="text-body-m text-[var(--color-text-secondary)]">
         {order.delivery}
       </p>
     </VStack>
@@ -280,7 +280,7 @@ const OrderTrackingCard = ({ order }) => (
         alt="order"
         className="h-[var(--size-order-image)] w-[var(--size-order-image)] rounded-[var(--radius-s)] object-cover"
       />
-      <span className="absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] text-[var(--font-size-caption)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+      <span className="text-body-s absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
         {order.count}
       </span>
     </div>
@@ -292,17 +292,17 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
     <HStack className="items-start justify-between gap-[var(--space-2)]">
       <VStack className="gap-[var(--space-2)]">
         <HStack className="gap-[var(--space-2)]">
-          <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+          <p className="text-title-l text-[var(--color-text-primary)]">
             Морковск
           </p>
-          <MutedPill className="rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+          <MutedPill className="text-body-s rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--color-text-primary)]">
             312
           </MutedPill>
         </HStack>
-        <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-secondary)]">
+        <p className="text-body-m text-[var(--color-text-secondary)]">
           Суперприз — квартира
         </p>
-        <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+        <button className="text-body-m font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
           Узнать больше
         </button>
       </VStack>
@@ -318,10 +318,10 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 const FinanceSection = ({ debugStyle }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
     <HStack className="justify-between">
-      <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+      <p className="text-title-l text-[var(--color-text-primary)]">
         Финансы
       </p>
-      <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+      <button className="text-body-m font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
         Баллы и бонусы
       </button>
     </HStack>
@@ -329,20 +329,20 @@ const FinanceSection = ({ debugStyle }) => (
       <VStack className="gap-[var(--space-2)]">
         {financeCells.map((cell) => (
           <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+            <p className="text-title-cell text-[var(--color-text-secondary)]">
               {cell.title}
             </p>
-            <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+            <p className="text-title-m text-[var(--color-text-primary)]">
               {cell.value}
             </p>
           </MutedPill>
         ))}
       </VStack>
       <MutedPill className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-        <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+        <p className="text-title-m text-[var(--color-text-primary)]">
           Ozon Premium
         </p>
-        <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+        <p className="text-body-m text-[var(--color-text-link)]">
           Получить больше привилегий
         </p>
       </MutedPill>
@@ -358,15 +358,15 @@ const ProductCardCompact = ({ item, isFavorite, onToggle }) => (
         onClick={onToggle}
         className="absolute right-[6px] top-[6px] flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--color-surface)]"
       >
-        <span className="text-[12px] text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
+        <span className="text-body-s text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
       </button>
     </div>
-    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{item.price}</p>
-    <div className="flex items-center gap-[6px] text-[12px] font-semibold">
+    <p className="text-title-s text-[var(--color-text-primary)]">{item.price}</p>
+    <div className="text-body-s flex items-center gap-[6px] font-[var(--font-weight-semibold)]">
       <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
       <span className="text-[var(--color-text-primary)]">{item.discount}</span>
     </div>
-    <p className="text-[12px] text-[var(--color-text-secondary)]">{item.title}</p>
+    <p className="text-body-s text-[var(--color-text-secondary)]">{item.title}</p>
   </div>
 );
 
@@ -378,27 +378,29 @@ const VerticalProductCard = ({ item, isFavorite, onToggle, stepper, onStep }) =>
         onClick={onToggle}
         className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center rounded-full bg-[var(--color-surface)]"
       >
-        <span className="text-[13px] text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
+        <span className="text-body-s text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
       </button>
     </div>
-    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{item.price}</p>
-    <div className="flex items-center gap-[6px] text-[12px] font-semibold">
+    <p className="text-title-s text-[var(--color-text-primary)]">{item.price}</p>
+    <div className="text-body-s flex items-center gap-[6px] font-[var(--font-weight-semibold)]">
       <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
       <span className="text-[var(--color-text-primary)]">{item.discount}</span>
     </div>
-    <p className="text-[12px] text-[var(--color-text-secondary)]">{item.title}</p>
-    <div className="flex items-center gap-[6px] text-[12px] text-[var(--color-text-primary)]">
+    <p className="text-body-s text-[var(--color-text-secondary)]">{item.title}</p>
+    <div className="text-body-s flex items-center gap-[6px] text-[var(--color-text-primary)]">
       <span className="text-[var(--color-text-secondary)]">★</span>
       <span>{item.rating}</span>
       <span className="text-[var(--color-text-secondary)]">• {item.reviews}</span>
     </div>
     {stepper && (
-      <div className="mt-[2px] flex items-center justify-between rounded-[12px] bg-[var(--color-surface-muted)] px-[10px] py-[4px] text-[var(--color-text-link)]">
-        <button onClick={() => onStep(-1)} className="text-[14px]">
+      <div className="text-body-m mt-[2px] flex items-center justify-between rounded-[12px] bg-[var(--color-surface-muted)] px-[10px] py-[4px] text-[var(--color-text-link)]">
+        <button onClick={() => onStep(-1)}>
           −
         </button>
-        <span className="text-[12px] font-semibold text-[var(--color-text-primary)]">{stepper}</span>
-        <button onClick={() => onStep(1)} className="text-[14px]">
+        <span className="text-body-s font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+          {stepper}
+        </span>
+        <button onClick={() => onStep(1)}>
           +
         </button>
       </div>
@@ -415,13 +417,13 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
           onChange(item.id);
           console.log("Segment", item.id);
         }}
-        className={`flex flex-1 items-center justify-center gap-[6px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px] text-[16px] font-semibold ${
+        className={`text-title-m flex flex-1 items-center justify-center gap-[6px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px] ${
           activeId === item.id
             ? "text-[var(--color-text-primary)]"
             : "text-[var(--color-text-secondary)]"
         }`}
       >
-        <span className="text-[16px]">{item.icon}</span>
+        <span className="text-title-m">{item.icon}</span>
         <span>{item.label}</span>
       </button>
     ))}
@@ -442,14 +444,14 @@ const BottomNav = ({ activeTab, onChange, debugStyle }) => (
             className="flex flex-1 flex-col items-center gap-[var(--space-0-5)]"
           >
             <span
-              className={`text-[var(--font-size-body)] ${
+              className={`text-body-m ${
                 activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
               }`}
             >
               {tab.icon}
             </span>
             <span
-              className={`text-[var(--font-size-caption)] ${
+              className={`text-body-s ${
                 activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
               }`}
             >
@@ -505,7 +507,7 @@ const App = ({ debug }) => {
             <Avatar />
             <VStack className="min-w-0 gap-[var(--space-0-5)]">
               <HStack className="gap-[var(--space-1)]">
-                <p className="truncate text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+                <p className="text-title-s truncate text-[var(--color-text-primary)]">
                   {mockUser.name}
                 </p>
                 {mockUser.isPremium && (
@@ -514,7 +516,7 @@ const App = ({ debug }) => {
                   </span>
                 )}
               </HStack>
-              <p className="truncate text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+              <p className="text-body-s truncate text-[var(--color-text-secondary)]">
                 {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
               </p>
             </VStack>

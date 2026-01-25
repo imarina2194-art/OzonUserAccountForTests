@@ -33,6 +33,26 @@
   --line-height-body: 18px;
   --line-height-caption: 16px;
 
+  /* Semantic typography */
+  --text-title-s-size: 14px;
+  --text-title-s-line: 16px;
+  --text-title-s-weight: 500;
+  --text-body-s-size: 12px;
+  --text-body-s-line: 14px;
+  --text-body-s-weight: 400;
+  --text-title-m-size: 16px;
+  --text-title-m-line: 18px;
+  --text-title-m-weight: 700;
+  --text-body-m-size: 14px;
+  --text-body-m-line: 16px;
+  --text-body-m-weight: 400;
+  --text-title-l-size: 20px;
+  --text-title-l-line: 24px;
+  --text-title-l-weight: 700;
+  --text-title-cell-size: 16px;
+  --text-title-cell-line: 24px;
+  --text-title-cell-weight: 500;
+
   /* Radius */
   --radius-s: 12px;
   --radius-m: 16px;
@@ -79,4 +99,40 @@ body {
   font-family: var(--font-family-base);
   background: var(--color-bg-page);
   color: var(--color-text-primary);
+}
+
+.text-title-s {
+  font-size: var(--text-title-s-size);
+  line-height: var(--text-title-s-line);
+  font-weight: var(--text-title-s-weight);
+}
+
+.text-body-s {
+  font-size: var(--text-body-s-size);
+  line-height: var(--text-body-s-line);
+  font-weight: var(--text-body-s-weight);
+}
+
+.text-title-m {
+  font-size: var(--text-title-m-size);
+  line-height: var(--text-title-m-line);
+  font-weight: var(--text-title-m-weight);
+}
+
+.text-body-m {
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-line);
+  font-weight: var(--text-body-m-weight);
+}
+
+.text-title-l {
+  font-size: var(--text-title-l-size);
+  line-height: var(--text-title-l-line);
+  font-weight: var(--text-title-l-weight);
+}
+
+.text-title-cell {
+  font-size: var(--text-title-cell-size);
+  line-height: var(--text-title-cell-line);
+  font-weight: var(--text-title-cell-weight);
 }
