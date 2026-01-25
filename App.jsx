@@ -148,16 +148,15 @@ const bottomTabs = [
 
 const StatusBar = ({ debugStyle }) => (
   <HStack
-    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-body-m text-[var(--color-text-primary)]"
+    className="box-border h-[var(--size-statusbar-h)] w-full justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-body-m text-[var(--color-text-primary)]"
     style={debugStyle}
   >
     <span className="font-[var(--font-weight-semibold)]">9:30</span>
-    <HStack className="w-[var(--size-status-icons-w)] justify-end gap-[var(--space-0-5)] text-body-s">
-      <span>●</span>
-      <span>●</span>
-      <span>●</span>
-      <span className="ml-[var(--space-0-5)]">87%</span>
-    </HStack>
+    <img
+      src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/status_icons.png"
+      alt="status icons"
+      className="h-auto w-[var(--size-status-icons-w)] object-contain"
+    />
   </HStack>
 );
 
@@ -212,9 +211,9 @@ const Badge = ({ className, children, ...props }) => (
 
 const DeviceFrame = ({ children, debug }) => (
   <div className="flex min-h-screen items-center justify-center bg-black">
-    <div className="relative h-[852px] w-[393px] rounded-[40px] bg-black p-[10px]">
+    <div className="relative h-[852px] w-[410px] rounded-[40px] bg-black p-[10px]">
       <div
-        className="screen flex h-full w-full flex-col overflow-hidden rounded-[30px] bg-[var(--color-bg-page)]"
+        className="screen box-border flex h-full w-[390px] flex-col overflow-hidden overflow-x-hidden rounded-[30px] bg-[var(--color-bg-page)]"
         style={{
           transform: "translateZ(0)",
           outline: debug ? "1px dashed var(--color-text-secondary)" : undefined,
@@ -229,7 +228,7 @@ const DeviceFrame = ({ children, debug }) => (
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center rounded-full bg-[var(--color-surface)]"
+    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center"
   >
     <span className="h-[var(--size-icon-button-icon)] w-[var(--size-icon-button-icon)]">
       <Icon name={iconName} alt="" className="h-full w-full" />
@@ -431,7 +430,7 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
 );
 
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
-  <div className="sticky bottom-0 z-30" style={debugStyle}>
+  <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
     <div className="bg-[var(--color-bg-page)] px-[var(--space-4)] pb-[var(--space-4)]">
       <div className="flex h-[var(--size-bottom-nav-h)] items-center justify-between rounded-[var(--radius-m)] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[var(--space-3)]">
         {bottomTabs.map((tab) => (
@@ -499,10 +498,10 @@ const App = ({ debug }) => {
     <>
       <StatusBar debugStyle={debugStyle} />
       <div
-        className="sticky top-0 z-20 bg-[var(--color-bg-page)]"
+        className="sticky top-0 z-20 w-full bg-[var(--color-bg-page)]"
         style={debugStyle}
       >
-        <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-page)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+        <HStack className="box-border h-[var(--size-header-h)] w-full items-end bg-[var(--color-bg-page)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
           <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
             <Avatar />
             <VStack className="min-w-0 gap-[var(--space-0-5)]">
@@ -533,11 +532,11 @@ const App = ({ debug }) => {
       </div>
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
-          className="px-[var(--space-4)] pt-[var(--space-3)]"
+          className="w-full box-border pt-[var(--space-3)]"
           style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottom-nav-h))" }}
         >
-          <Section style={debugStyle}>
-            <Island className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] p-[var(--space-4)]">
+          <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
+            <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-l)] p-[var(--space-4)]">
               <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
                   <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
@@ -546,9 +545,9 @@ const App = ({ debug }) => {
             </Island>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <Section style={debugStyle}>
+          <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
             <HStack
-              className="h-[var(--size-order-row-h)] gap-[var(--space-2)] overflow-x-auto"
+              className="h-[var(--size-order-row-h)] w-full gap-[var(--space-2)] overflow-x-auto"
             >
               <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-m)] bg-[var(--color-text-primary)]">
                 <span className="h-[var(--size-barcode-icon)] w-[var(--size-barcode-icon)]">
@@ -561,9 +560,13 @@ const App = ({ debug }) => {
             </HStack>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <MorkovskEntryPoint debugStyle={debugStyle} />
+          <div className="w-full box-border px-[var(--space-4)]">
+            <MorkovskEntryPoint debugStyle={debugStyle} />
+          </div>
           <div className="h-[var(--space-1)]" />
-          <FinanceSection debugStyle={debugStyle} />
+          <div className="w-full box-border px-[var(--space-4)]">
+            <FinanceSection debugStyle={debugStyle} />
+          </div>
         </div>
       </div>
       <BottomNav activeTab={activeTab} onChange={setActiveTab} debugStyle={debugStyle} />
