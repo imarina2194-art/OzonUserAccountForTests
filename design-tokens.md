@@ -2,27 +2,30 @@
 
 **Single source of truth:** `tokens.css`. This file contains the canonical CSS variables used by the UI.
 
-## Palette (base values)
+## Figma source tokens (primitives)
 
-These are raw values and are **not** used directly in components.
+These are raw values sourced from Figma and are **not** used directly in components.
+`--figma-overlay-bg` represents an overlay tint, not a final paint color.
 
-- `--palette-bg-overlay`: rgba(0, 26, 52, 0.40)
-- `--palette-text-main`: rgba(7, 7, 7, 1.00)
-- `--palette-text-secondary`: rgba(0, 26, 52, 0.60)
-- `--palette-surface`: rgba(255, 255, 255, 1.00)
-- `--palette-surface-muted`: rgba(0, 48, 120, 0.04)
+- `--figma-overlay-bg`: rgba(0, 26, 52, 0.40)
+- `--figma-text-primary`: rgba(7, 7, 7, 1.00)
+- `--figma-text-secondary`: rgba(0, 26, 52, 0.60)
+- `--figma-white`: #fff
+- `--figma-gray-cell`: rgba(0, 48, 120, 0.04)
 
 ## Semantic color tokens
 
-Components should only use these tokens.
+Components should only use these tokens. Overlay tokens are transformed into realistic paint values
+(for example, a very light alpha composite over white) instead of being applied directly.
 
-- `--color-bg-page`: rgba(153, 163, 174, 1.00) (overlay on white)
-- `--color-surface`: var(--palette-surface)
-- `--color-surface-muted`: var(--palette-surface-muted)
-- `--color-text-primary`: var(--palette-text-main)
-- `--color-text-secondary`: var(--palette-text-secondary)
-- `--color-icon-primary`: var(--palette-text-main)
-- `--color-text-link`: var(--palette-text-secondary)
+- `--color-bg-page`: rgba(0, 26, 52, 0.06) (light overlay composite for a cool gray background)
+- `--color-bg-header`: var(--color-bg-page)
+- `--color-surface`: var(--figma-white)
+- `--color-surface-muted`: var(--figma-gray-cell)
+- `--color-text-primary`: var(--figma-text-primary)
+- `--color-text-secondary`: var(--figma-text-secondary)
+- `--color-icon-primary`: var(--figma-text-primary)
+- `--color-text-link`: var(--figma-text-secondary)
 - `--color-border-subtle`: rgba(0, 26, 52, 0.12)
 - `--color-badge`: rgba(255, 59, 48, 1.00)
 
