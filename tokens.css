@@ -89,6 +89,9 @@
   --size-morkovsk-illustration: 52px;
   --size-morkovsk-h: 56px;
   --size-bottom-nav-h: 56px;
+  --size-bottomnav-h: 49px;
+  --size-bottomtab-w: 62.67px;
+  --size-bottomicon: 24px;
 
   /* Spacing */
   --space-0-5: 2px;

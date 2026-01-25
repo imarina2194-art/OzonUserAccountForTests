@@ -80,6 +80,9 @@ Components should only use these tokens. Overlay tokens are transformed into rea
 - `--size-morkovsk-illustration`: 52px
 - `--size-morkovsk-h`: 56px
 - `--size-bottom-nav-h`: 56px
+- `--size-bottomnav-h`: 49px
+- `--size-bottomtab-w`: 62.67px
+- `--size-bottomicon`: 24px
 
 ## Spacing tokens
 

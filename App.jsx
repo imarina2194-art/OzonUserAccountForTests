@@ -138,12 +138,36 @@ const verticalItems = [
 ];
 
 const bottomTabs = [
-  { id: "home", label: "Главная", icon: "🏠" },
-  { id: "fresh", label: "Ozon Fresh", icon: "🥬" },
-  { id: "finance", label: "Финансы", icon: "💳" },
-  { id: "favorites", label: "Избранное", icon: "❤" },
-  { id: "cart", label: "Корзина", icon: "🛒" },
-  { id: "account", label: "Профиль", icon: "👤" },
+  {
+    id: "home",
+    label: "Главная",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/home_tab.png",
+  },
+  {
+    id: "fresh",
+    label: "Ozon Fresh",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/fresh_tab.png",
+  },
+  {
+    id: "finance",
+    label: "Финансы",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/finance_tab.png",
+  },
+  {
+    id: "favorites",
+    label: "Избранное",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/fav_tab.png",
+  },
+  {
+    id: "cart",
+    label: "Корзина",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/cart_tab.png",
+  },
+  {
+    id: "account",
+    label: "Профиль",
+    icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/accaunt_tab.png",
+  },
 ];
 
 const StatusBar = ({ debugStyle }) => (
@@ -213,7 +237,7 @@ const DeviceFrame = ({ children, debug }) => (
   <div className="flex min-h-screen items-center justify-center bg-black">
     <div className="relative h-[852px] w-[410px] rounded-[40px] bg-black p-[10px]">
       <div
-        className="screen box-border flex h-full w-full flex-col overflow-hidden overflow-x-hidden rounded-[30px] bg-[var(--color-bg-page)]"
+        className="screen box-border flex h-full w-[390px] flex-col overflow-hidden overflow-x-hidden rounded-[30px] bg-[var(--color-bg-page)]"
         style={{
           transform: "translateZ(0)",
           outline: debug ? "1px dashed var(--color-text-secondary)" : undefined,
@@ -425,8 +449,14 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
 
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
   <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
-    <div className="px-[var(--space-4)] pb-[var(--space-4)]">
-      <div className="flex h-[var(--size-bottom-nav-h)] items-center justify-between rounded-[var(--radius-m)] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[var(--space-3)]">
+    <div className="flex h-[var(--size-bottomnav-h)] w-full items-center justify-center bg-[var(--color-surface)]">
+      <div
+        className="grid h-full"
+        style={{
+          width: "calc(6 * var(--size-bottomtab-w))",
+          gridTemplateColumns: "repeat(6, var(--size-bottomtab-w))",
+        }}
+      >
         {bottomTabs.map((tab) => (
           <button
             key={tab.id}
@@ -434,22 +464,14 @@ const BottomNav = ({ activeTab, onChange, debugStyle }) => (
               onChange(tab.id);
               console.log("Navigate", tab.id);
             }}
-            className="flex flex-1 flex-col items-center gap-[var(--space-0-5)]"
+            className="flex h-[var(--size-bottomnav-h)] w-[var(--size-bottomtab-w)] items-center justify-center"
+            aria-label={tab.label}
           >
-            <span
-              className={`text-body-m ${
-                activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
-              }`}
-            >
-              {tab.icon}
-            </span>
-            <span
-              className={`text-body-s ${
-                activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
-              }`}
-            >
-              {tab.label}
-            </span>
+            <img
+              src={tab.icon}
+              alt=""
+              className="h-[var(--size-bottomicon)] w-[var(--size-bottomicon)] object-contain"
+            />
           </button>
         ))}
       </div>
@@ -527,7 +549,7 @@ const App = ({ debug }) => {
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
           className="w-full box-border pt-[var(--space-3)]"
-          style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottom-nav-h))" }}
+          style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottomnav-h))" }}
         >
           <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
             <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-24)] p-[var(--space-4)]">
