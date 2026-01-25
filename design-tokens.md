@@ -1,74 +1,78 @@
-# Design Token System (Inferred)
+# Design Tokens (Ozon ProfileHome)
 
-## Color Roles
-- BackgroundPrimary: #F2F5F9
-- BackgroundSecondary: #FFFFFF
-- TextPrimary: #001A34
-- TextPrimaryNegative: #FFFFFF
-- LinkText: #005BFF
-- Button: #005BFF
+This token system is the single source of truth for colors, typography, spacing,
+radius, and shadows used in the ProfileHome digital twin.
 
-## Text Style Roles
-- Headline
-- Section Title
-- Body
-- Caption
-- Button
-- Button Subtitle
-- Label
-- Overline (uppercase)
+## 1) CSS Variables
 
-## Spacing Scale
-- 4pt base scale: 4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48
+```css
+:root {
+  /* Base color sources (do not use directly in UI) */
+  --color-bg-overlay: rgba(0, 26, 52, 0.40); /* lightGrayBackground */
+  --color-text-primary: rgba(7, 7, 7, 1.00); /* mainText */
+  --color-text-secondary: rgba(0, 26, 52, 0.60); /* secondaryText */
+  --color-surface: rgba(255, 255, 255, 1.00); /* whiteIsland */
+  --color-surface-muted: rgba(0, 48, 120, 0.04); /* grayCell */
 
-## Border Radius Levels
-- XS: 4
-- S: 8
-- M: 12
-- L: 16
-- XL: 24
+  /* Derived colors */
+  --color-bg-page: rgba(153, 163, 174, 1.00); /* overlay on white */
+  --color-border-subtle: rgba(0, 26, 52, 0.12);
+  --color-icon-primary: var(--color-text-primary);
+  --color-text-link: var(--color-text-secondary);
+  --color-badge: rgba(255, 59, 48, 1.00);
 
-## Button Treatment (Inferred)
-- Primary filled button supports single-line and two-line (title + subtitle) layouts.
+  /* Typography */
+  --font-family-base: "Onest", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", system-ui, sans-serif;
+  --font-size-title: 20px;
+  --font-size-body: 14px;
+  --font-size-caption: 12px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --line-height-title: 24px;
+  --line-height-body: 18px;
+  --line-height-caption: 16px;
 
-## Cell Treatment (Inferred)
-- Rounded container surface with optional left icon, title/subtitle stack, and right-side chevron or action button.
+  /* Radius */
+  --radius-s: 12px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --radius-pill: 999px;
 
-## Text Treatment (Inferred)
-- Typography includes multiple size/weight steps plus an uppercase overline style for compact labels.
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
 
-## Component Token Mapping
-- Avatar
-  - Uses: BackgroundSecondary (surface), TextPrimary (initials), Border Radius L/XL (avatar shape)
-- IconButton
-  - Uses: Button (icon/action color), BackgroundSecondary (surface)
-- Button
-  - Uses: Button (fill), TextPrimaryNegative (label), Button / Button Subtitle text roles, Border Radius L/XL
-- Badge
-  - Uses: LinkText (highlight) or TextPrimaryNegative (on-color), Text Style: Caption/Label
-- Text
-  - Uses: TextPrimary, TextPrimaryNegative, LinkText; Text Style roles: Headline/Section Title/Body/Caption/Label/Overline
-- AccountHeader
-  - Uses: BackgroundSecondary (surface), TextPrimary (title/subtitle), Badge, Button
-- Cell
-  - Uses: BackgroundSecondary (surface), TextPrimary (title), Caption/Body (subtitle), LinkText (actions), Border Radius M/L
-- ShortcutPill
-  - Uses: BackgroundSecondary (pill surface), TextPrimary (title/subtitle), Border Radius L/XL
-- MorkovskEntryPoint
-  - Uses: BackgroundSecondary (surface), TextPrimary, Button, Accent (illustration/bg)
-- FinanceInfoSection
-  - Uses: BackgroundPrimary (section), Cell, Banner
-- OrderTracking
-  - Uses: BackgroundSecondary (surface), TextPrimary, LinkText (barcode/action)
-- OrderTrackingCard
-  - Uses: BackgroundSecondary (card surface), TextPrimary (status), Caption (meta)
-- ItemHorizontalShelf / ItemVerticalShelf
-  - Uses: BackgroundPrimary (section), TextPrimary (titles)
-- ProductCardCompact
-  - Uses: BackgroundSecondary (card), TextPrimary (title), LinkText (promo/delivery), Button (delivery CTA), Caption/Label (meta)
-- FavoriteToggle
-  - Uses: Accent (active) / TextPrimary (inactive)
-- Banner
-  - Uses: BackgroundSecondary (image surface), LinkText (deeplink)
-- BottomNavigationBar / BottomNavTabItem
-  - Uses: BackgroundSecondary (bar), TextPrimary (inactive), LinkText (active), Badge
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-float: 0 1px 3px rgba(0, 26, 52, 0.12);
+}
+```
+
+## 2) Usage Notes
+
+- **Backgrounds**
+  - Use `--color-bg-page` for the page tint.
+  - Use `--color-surface` for all card/island backgrounds.
+  - Use `--color-surface-muted` for muted tiles inside cards.
+
+- **Text & Icons**
+  - Primary: `--color-text-primary`
+  - Secondary/meta: `--color-text-secondary`
+  - Links/actions: `--color-text-link`
+  - Icons: `--color-icon-primary`
+
+- **Borders**
+  - Use `--color-border-subtle` for subtle dividers and card edges.
+
+- **Badges**
+  - Notification badge uses `--color-badge`.
+
+- **Shadows**
+  - Default is `--shadow-none`.
+  - `--shadow-float` reserved for sticky/floating UI only.

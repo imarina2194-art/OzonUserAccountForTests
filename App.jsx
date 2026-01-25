@@ -121,9 +121,9 @@ const bottomTabs = [
 ];
 
 const StatusBar = () => (
-  <div className="flex items-center justify-between px-[16px] pt-[8px] text-[14px] text-[#070707]">
+  <div className="flex items-center justify-between px-[16px] pt-[8px] text-[14px] text-[var(--color-text-primary)]">
     <span className="font-semibold">9:30</span>
-    <div className="flex items-center gap-[4px] text-[12px] text-[#070707]">
+    <div className="flex items-center gap-[4px] text-[12px] text-[var(--color-text-primary)]">
       <span>●</span>
       <span>●</span>
       <span>●</span>
@@ -133,7 +133,7 @@ const StatusBar = () => (
 );
 
 const Avatar = () => (
-  <div className="h-[36px] w-[36px] overflow-hidden rounded-full bg-[#D6DEE8]">
+  <div className="h-[36px] w-[36px] overflow-hidden rounded-full bg-[var(--color-surface-muted)]">
     <img
       className="h-full w-full object-cover"
       src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
@@ -145,11 +145,11 @@ const Avatar = () => (
 const IconButton = ({ icon, badge, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[28px] w-[28px] items-center justify-center rounded-full bg-white"
+    className="relative flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[var(--color-surface)]"
   >
     <span className="text-[16px]">{icon}</span>
     {badge && (
-      <span className="absolute -right-[2px] -top-[4px] flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[#FF3B30] px-[4px] text-[10px] font-semibold text-white">
+      <span className="absolute -right-[2px] -top-[4px] flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[var(--color-badge)] px-[4px] text-[10px] font-semibold text-[var(--color-surface)]">
         {badge}
       </span>
     )}
@@ -157,42 +157,42 @@ const IconButton = ({ icon, badge, onClick }) => (
 );
 
 const PromoBadge = ({ label }) => (
-  <span className="rounded-full bg-[#111111] px-[10px] py-[2px] text-[12px] font-semibold text-white">
+  <span className="rounded-full bg-[var(--color-text-primary)] px-[10px] py-[2px] text-[12px] font-semibold text-[var(--color-surface)]">
     {label}
   </span>
 );
 
 const CreatorPromotionCell = () => (
-  <div className="flex items-center justify-between rounded-[16px] bg-white px-[14px] py-[8px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
+  <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[8px]">
     <div>
-      <p className="text-[16px] font-semibold text-[#070707]">Кабинет блогера</p>
-      <p className="text-[14px] text-[#070707] opacity-70">Получайте до 50% с продаж</p>
+      <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">Кабинет блогера</p>
+      <p className="text-[14px] text-[var(--color-text-secondary)]">Получайте до 50% с продаж</p>
     </div>
     <PromoBadge label="Новое" />
   </div>
 );
 
 const ShortcutCard = ({ title, subtitle }) => (
-  <div className="flex flex-1 flex-col gap-[4px] rounded-[16px] bg-white px-[10px] py-[8px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
-    <div className="h-[18px] w-[18px] rounded-[6px] bg-[#E6E9EF]" />
-    <p className="text-[14px] font-semibold text-[#070707]">{title}</p>
-    <p className="text-[12px] text-[#070707] opacity-70">{subtitle}</p>
+  <div className="flex flex-1 flex-col gap-[4px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[10px] py-[8px]">
+    <div className="h-[18px] w-[18px] rounded-[6px] bg-[var(--color-surface-muted)]" />
+    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{title}</p>
+    <p className="text-[12px] text-[var(--color-text-secondary)]">{subtitle}</p>
   </div>
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <div className="flex min-w-[252px] items-center gap-[10px] rounded-[16px] bg-white px-[12px] py-[8px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
-    <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[#111111] text-white">
+  <div className="flex min-w-[252px] items-center gap-[10px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px]">
+    <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
       ▥
     </div>
     <div className="flex-1">
-      <p className="text-[16px] font-semibold text-[#070707]">{order.status}</p>
-      <p className="text-[12px] text-[#070707] opacity-70">{order.carrier}</p>
-      <p className="text-[12px] text-[#070707] opacity-70">{order.delivery}</p>
+      <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">{order.status}</p>
+      <p className="text-[12px] text-[var(--color-text-secondary)]">{order.carrier}</p>
+      <p className="text-[12px] text-[var(--color-text-secondary)]">{order.delivery}</p>
     </div>
     <div className="relative">
       <img src={order.image} alt="order" className="h-[50px] w-[50px] rounded-[12px] object-cover" />
-      <span className="absolute -bottom-[6px] -left-[6px] rounded-full bg-white px-[6px] text-[10px] font-semibold text-[#070707] shadow">
+      <span className="absolute -bottom-[6px] -left-[6px] rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[6px] text-[10px] font-semibold text-[var(--color-text-primary)]">
         {order.count}
       </span>
     </div>
@@ -200,14 +200,14 @@ const OrderTrackingCard = ({ order }) => (
 );
 
 const MorkovskEntryPoint = () => (
-  <div className="flex items-center justify-between rounded-[16px] bg-white px-[14px] py-[10px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
+  <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[10px]">
     <div>
-      <p className="text-[20px] font-bold text-[#070707]">Морковск</p>
-      <p className="text-[14px] text-[#070707] opacity-70">Суперприз — квартира</p>
-      <button className="mt-[4px] text-[14px] font-semibold text-[#5B51DE]">Узнать больше</button>
+      <p className="text-[20px] font-bold text-[var(--color-text-primary)]">Морковск</p>
+      <p className="text-[14px] text-[var(--color-text-secondary)]">Суперприз — квартира</p>
+      <button className="mt-[4px] text-[14px] font-semibold text-[var(--color-text-link)]">Узнать больше</button>
     </div>
     <div className="flex flex-col items-center">
-      <div className="rounded-full bg-[#F7F0FF] px-[10px] py-[2px] text-[16px] text-[#070707]">312</div>
+      <div className="rounded-full bg-[var(--color-surface-muted)] px-[10px] py-[2px] text-[16px] text-[var(--color-text-primary)]">312</div>
       <img
         src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
         alt="bunny"
@@ -218,24 +218,27 @@ const MorkovskEntryPoint = () => (
 );
 
 const FinanceSection = () => (
-  <div className="rounded-[16px] bg-white px-[14px] py-[10px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
+  <div className="rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[10px]">
     <div className="flex items-center justify-between">
-      <p className="text-[20px] font-bold text-[#070707]">Финансы</p>
-      <button className="text-[14px] font-semibold text-[#5B51DE]">Баллы и бонусы</button>
+      <p className="text-[20px] font-bold text-[var(--color-text-primary)]">Финансы</p>
+      <button className="text-[14px] font-semibold text-[var(--color-text-link)]">Баллы и бонусы</button>
     </div>
     <div className="mt-[8px] grid grid-cols-2 gap-[10px]">
       <div className="flex flex-col gap-[8px]">
         {financeCells.map((cell) => (
-          <div key={cell.id} className="rounded-[12px] bg-[#F7F7F9] px-[12px] py-[8px]">
-            <p className="text-[12px] text-[#070707] opacity-70">{cell.title}</p>
-            <p className="text-[16px] font-semibold text-[#070707]">{cell.value}</p>
+          <div
+            key={cell.id}
+            className="rounded-[12px] bg-[var(--color-surface-muted)] px-[12px] py-[8px]"
+          >
+            <p className="text-[12px] text-[var(--color-text-secondary)]">{cell.title}</p>
+            <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">{cell.value}</p>
           </div>
         ))}
       </div>
-      <div className="relative overflow-hidden rounded-[12px] bg-[#F7F7F9] px-[12px] py-[8px]">
-        <p className="text-[16px] font-semibold text-[#070707]">Ozon Premium</p>
-        <p className="text-[14px] text-[#5B51DE]">Получить больше привилегий</p>
-        <div className="absolute bottom-[8px] right-[8px] h-[28px] w-[28px] rounded-[8px] bg-[#E0D4FF]" />
+      <div className="relative overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)] px-[12px] py-[8px]">
+        <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">Ozon Premium</p>
+        <p className="text-[14px] text-[var(--color-text-link)]">Получить больше привилегий</p>
+        <div className="absolute bottom-[8px] right-[8px] h-[28px] w-[28px] rounded-[8px] bg-[var(--color-surface)]" />
       </div>
     </div>
   </div>
@@ -243,52 +246,52 @@ const FinanceSection = () => (
 
 const ProductCardCompact = ({ item, isFavorite, onToggle }) => (
   <div className="flex w-[140px] flex-col gap-[4px]">
-    <div className="relative overflow-hidden rounded-[16px] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.06)]">
+    <div className="relative overflow-hidden rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
       <img src={item.image} alt={item.title} className="h-[116px] w-full object-cover" />
       <button
         onClick={onToggle}
-        className="absolute right-[6px] top-[6px] flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white"
+        className="absolute right-[6px] top-[6px] flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--color-surface)]"
       >
-        <span className="text-[12px] text-[#070707]">{isFavorite ? "❤" : "♡"}</span>
+        <span className="text-[12px] text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
       </button>
     </div>
-    <p className="text-[14px] font-semibold text-[#070707]">{item.price}</p>
+    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{item.price}</p>
     <div className="flex items-center gap-[6px] text-[12px] font-semibold">
-      <span className="text-[#99A3AE] line-through">{item.oldPrice}</span>
-      <span className="text-[#F1117E]">{item.discount}</span>
+      <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
+      <span className="text-[var(--color-text-primary)]">{item.discount}</span>
     </div>
-    <p className="text-[12px] text-[#070707]">{item.title}</p>
+    <p className="text-[12px] text-[var(--color-text-secondary)]">{item.title}</p>
   </div>
 );
 
 const VerticalProductCard = ({ item, isFavorite, onToggle, stepper, onStep }) => (
   <div className="flex flex-col gap-[4px]">
-    <div className="relative overflow-hidden rounded-[16px] bg-white shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
+    <div className="relative overflow-hidden rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
       <img src={item.image} alt={item.title} className="h-[144px] w-full object-cover" />
       <button
         onClick={onToggle}
-        className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white"
+        className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center rounded-full bg-[var(--color-surface)]"
       >
-        <span className="text-[13px] text-[#070707]">{isFavorite ? "❤" : "♡"}</span>
+        <span className="text-[13px] text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
       </button>
     </div>
-    <p className="text-[14px] font-semibold text-[#070707]">{item.price}</p>
+    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{item.price}</p>
     <div className="flex items-center gap-[6px] text-[12px] font-semibold">
-      <span className="text-[#99A3AE] line-through">{item.oldPrice}</span>
-      <span className="text-[#F1117E]">{item.discount}</span>
+      <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
+      <span className="text-[var(--color-text-primary)]">{item.discount}</span>
     </div>
-    <p className="text-[12px] text-[#070707]">{item.title}</p>
-    <div className="flex items-center gap-[6px] text-[12px] text-[#070707]">
-      <span className="text-[#F5A000]">★</span>
+    <p className="text-[12px] text-[var(--color-text-secondary)]">{item.title}</p>
+    <div className="flex items-center gap-[6px] text-[12px] text-[var(--color-text-primary)]">
+      <span className="text-[var(--color-text-secondary)]">★</span>
       <span>{item.rating}</span>
-      <span className="text-[#99A3AE]">• {item.reviews}</span>
+      <span className="text-[var(--color-text-secondary)]">• {item.reviews}</span>
     </div>
     {stepper && (
-      <div className="mt-[2px] flex items-center justify-between rounded-[12px] bg-[#EEF1F7] px-[10px] py-[4px] text-[#5B51DE]">
+      <div className="mt-[2px] flex items-center justify-between rounded-[12px] bg-[var(--color-surface-muted)] px-[10px] py-[4px] text-[var(--color-text-link)]">
         <button onClick={() => onStep(-1)} className="text-[14px]">
           −
         </button>
-        <span className="text-[12px] font-semibold text-[#070707]">{stepper}</span>
+        <span className="text-[12px] font-semibold text-[var(--color-text-primary)]">{stepper}</span>
         <button onClick={() => onStep(1)} className="text-[14px]">
           +
         </button>
@@ -306,8 +309,10 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
           onChange(item.id);
           console.log("Segment", item.id);
         }}
-        className={`flex flex-1 items-center justify-center gap-[6px] rounded-[16px] px-[12px] py-[8px] text-[16px] font-semibold shadow-[0_4px_10px_rgba(0,0,0,0.06)] ${
-          activeId === item.id ? "bg-white text-[#001A34]" : "bg-white/60 text-[#001A34]"
+        className={`flex flex-1 items-center justify-center gap-[6px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px] text-[16px] font-semibold ${
+          activeId === item.id
+            ? "text-[var(--color-text-primary)]"
+            : "text-[var(--color-text-secondary)]"
         }`}
       >
         <span className="text-[16px]">{item.icon}</span>
@@ -319,7 +324,7 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
 
 const BottomNav = ({ activeTab, onChange }) => (
   <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-center">
-    <div className="flex w-[382px] items-center justify-between rounded-[16px] bg-white px-[12px] py-[8px] shadow-[0_-6px_16px_rgba(0,0,0,0.12)]">
+    <div className="flex w-[382px] items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px]">
       {bottomTabs.map((tab) => (
         <button
           key={tab.id}
@@ -329,10 +334,10 @@ const BottomNav = ({ activeTab, onChange }) => (
           }}
           className="flex flex-1 flex-col items-center gap-[2px]"
         >
-          <span className={`text-[16px] ${activeTab === tab.id ? "text-[#5B51DE]" : "text-[#99A3AE]"}`}>
+          <span className={`text-[16px] ${activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"}`}>
             {tab.icon}
           </span>
-          <span className={`text-[10px] ${activeTab === tab.id ? "text-[#5B51DE]" : "text-[#99A3AE]"}`}>
+          <span className={`text-[10px] ${activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"}`}>
             {tab.label}
           </span>
         </button>
@@ -372,19 +377,19 @@ const App = () => {
   ]);
 
   return (
-    <div className="flex justify-center bg-[#F5F5F5] pb-[96px] pt-[6px]">
-      <div className="relative w-[390px] rounded-[24px] bg-[#F0F2F5] pb-[120px]">
+    <div className="flex justify-center bg-[var(--color-bg-page)] pb-[96px] pt-[6px]">
+      <div className="relative w-[390px] rounded-[24px] bg-[var(--color-bg-page)] pb-[120px]">
         <StatusBar />
-        <div className="sticky top-0 z-20 bg-[#F0F2F5] px-[16px] pt-[8px]">
-          <div className="flex items-center justify-between rounded-[18px] bg-white px-[12px] py-[6px] shadow-[0_6px_12px_rgba(0,0,0,0.06)]">
+        <div className="sticky top-0 z-20 bg-[var(--color-bg-page)] px-[16px] pt-[8px]">
+          <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[6px]">
             <div className="flex items-center gap-[10px]">
               <Avatar />
               <div>
                 <div className="flex items-center gap-[6px]">
-                  <p className="text-[14px] font-semibold text-[#070707]">{mockUser.name}</p>
+                  <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{mockUser.name}</p>
                   {mockUser.isPremium && <span className="text-[14px]">👑</span>}
                 </div>
-                <p className="text-[12px] text-[#070707] opacity-70">
+                <p className="text-[12px] text-[var(--color-text-secondary)]">
                   {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
                 </p>
               </div>
@@ -406,7 +411,7 @@ const App = () => {
           </div>
 
           <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
-            <div className="flex min-w-[66px] flex-col items-center justify-center rounded-[16px] bg-[#111111] p-[8px] text-white">
+            <div className="flex min-w-[66px] flex-col items-center justify-center rounded-[16px] bg-[var(--color-text-primary)] p-[8px] text-[var(--color-surface)]">
               <span className="text-[18px]">▥</span>
               <span className="text-[10px]">Штрихкод</span>
             </div>
@@ -420,7 +425,7 @@ const App = () => {
           <FinanceSection />
 
           <div>
-            <p className="pb-[4px] text-[20px] font-bold text-[#070707]">Вы смотрели</p>
+            <p className="pb-[4px] text-[20px] font-bold text-[var(--color-text-primary)]">Вы смотрели</p>
             <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
               {horizontalItems.map((item) => (
                 <ProductCardCompact
@@ -443,7 +448,7 @@ const App = () => {
           />
 
           <div>
-            <p className="pb-[4px] text-[20px] font-bold text-[#070707]">Возможно, вам понравится</p>
+            <p className="pb-[4px] text-[20px] font-bold text-[var(--color-text-primary)]">Возможно, вам понравится</p>
             <div className="grid grid-cols-2 gap-[12px]">
               {verticalItems.map((item) => (
                 <VerticalProductCard
