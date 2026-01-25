@@ -148,7 +148,7 @@ const bottomTabs = [
 
 const StatusBar = ({ debugStyle }) => (
   <HStack
-    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-header)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]"
+    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]"
     style={debugStyle}
   >
     <span className="font-[var(--font-weight-semibold)]">9:30</span>
@@ -497,10 +497,10 @@ const App = ({ debug }) => {
     <>
       <StatusBar debugStyle={debugStyle} />
       <div
-        className="sticky top-0 z-20 bg-[var(--color-bg-header)]"
+        className="sticky top-0 z-20 bg-[var(--color-bg-page)]"
         style={debugStyle}
       >
-        <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-header)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+        <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-page)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
           <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
             <Avatar />
             <VStack className="min-w-0 gap-[var(--space-0-5)]">
@@ -535,6 +535,16 @@ const App = ({ debug }) => {
           style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottom-nav-h))" }}
         >
           <Section style={debugStyle}>
+            <Island className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] p-[var(--space-4)]">
+              <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
+                {shortcutItems.map((item) => (
+                  <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
+                ))}
+              </div>
+            </Island>
+          </Section>
+          <div className="h-[var(--space-1)]" />
+          <Section style={debugStyle}>
             <HStack
               className="h-[var(--size-order-row-h)] gap-[var(--space-2)] overflow-x-auto"
             >
@@ -547,16 +557,6 @@ const App = ({ debug }) => {
                 <OrderTrackingCard key={order.id} order={order} />
               ))}
             </HStack>
-          </Section>
-          <div className="h-[var(--space-1)]" />
-          <Section style={debugStyle}>
-            <Island className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] p-[var(--space-4)]">
-              <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
-                {shortcutItems.map((item) => (
-                  <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
-                ))}
-              </div>
-            </Island>
           </Section>
           <div className="h-[var(--space-1)]" />
           <MorkovskEntryPoint debugStyle={debugStyle} />
