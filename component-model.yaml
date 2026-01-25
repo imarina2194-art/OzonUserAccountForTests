@@ -1,0 +1,316 @@
+Avatar:
+  Props:
+    - imageUrl (string)
+    - initials (string)
+  Variants:
+    - filled
+    - default
+  States:
+    - default
+  Children: []
+
+IconButton:
+  Props:
+    - iconName (string)
+    - ariaLabel (string)
+    - deepLink (string)
+    - badgeValue (string)
+  Variants:
+    - default
+    - withBadge
+  States:
+    - default
+    - active
+    - disabled
+    - loading
+  Children: []
+
+Button:
+  Props:
+    - title (string)
+    - subtitle (string)
+    - style (string)
+    - deepLink (string)
+  Variants:
+    - default
+  States:
+    - default
+    - active
+    - disabled
+    - loading
+  Children: []
+
+Badge:
+  Props:
+    - value (string)
+    - maxSymbols (number)
+  Variants:
+    - full
+    - truncated
+  States:
+    - default
+    - hidden
+  Children: []
+
+Text:
+  Props:
+    - text (string)
+    - textStyle (string)
+    - textColor (string)
+    - deepLink (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children: []
+
+AccountHeader:
+  Props:
+    - userName (string)
+    - isPublic (boolean)
+    - subscribersCount (number)
+    - subscriptionsCount (number)
+    - showPremiumCrown (boolean)
+  Variants:
+    - public
+    - private
+  States:
+    - default
+  Children:
+    - Avatar
+    - Text
+    - Button
+    - Badge
+
+Cell:
+  Props:
+    - leftIconName (string)
+    - title (string)
+    - subtitle (string)
+    - rightActionButton (string)
+    - showChevron (boolean)
+    - badgeValue (string)
+    - deepLink (string)
+  Variants:
+    - default
+    - iconOnly
+    - iconTitle
+    - iconTitleSubtitle
+    - titleOnly
+    - titleSubtitle
+    - titleBadge
+    - titleButton
+    - titleChevron
+    - titleSubtitleBadge
+    - titleSubtitleButton
+    - titleSubtitleChevron
+  States:
+    - default
+  Children:
+    - IconButton
+    - Badge
+    - Text
+
+ShortcutPill:
+  Props:
+    - iconName (string)
+    - title (string)
+    - subtitle (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children: []
+
+MorkovskEntryPoint:
+  Props:
+    - title (string)
+    - subtitle (string)
+    - carrotsCount (number)
+    - carrotsIconName (string)
+    - button (string)
+    - backgroundImageUrl (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children:
+    - Text
+
+FinanceInfoSection:
+  Props:
+    - title (string)
+    - items (array)
+    - bannerItems (array)
+  Variants:
+    - default
+  States:
+    - default
+    - loading
+    - empty
+    - error
+  Children:
+    - Cell
+    - Banner
+
+OrderTracking:
+  Props:
+    - showBarcode (boolean)
+    - barcodeImageUrl (string)
+    - barcodeDeepLink (string)
+    - orders (array)
+  Variants:
+    - default
+  States:
+    - default
+    - loading
+    - empty
+    - error
+  Children:
+    - OrderTrackingCarousel
+
+OrderTrackingCarousel:
+  Props:
+    - orders (array)
+    - orderTrackingCarouselCards (array)
+  Variants:
+    - default
+  States:
+    - default
+    - loading
+    - empty
+  Children:
+    - OrderTrackingCard
+    - OrderTrackingCarouselCards
+
+OrderTrackingCard:
+  Props:
+    - statusLabel (string)
+    - carrierInfo (string)
+    - deliveryDateTime (string)
+    - itemImageUrl (string)
+    - itemsCount (number)
+  Variants:
+    - default
+  States:
+    - default
+  Children: []
+
+OrderTrackingCarouselCards:
+  Props:
+    - label (string)
+    - deepLink (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children:
+    - Text
+
+ItemHorizontalShelf:
+  Props:
+    - title (string)
+    - items (array)
+  Variants:
+    - default
+  States:
+    - default
+    - loading
+    - empty
+  Children:
+    - ProductCardCompact
+
+ItemVerticalShelf:
+  Props:
+    - title (string)
+    - items (array)
+  Variants:
+    - default
+  States:
+    - default
+    - loading
+    - empty
+  Children:
+    - ProductCardCompact
+
+ProductCardCompact:
+  Props:
+    - imageUrl (string)
+    - originalPrice (string)
+    - discount (string)
+    - finalPrice (string)
+    - saleStockCounter (string)
+    - promoBadgeLabel (string)
+    - brandLabel (string)
+    - authenticityLabel (string)
+    - title (string)
+    - ratingValue (number)
+    - isFavorited (boolean)
+    - isOutOfStock (boolean)
+    - addedToCartCount (number)
+    - showAddToCartButton (boolean)
+    - showStepper (boolean)
+    - deliveryLabel (string)
+    - showDeliveryButton (boolean)
+  Variants:
+    - default
+    - favorited
+    - outOfStock
+    - withPromoBadge
+    - withDeliveryButton
+    - withStepper
+  States:
+    - default
+    - loading
+    - error
+  Children:
+    - FavoriteToggle
+
+FavoriteToggle:
+  Props:
+    - isActive (boolean)
+  Variants:
+    - default
+    - active
+  States:
+    - default
+    - disabled
+    - loading
+  Children: []
+
+Banner:
+  Props:
+    - imageUrl (string)
+    - deepLink (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children: []
+
+BottomNavigationBar:
+  Props:
+    - activeTabId (string)
+  Variants:
+    - default
+  States:
+    - default
+  Children:
+    - BottomNavTabItem
+
+BottomNavTabItem:
+  Props:
+    - tabId (string)
+    - iconName (string)
+    - label (string)
+    - isActive (boolean)
+    - badgeValue (string)
+  Variants:
+    - active
+    - inactive
+  States:
+    - default
+    - disabled
+    - unread
+  Children:
+    - Badge
