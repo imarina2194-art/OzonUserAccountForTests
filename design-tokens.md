@@ -48,9 +48,33 @@ Components should only use these tokens. Overlay tokens are transformed into rea
 - `--radius-m`: 16px
 - `--radius-l`: 24px
 - `--radius-pill`: 999px
+- `--radius-island-pill`: 32px
+
+## Size tokens
+
+- `--size-statusbar-h`: 44px
+- `--size-header-h`: 56px
+- `--size-island-h`: 48px
+- `--size-avatar`: 44px
+- `--size-premium-icon`: 14px
+- `--size-icon-button`: 28px
+- `--size-icon-button-icon`: 16px
+- `--size-badge`: 16px
+- `--size-badge-icon`: 10px
+- `--size-status-icons-w`: 46px
+- `--size-order-row-h`: 80px
+- `--size-order-image`: 64px
+- `--size-order-text-h`: 56px
+- `--size-barcode-icon`: 32px
+- `--size-barcode-tile-w`: 66px
+- `--size-shortcuts-h`: 108px
+- `--size-shortcut-pill-h`: 76px
+- `--size-shortcut-icon`: 20px
+- `--size-morkovsk-illustration`: 52px
 
 ## Spacing tokens
 
+- `--space-0-5`: 2px
 - `--space-1`: 4px
 - `--space-2`: 8px
 - `--space-3`: 12px

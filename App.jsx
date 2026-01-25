@@ -147,19 +147,19 @@ const bottomTabs = [
 ];
 
 const StatusBar = () => (
-  <div className="flex items-center justify-between px-[16px] pt-[8px] text-[14px] text-[var(--color-text-primary)]">
-    <span className="font-semibold">9:30</span>
-    <div className="flex items-center gap-[4px] text-[12px] text-[var(--color-text-primary)]">
+  <HStack className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-header)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]">
+    <span className="font-[var(--font-weight-semibold)]">9:30</span>
+    <HStack className="w-[var(--size-status-icons-w)] justify-end gap-[var(--space-0-5)] text-[var(--font-size-caption)]">
       <span>●</span>
       <span>●</span>
       <span>●</span>
-      <span className="ml-[4px]">87%</span>
-    </div>
-  </div>
+      <span className="ml-[var(--space-0-5)]">87%</span>
+    </HStack>
+  </HStack>
 );
 
 const Avatar = () => (
-  <div className="h-[36px] w-[36px] overflow-hidden rounded-full bg-[var(--color-surface-muted)]">
+  <div className="h-[var(--size-avatar)] w-[var(--size-avatar)] overflow-hidden rounded-full bg-[var(--color-surface-muted)]">
     <img
       className="h-full w-full object-cover"
       src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
@@ -168,85 +168,130 @@ const Avatar = () => (
   </div>
 );
 
+const HStack = ({ className, children, ...props }) => (
+  <div className={`flex items-center ${className || ""}`} {...props}>
+    {children}
+  </div>
+);
+
+const VStack = ({ className, children, ...props }) => (
+  <div className={`flex flex-col ${className || ""}`} {...props}>
+    {children}
+  </div>
+);
+
+const Section = ({ className, children, ...props }) => (
+  <section className={className} {...props}>
+    {children}
+  </section>
+);
+
+const Island = ({ className, children, ...props }) => (
+  <div className={`bg-[var(--color-surface)] ${className || ""}`} {...props}>
+    {children}
+  </div>
+);
+
+const Pill = ({ className, children, ...props }) => (
+  <div className={`bg-[var(--color-surface-muted)] ${className || ""}`} {...props}>
+    {children}
+  </div>
+);
+
+const Badge = ({ className, children, ...props }) => (
+  <span
+    className={`inline-flex items-center justify-center rounded-full bg-[var(--color-badge)] text-[var(--color-surface)] ${className || ""}`}
+    {...props}
+  >
+    {children}
+  </span>
+);
+
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[var(--color-surface)]"
+    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center rounded-full bg-[var(--color-surface)]"
   >
-    <span className="h-[16px] w-[16px]">
+    <span className="h-[var(--size-icon-button-icon)] w-[var(--size-icon-button-icon)]">
       <Icon name={iconName} alt="" className="h-full w-full" />
     </span>
     {badgeIconName && (
-      <span className="absolute -right-[2px] -top-[4px] flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[var(--color-badge)] px-[4px] text-[10px] font-semibold text-[var(--color-surface)]">
-        <span className="h-[10px] w-[10px]">
+      <Badge className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] h-[var(--size-badge)] min-w-[var(--size-badge)] p-[var(--space-0-5)] text-[var(--font-size-caption)] font-[var(--font-weight-semibold)]">
+        <span className="h-[var(--size-badge-icon)] w-[var(--size-badge-icon)]">
           <Icon name={badgeIconName} alt="" className="h-full w-full" />
         </span>
-      </span>
+      </Badge>
     )}
   </button>
 );
 
-const PromoBadge = ({ label }) => (
-  <span className="rounded-full bg-[var(--color-text-primary)] px-[10px] py-[2px] text-[12px] font-semibold text-[var(--color-surface)]">
-    {label}
-  </span>
-);
-
-const CreatorPromotionCell = () => (
-  <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[8px]">
-    <div>
-      <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">Кабинет блогера</p>
-      <p className="text-[14px] text-[var(--color-text-secondary)]">Получайте до 50% с продаж</p>
-    </div>
-    <PromoBadge label="Новое" />
-  </div>
-);
-
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <div className="flex flex-1 flex-col gap-[4px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[10px] py-[8px]">
-    <div className="flex h-[18px] w-[18px] items-center justify-center rounded-[6px] bg-[var(--color-surface-muted)] p-[2px]">
+  <Pill className="flex h-[var(--size-shortcut-pill-h)] flex-1 flex-col gap-[var(--space-1)] rounded-[var(--radius-m)] p-[var(--space-2)]">
+    <span className="flex h-[var(--size-shortcut-icon)] w-[var(--size-shortcut-icon)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
-    </div>
-    <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{title}</p>
-    <p className="text-[12px] text-[var(--color-text-secondary)]">{subtitle}</p>
-  </div>
+    </span>
+    <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+      {title}
+    </p>
+    <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+      {subtitle}
+    </p>
+  </Pill>
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <div className="flex min-w-[252px] items-center gap-[10px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px]">
-    <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
+  <Island className="flex min-w-[252px] items-center gap-[var(--space-2)] rounded-[var(--radius-m)] p-[var(--space-2)]">
+    <div className="flex h-[var(--size-order-image)] w-[var(--size-order-image)] items-center justify-center rounded-[var(--radius-s)] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
       ▥
     </div>
-    <div className="flex-1">
-      <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">{order.status}</p>
-      <p className="text-[12px] text-[var(--color-text-secondary)]">{order.carrier}</p>
-      <p className="text-[12px] text-[var(--color-text-secondary)]">{order.delivery}</p>
-    </div>
+    <VStack className="h-[var(--size-order-text-h)] flex-1 justify-center gap-[var(--space-0-5)]">
+      <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+        {order.status}
+      </p>
+      <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+        {order.carrier}
+      </p>
+      <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+        {order.delivery}
+      </p>
+    </VStack>
     <div className="relative">
-      <img src={order.image} alt="order" className="h-[50px] w-[50px] rounded-[12px] object-cover" />
-      <span className="absolute -bottom-[6px] -left-[6px] rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[6px] text-[10px] font-semibold text-[var(--color-text-primary)]">
+      <img
+        src={order.image}
+        alt="order"
+        className="h-[var(--size-order-image)] w-[var(--size-order-image)] rounded-[var(--radius-s)] object-cover"
+      />
+      <span className="absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] text-[var(--font-size-caption)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
         {order.count}
       </span>
     </div>
-  </div>
+  </Island>
 );
 
 const MorkovskEntryPoint = () => (
-  <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[10px]">
-    <div>
-      <p className="text-[20px] font-bold text-[var(--color-text-primary)]">Морковск</p>
-      <p className="text-[14px] text-[var(--color-text-secondary)]">Суперприз — квартира</p>
-      <button className="mt-[4px] text-[14px] font-semibold text-[var(--color-text-link)]">Узнать больше</button>
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="rounded-full bg-[var(--color-surface-muted)] px-[10px] py-[2px] text-[16px] text-[var(--color-text-primary)]">312</div>
-      <img
-        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
-        alt="bunny"
-        className="mt-[4px] h-[52px] w-[52px] rounded-full object-cover"
-      />
-    </div>
-  </div>
+  <Island className="flex items-center justify-between rounded-[var(--radius-l)] p-[var(--space-4)]">
+    <VStack className="gap-[var(--space-2)]">
+      <HStack className="gap-[var(--space-2)]">
+        <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+          Морковск
+        </p>
+        <Pill className="rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+          312
+        </Pill>
+      </HStack>
+      <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-secondary)]">
+        Суперприз — квартира
+      </p>
+      <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+        Узнать больше
+      </button>
+    </VStack>
+    <img
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
+      alt="bunny"
+      className="h-[var(--size-morkovsk-illustration)] w-[var(--size-morkovsk-illustration)] rounded-full object-cover"
+    />
+  </Island>
 );
 
 const FinanceSection = () => (
@@ -409,62 +454,65 @@ const App = () => {
   ]);
 
   return (
-    <div className="flex justify-center bg-[var(--color-bg-page)] pb-[96px] pt-[6px]">
-      <div className="relative w-[390px] rounded-[24px] bg-[var(--color-bg-page)] pb-[120px]">
+    <div className="flex justify-center bg-[var(--color-bg-page)] pb-[96px]">
+      <div className="relative w-[390px] rounded-[var(--radius-l)] bg-[var(--color-bg-page)] pb-[120px]">
         <StatusBar />
-        <div className="sticky top-0 z-20 bg-[var(--color-bg-page)] px-[16px] pt-[8px]">
-          <div className="flex items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[6px]">
-            <div className="flex items-center gap-[10px]">
+        <div className="sticky top-0 z-20 bg-[var(--color-bg-header)]">
+          <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-header)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+            <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
               <Avatar />
-              <div>
-                <div className="flex items-center gap-[6px]">
-                  <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{mockUser.name}</p>
+              <VStack className="gap-[var(--space-0-5)]">
+                <HStack className="gap-[var(--space-1)]">
+                  <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+                    {mockUser.name}
+                  </p>
                   {mockUser.isPremium && (
-                    <span className="h-[14px] w-[14px]">
+                    <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
                       <Icon name="premium" alt="premium" className="h-full w-full" />
                     </span>
                   )}
-                </div>
-                <p className="text-[12px] text-[var(--color-text-secondary)]">
+                </HStack>
+                <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
                   {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
                 </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-[8px]">
+              </VStack>
+            </Island>
+            <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
               <IconButton
                 iconName="chat"
                 badgeIconName="chat-badge"
                 onClick={() => console.log("Open messages")}
               />
               <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
-            </div>
-          </div>
+            </HStack>
+          </HStack>
         </div>
 
-        <div className="flex flex-col gap-[12px] px-[16px] pt-[8px]">
-          <CreatorPromotionCell />
+        <VStack className="gap-[var(--space-3)] px-[var(--space-4)] pt-[var(--space-3)]">
+          <Section className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-4)]">
+            <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
+              {shortcutItems.map((item) => (
+                <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
+              ))}
+            </div>
+          </Section>
 
-          <div className="grid grid-cols-3 gap-[10px]">
-            {shortcutItems.map((item) => (
-              <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
-            ))}
-          </div>
-
-          <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
-            <div className="flex min-w-[66px] flex-col items-center justify-center rounded-[16px] bg-[var(--color-text-primary)] p-[8px] text-[var(--color-surface)]">
-              <span className="h-[18px] w-[18px]">
+          <HStack className="h-[var(--size-order-row-h)] gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
+            <div className="flex min-w-[var(--size-barcode-tile-w)] flex-col items-center justify-center rounded-r-[var(--radius-m)] bg-[var(--color-text-primary)] p-[var(--space-2)] text-[var(--color-surface)]">
+              <span className="h-[var(--size-barcode-icon)] w-[var(--size-barcode-icon)]">
                 <Icon name="barcode" alt="barcode" className="h-full w-full" />
               </span>
-              <span className="text-[10px]">Штрихкод</span>
+              <span className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)]">Штрихкод</span>
             </div>
             {orderItems.map((order) => (
               <OrderTrackingCard key={order.id} order={order} />
             ))}
-          </div>
+          </HStack>
 
-          <MorkovskEntryPoint />
-
-          <FinanceSection />
+          <VStack className="gap-[var(--space-1)]">
+            <MorkovskEntryPoint />
+            <FinanceSection />
+          </VStack>
 
           <div>
             <p className="pb-[4px] text-[20px] font-bold text-[var(--color-text-primary)]">Вы смотрели</p>
