@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from "react";
+import Icon from "./src/design-system/Icon";
+import statusIcons from "./src/design-system/icons/Status Icons.png";
 
 const mockUser = {
   name: "Александр Р.",
@@ -123,11 +125,8 @@ const bottomTabs = [
 const StatusBar = () => (
   <div className="flex items-center justify-between px-[16px] pt-[8px] text-[14px] text-[var(--color-text-primary)]">
     <span className="font-semibold">9:30</span>
-    <div className="flex items-center gap-[4px] text-[12px] text-[var(--color-text-primary)]">
-      <span>●</span>
-      <span>●</span>
-      <span>●</span>
-      <span className="ml-[4px]">87%</span>
+    <div className="flex items-center">
+      <img src={statusIcons} alt="Status icons" className="h-[14px] w-auto" />
     </div>
   </div>
 );
@@ -142,15 +141,15 @@ const Avatar = () => (
   </div>
 );
 
-const IconButton = ({ icon, badge, onClick }) => (
+const IconButton = ({ name, badge, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[var(--color-surface)]"
+    className="relative flex h-[32px] w-[32px] items-center justify-center rounded-full bg-[var(--color-surface)]"
   >
-    <span className="text-[16px]">{icon}</span>
+    <Icon name={name} size={20} />
     {badge && (
-      <span className="absolute -right-[2px] -top-[4px] flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[var(--color-badge)] px-[4px] text-[10px] font-semibold text-[var(--color-surface)]">
-        {badge}
+      <span className="absolute -right-[2px] -top-[4px]">
+        <Icon name="chat-badge" size={16} />
       </span>
     )}
   </button>
@@ -172,9 +171,11 @@ const CreatorPromotionCell = () => (
   </div>
 );
 
-const ShortcutCard = ({ title, subtitle }) => (
+const ShortcutCard = ({ title, subtitle, iconName }) => (
   <div className="flex flex-1 flex-col gap-[4px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[10px] py-[8px]">
-    <div className="h-[18px] w-[18px] rounded-[6px] bg-[var(--color-surface-muted)]" />
+    <div className="flex h-[18px] w-[18px] items-center justify-center">
+      <Icon name={iconName} size={18} />
+    </div>
     <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{title}</p>
     <p className="text-[12px] text-[var(--color-text-secondary)]">{subtitle}</p>
   </div>
@@ -182,9 +183,9 @@ const ShortcutCard = ({ title, subtitle }) => (
 
 const OrderTrackingCard = ({ order }) => (
   <div className="flex min-w-[252px] items-center gap-[10px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px]">
-    <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
-      ▥
-    </div>
+      <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
+        <Icon name="barcode" size={20} />
+      </div>
     <div className="flex-1">
       <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">{order.status}</p>
       <p className="text-[12px] text-[var(--color-text-secondary)]">{order.carrier}</p>
@@ -404,7 +405,7 @@ const App = () => {
               <div>
                 <div className="flex items-center gap-[6px]">
                   <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{mockUser.name}</p>
-                  {mockUser.isPremium && <span className="text-[14px]">👑</span>}
+                  {mockUser.isPremium && <Icon name="premium" size={16} />}
                 </div>
                 <p className="text-[12px] text-[var(--color-text-secondary)]">
                   {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
@@ -412,8 +413,8 @@ const App = () => {
               </div>
             </div>
             <div className="flex items-center gap-[8px]">
-              <IconButton icon="💬" badge="3" onClick={() => console.log("Open messages")} />
-              <IconButton icon="☰" onClick={() => console.log("Open menu")} />
+              <IconButton name="chat" badge onClick={() => console.log("Open messages")} />
+              <IconButton name="menu" onClick={() => console.log("Open menu")} />
             </div>
           </div>
         </div>
@@ -423,13 +424,18 @@ const App = () => {
 
           <div className="grid grid-cols-3 gap-[10px]">
             {shortcutItems.map((item) => (
-              <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} />
+              <ShortcutCard
+                key={item.id}
+                title={item.title}
+                subtitle={item.subtitle}
+                iconName={item.id}
+              />
             ))}
           </div>
 
           <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
             <div className="flex min-w-[66px] flex-col items-center justify-center rounded-[16px] bg-[var(--color-text-primary)] p-[8px] text-[var(--color-surface)]">
-              <span className="text-[18px]">▥</span>
+              <Icon name="barcode" size={18} />
               <span className="text-[10px]">Штрихкод</span>
             </div>
             {orderItems.map((order) => (
