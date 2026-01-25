@@ -207,6 +207,20 @@ const Badge = ({ className, children, ...props }) => (
   </span>
 );
 
+const DeviceFrame = ({ children }) => (
+  <div className="flex min-h-screen items-center justify-center bg-black">
+    <div className="relative h-[852px] w-[393px] rounded-[40px] bg-black p-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+      <div className="absolute left-1/2 top-[10px] h-[32px] w-[160px] -translate-x-1/2 rounded-[16px] bg-black" />
+      <div
+        className="relative flex h-full w-full flex-col overflow-hidden rounded-[30px] bg-[var(--color-bg-page)]"
+        style={{ transform: "translateZ(0)" }}
+      >
+        {children}
+      </div>
+    </div>
+  </div>
+);
+
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
@@ -559,4 +573,10 @@ const App = () => {
   );
 };
 
-export default App;
+const Root = () => (
+  <DeviceFrame>
+    <App />
+  </DeviceFrame>
+);
+
+export default Root;
