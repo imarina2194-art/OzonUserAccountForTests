@@ -347,6 +347,23 @@ const BottomNav = ({ activeTab, onChange }) => (
 );
 
 const App = () => {
+  const tokensReady =
+    typeof document !== "undefined" &&
+    getComputedStyle(document.documentElement).getPropertyValue("--color-bg-page").trim() !== "";
+
+  if (!tokensReady) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[var(--color-bg-page)] p-[24px] text-center">
+        <div className="max-w-[320px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-[16px]">
+          <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">Design tokens missing</p>
+          <p className="mt-[8px] text-[12px] text-[var(--color-text-secondary)]">
+            tokens.css is not loaded. Include <code>tokens.css</code> in <code>index.html</code>.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1"]));
   const [activeTab, setActiveTab] = useState("account");
   const [stepperCounts, setStepperCounts] = useState(() => ({ "v-1": 1, "v-4": 2 }));
