@@ -7,10 +7,36 @@ const mockUser = {
   isPremium: true,
 };
 
+const iconRegistry = {
+  chat: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/chat_icon.png",
+  "chat-badge":
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/indicator_badge_icon.png",
+  menu: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/burger_menu_icon.png",
+  barcode:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/barcode_icon.png",
+  reviews:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/reviews_shortcut_icon.png",
+  purchases:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/purchased_shortcut_icon.png",
+  favorites:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/favorites_shortcut_icon.png",
+  premium:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/premium_crown_icon.png",
+};
+
+const Icon = ({ name, alt, className }) => {
+  const src = iconRegistry[name];
+  if (!src) {
+    return null;
+  }
+
+  return <img src={src} alt={alt} className={`object-contain ${className || ""}`} />;
+};
+
 const shortcutItems = [
-  { id: "favorites", title: "Избранное", subtitle: "250 товаров" },
-  { id: "purchases", title: "Покупки", subtitle: "Заказать снова" },
-  { id: "reviews", title: "Ждут отзыва", subtitle: "8 товаров" },
+  { id: "favorites", title: "Избранное", subtitle: "250 товаров", iconName: "favorites" },
+  { id: "purchases", title: "Покупки", subtitle: "Заказать снова", iconName: "purchases" },
+  { id: "reviews", title: "Ждут отзыва", subtitle: "8 товаров", iconName: "reviews" },
 ];
 
 const orderItems = [
@@ -142,15 +168,19 @@ const Avatar = () => (
   </div>
 );
 
-const IconButton = ({ icon, badge, onClick }) => (
+const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
     className="relative flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[var(--color-surface)]"
   >
-    <span className="text-[16px]">{icon}</span>
-    {badge && (
+    <span className="h-[16px] w-[16px]">
+      <Icon name={iconName} alt="" className="h-full w-full" />
+    </span>
+    {badgeIconName && (
       <span className="absolute -right-[2px] -top-[4px] flex h-[14px] min-w-[14px] items-center justify-center rounded-full bg-[var(--color-badge)] px-[4px] text-[10px] font-semibold text-[var(--color-surface)]">
-        {badge}
+        <span className="h-[10px] w-[10px]">
+          <Icon name={badgeIconName} alt="" className="h-full w-full" />
+        </span>
       </span>
     )}
   </button>
@@ -172,9 +202,11 @@ const CreatorPromotionCell = () => (
   </div>
 );
 
-const ShortcutCard = ({ title, subtitle }) => (
+const ShortcutCard = ({ title, subtitle, iconName }) => (
   <div className="flex flex-1 flex-col gap-[4px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[10px] py-[8px]">
-    <div className="h-[18px] w-[18px] rounded-[6px] bg-[var(--color-surface-muted)]" />
+    <div className="flex h-[18px] w-[18px] items-center justify-center rounded-[6px] bg-[var(--color-surface-muted)] p-[2px]">
+      <Icon name={iconName} alt={title} className="h-full w-full" />
+    </div>
     <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{title}</p>
     <p className="text-[12px] text-[var(--color-text-secondary)]">{subtitle}</p>
   </div>
@@ -387,7 +419,11 @@ const App = () => {
               <div>
                 <div className="flex items-center gap-[6px]">
                   <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">{mockUser.name}</p>
-                  {mockUser.isPremium && <span className="text-[14px]">👑</span>}
+                  {mockUser.isPremium && (
+                    <span className="h-[14px] w-[14px]">
+                      <Icon name="premium" alt="premium" className="h-full w-full" />
+                    </span>
+                  )}
                 </div>
                 <p className="text-[12px] text-[var(--color-text-secondary)]">
                   {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
@@ -395,8 +431,12 @@ const App = () => {
               </div>
             </div>
             <div className="flex items-center gap-[8px]">
-              <IconButton icon="💬" badge="3" onClick={() => console.log("Open messages")} />
-              <IconButton icon="☰" onClick={() => console.log("Open menu")} />
+              <IconButton
+                iconName="chat"
+                badgeIconName="chat-badge"
+                onClick={() => console.log("Open messages")}
+              />
+              <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
             </div>
           </div>
         </div>
@@ -406,13 +446,15 @@ const App = () => {
 
           <div className="grid grid-cols-3 gap-[10px]">
             {shortcutItems.map((item) => (
-              <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} />
+              <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
             ))}
           </div>
 
           <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
             <div className="flex min-w-[66px] flex-col items-center justify-center rounded-[16px] bg-[var(--color-text-primary)] p-[8px] text-[var(--color-surface)]">
-              <span className="text-[18px]">▥</span>
+              <span className="h-[18px] w-[18px]">
+                <Icon name="barcode" alt="barcode" className="h-full w-full" />
+              </span>
               <span className="text-[10px]">Штрихкод</span>
             </div>
             {orderItems.map((order) => (
