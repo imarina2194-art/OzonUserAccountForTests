@@ -486,7 +486,7 @@ const App = () => {
               <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
             </HStack>
           </HStack>
-        </div>
+        </VStack>
 
         <VStack className="gap-[var(--space-3)] px-[var(--space-4)] pt-[var(--space-3)]">
           <Section className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-4)]">
@@ -552,7 +552,7 @@ const App = () => {
               ))}
             </div>
           </div>
-        </div>
+        </VStack>
       </div>
       <BottomNav activeTab={activeTab} onChange={setActiveTab} />
     </div>
