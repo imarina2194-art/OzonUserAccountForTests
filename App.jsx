@@ -244,8 +244,8 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
 );
 
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] flex-1 flex-col gap-[var(--space-1)] rounded-[var(--radius-m)] p-[var(--space-2)]">
-    <span className="flex h-[var(--size-shortcut-icon)] w-[var(--size-shortcut-icon)] items-center justify-center">
+  <MutedPill className="flex h-[var(--size-pill-h)] flex-1 flex-col gap-[var(--space-0_5)] rounded-[var(--radius-16)] p-[var(--space-2)]">
+    <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
     </span>
     <p className="text-title-s text-[var(--color-text-primary)]">
@@ -258,11 +258,18 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex min-w-[252px] items-center gap-[var(--space-2)] rounded-[var(--radius-m)] p-[var(--space-2)]">
-    <div className="flex h-[var(--size-order-image)] w-[var(--size-order-image)] items-center justify-center rounded-[var(--radius-s)] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
-      ▥
+  <Island className="flex min-w-[252px] items-center gap-[var(--space-2)] rounded-[var(--radius-16)] p-[var(--space-2)]">
+    <div className="relative">
+      <img
+        src={order.image}
+        alt="order"
+        className="h-[var(--size-order-image)] w-[var(--size-order-image)] rounded-[var(--radius-8)] object-cover"
+      />
+      <span className="text-body-s absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+        {order.count}
+      </span>
     </div>
-    <VStack className="flex-1 justify-center gap-[var(--space-0-5)]">
+    <VStack className="flex-1 justify-center gap-[var(--space-0_5)]">
       <p className="text-title-m text-[var(--color-text-primary)]">
         {order.status}
       </p>
@@ -273,44 +280,31 @@ const OrderTrackingCard = ({ order }) => (
         {order.delivery}
       </p>
     </VStack>
-    <div className="relative">
-      <img
-        src={order.image}
-        alt="order"
-        className="h-[var(--size-order-image)] w-[var(--size-order-image)] rounded-[var(--radius-s)] object-cover"
-      />
-      <span className="text-body-s absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
-        {order.count}
-      </span>
-    </div>
   </Island>
 );
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
-  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
-    <HStack className="items-start justify-between gap-[var(--space-2)]">
-      <VStack className="gap-[var(--space-2)]">
-        <HStack className="gap-[var(--space-2)]">
-          <p className="text-title-l text-[var(--color-text-primary)]">
-            Морковск
-          </p>
-          <MutedPill className="text-body-s rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--color-text-primary)]">
-            312
-          </MutedPill>
-        </HStack>
-        <p className="text-body-m text-[var(--color-text-secondary)]">
-          Суперприз — квартира
+  <Island
+    className="h-[var(--size-morkovsk-h)] overflow-hidden rounded-[var(--radius-24)] p-[var(--space-4)]"
+    style={debugStyle}
+  >
+    <VStack className="h-full gap-[var(--space-2)]">
+      <HStack className="gap-[var(--space-2)]">
+        <p className="text-title-l truncate text-[var(--color-text-primary)]">
+          Морковск
         </p>
-        <button className="text-body-m font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
-          Узнать больше
-        </button>
-      </VStack>
-      <img
-        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
-        alt="bunny"
-        className="h-[var(--size-morkovsk-illustration)] w-[var(--size-morkovsk-illustration)] rounded-full object-cover"
-      />
-    </HStack>
+        <MutedPill className="text-body-s inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] px-[var(--space-2)] py-[var(--space-0_5)] text-[var(--color-text-primary)]">
+          <span>312</span>
+          <span aria-hidden="true">🥕</span>
+        </MutedPill>
+      </HStack>
+      <p className="text-body-m truncate text-[var(--color-text-secondary)]">
+        Суперприз — квартира
+      </p>
+      <button className="text-body-m truncate font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
+        Узнать больше
+      </button>
+    </VStack>
   </Island>
 );
 
@@ -501,10 +495,10 @@ const App = ({ debug }) => {
         className="sticky top-0 z-20 w-full"
         style={debugStyle}
       >
-        <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
-          <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
+        <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-0">
+          <Island className="flex h-[var(--size-header-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-32)] px-[var(--space-3)]">
             <Avatar />
-            <VStack className="min-w-0 gap-[var(--space-0-5)]">
+            <VStack className="min-w-0 gap-[var(--space-0_5)]">
               <HStack className="gap-[var(--space-1)]">
                 <p className="text-title-s truncate text-[var(--color-text-primary)]">
                   {mockUser.name}
@@ -536,7 +530,7 @@ const App = ({ debug }) => {
           style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottom-nav-h))" }}
         >
           <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
-            <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-l)] p-[var(--space-4)]">
+            <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-24)] p-[var(--space-4)]">
               <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
                   <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
@@ -549,8 +543,8 @@ const App = ({ debug }) => {
             <HStack
               className="h-[var(--size-order-row-h)] w-full gap-[var(--space-2)] overflow-x-auto"
             >
-              <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-m)] bg-[var(--color-text-primary)]">
-                <span className="h-[var(--size-barcode-icon)] w-[var(--size-barcode-icon)]">
+              <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-16)] bg-black">
+                <span className="h-[var(--size-icon-m)] w-[var(--size-icon-m)]">
                   <Icon name="barcode" alt="barcode" className="h-full w-full" />
                 </span>
               </div>
