@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 const mockUser = {
   name: "Александр Р.",
@@ -146,8 +146,11 @@ const bottomTabs = [
   { id: "account", label: "Профиль", icon: "👤" },
 ];
 
-const StatusBar = () => (
-  <HStack className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-header)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]">
+const StatusBar = ({ debugStyle }) => (
+  <HStack
+    className="h-[var(--size-statusbar-h)] justify-between bg-[var(--color-bg-header)] px-[var(--space-4)] text-[var(--font-size-body)] text-[var(--color-text-primary)]"
+    style={debugStyle}
+  >
     <span className="font-[var(--font-weight-semibold)]">9:30</span>
     <HStack className="w-[var(--size-status-icons-w)] justify-end gap-[var(--space-0-5)] text-[var(--font-size-caption)]">
       <span>●</span>
@@ -192,7 +195,7 @@ const Island = ({ className, children, ...props }) => (
   </div>
 );
 
-const Pill = ({ className, children, ...props }) => (
+const MutedPill = ({ className, children, ...props }) => (
   <div className={`bg-[var(--color-surface-muted)] ${className || ""}`} {...props}>
     {children}
   </div>
@@ -207,13 +210,15 @@ const Badge = ({ className, children, ...props }) => (
   </span>
 );
 
-const DeviceFrame = ({ children }) => (
+const DeviceFrame = ({ children, debug }) => (
   <div className="flex min-h-screen items-center justify-center bg-black">
-    <div className="relative h-[852px] w-[393px] rounded-[40px] bg-black p-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-      <div className="absolute left-1/2 top-[10px] h-[32px] w-[160px] -translate-x-1/2 rounded-[16px] bg-black" />
+    <div className="relative h-[852px] w-[393px] rounded-[40px] bg-black p-[10px]">
       <div
-        className="relative flex h-full w-full flex-col overflow-hidden rounded-[30px] bg-[var(--color-bg-page)]"
-        style={{ transform: "translateZ(0)" }}
+        className="screen flex h-full w-full flex-col overflow-hidden rounded-[30px] bg-[var(--color-bg-page)]"
+        style={{
+          transform: "translateZ(0)",
+          outline: debug ? "1px dashed var(--color-text-secondary)" : undefined,
+        }}
       >
         {children}
       </div>
@@ -240,7 +245,7 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
 );
 
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <Pill className="flex h-[var(--size-shortcut-pill-h)] flex-1 flex-col gap-[var(--space-1)] rounded-[var(--radius-m)] p-[var(--space-2)]">
+  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] flex-1 flex-col gap-[var(--space-1)] rounded-[var(--radius-m)] p-[var(--space-2)]">
     <span className="flex h-[var(--size-shortcut-icon)] w-[var(--size-shortcut-icon)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
     </span>
@@ -250,7 +255,7 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
     <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
       {subtitle}
     </p>
-  </Pill>
+  </MutedPill>
 );
 
 const OrderTrackingCard = ({ order }) => (
@@ -258,7 +263,7 @@ const OrderTrackingCard = ({ order }) => (
     <div className="flex h-[var(--size-order-image)] w-[var(--size-order-image)] items-center justify-center rounded-[var(--radius-s)] bg-[var(--color-text-primary)] text-[var(--color-surface)]">
       ▥
     </div>
-    <VStack className="h-[var(--size-order-text-h)] flex-1 justify-center gap-[var(--space-0-5)]">
+    <VStack className="flex-1 justify-center gap-[var(--space-0-5)]">
       <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
         {order.status}
       </p>
@@ -282,57 +287,67 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
-const MorkovskEntryPoint = () => (
-  <Island className="flex items-center justify-between rounded-[var(--radius-l)] p-[var(--space-4)]">
-    <VStack className="gap-[var(--space-2)]">
-      <HStack className="gap-[var(--space-2)]">
-        <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
-          Морковск
+const MorkovskEntryPoint = ({ debugStyle }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
+    <HStack className="items-start justify-between gap-[var(--space-2)]">
+      <VStack className="gap-[var(--space-2)]">
+        <HStack className="gap-[var(--space-2)]">
+          <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+            Морковск
+          </p>
+          <MutedPill className="rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+            312
+          </MutedPill>
+        </HStack>
+        <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-secondary)]">
+          Суперприз — квартира
         </p>
-        <Pill className="rounded-[var(--radius-s)] px-[var(--space-2)] py-[var(--space-0-5)] text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
-          312
-        </Pill>
-      </HStack>
-      <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-secondary)]">
-        Суперприз — квартира
-      </p>
-      <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
-        Узнать больше
-      </button>
-    </VStack>
-    <img
-      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
-      alt="bunny"
-      className="h-[var(--size-morkovsk-illustration)] w-[var(--size-morkovsk-illustration)] rounded-full object-cover"
-    />
+        <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+          Узнать больше
+        </button>
+      </VStack>
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
+        alt="bunny"
+        className="h-[var(--size-morkovsk-illustration)] w-[var(--size-morkovsk-illustration)] rounded-full object-cover"
+      />
+    </HStack>
   </Island>
 );
 
-const FinanceSection = () => (
-  <div className="rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[14px] py-[10px]">
-    <div className="flex items-center justify-between">
-      <p className="text-[20px] font-bold text-[var(--color-text-primary)]">Финансы</p>
-      <button className="text-[14px] font-semibold text-[var(--color-text-link)]">Баллы и бонусы</button>
-    </div>
-    <div className="mt-[8px] grid grid-cols-2 gap-[10px]">
-      <div className="flex flex-col gap-[8px]">
+const FinanceSection = ({ debugStyle }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
+    <HStack className="justify-between">
+      <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+        Финансы
+      </p>
+      <button className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+        Баллы и бонусы
+      </button>
+    </HStack>
+    <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
+      <VStack className="gap-[var(--space-2)]">
         {financeCells.map((cell) => (
-          <div
-            key={cell.id}
-            className="rounded-[12px] bg-[var(--color-surface-muted)] px-[12px] py-[8px]"
-          >
-            <p className="text-[12px] text-[var(--color-text-secondary)]">{cell.title}</p>
-            <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">{cell.value}</p>
-          </div>
+          <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
+            <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+              {cell.title}
+            </p>
+            <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+              {cell.value}
+            </p>
+          </MutedPill>
         ))}
-      </div>
-      <div className="relative overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)] px-[12px] py-[8px]">
-        <p className="text-[16px] font-semibold text-[var(--color-text-primary)]">Ozon Premium</p>
-        <p className="text-[14px] text-[var(--color-text-link)]">Получить больше привилегий</p>
-        <div className="absolute bottom-[8px] right-[8px] h-[28px] w-[28px] rounded-[8px] bg-[var(--color-surface)]" />
-      </div>
+      </VStack>
+      <MutedPill className="rounded-[var(--radius-s)] p-[var(--space-2)]">
+        <p className="text-[var(--font-size-body)] font-[var(--font-weight-semibold)] leading-[var(--line-height-body)] text-[var(--color-text-primary)]">
+          Ozon Premium
+        </p>
+        <p className="text-[var(--font-size-body)] leading-[var(--line-height-body)] text-[var(--color-text-link)]">
+          Получить больше привилегий
+        </p>
+      </MutedPill>
     </div>
-  </div>
+  </Island>
 );
 
 const ProductCardCompact = ({ item, isFavorite, onToggle }) => (
@@ -413,35 +428,46 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
   </div>
 );
 
-const BottomNav = ({ activeTab, onChange }) => (
-  <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-center">
-    <div className="flex w-[382px] items-center justify-between rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px]">
-      {bottomTabs.map((tab) => (
-        <button
-          key={tab.id}
-          onClick={() => {
-            onChange(tab.id);
-            console.log("Navigate", tab.id);
-          }}
-          className="flex flex-1 flex-col items-center gap-[2px]"
-        >
-          <span className={`text-[16px] ${activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"}`}>
-            {tab.icon}
-          </span>
-          <span className={`text-[10px] ${activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"}`}>
-            {tab.label}
-          </span>
-        </button>
-      ))}
+const BottomNav = ({ activeTab, onChange, debugStyle }) => (
+  <div className="sticky bottom-0 z-30" style={debugStyle}>
+    <div className="bg-[var(--color-bg-page)] px-[var(--space-4)] pb-[var(--space-4)]">
+      <div className="flex h-[var(--size-bottom-nav-h)] items-center justify-between rounded-[var(--radius-m)] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[var(--space-3)]">
+        {bottomTabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => {
+              onChange(tab.id);
+              console.log("Navigate", tab.id);
+            }}
+            className="flex flex-1 flex-col items-center gap-[var(--space-0-5)]"
+          >
+            <span
+              className={`text-[var(--font-size-body)] ${
+                activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
+              }`}
+            >
+              {tab.icon}
+            </span>
+            <span
+              className={`text-[var(--font-size-caption)] ${
+                activeTab === tab.id ? "text-[var(--color-text-link)]" : "text-[var(--color-text-secondary)]"
+              }`}
+            >
+              {tab.label}
+            </span>
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 );
 
-const App = () => {
+const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1"]));
   const [activeTab, setActiveTab] = useState("account");
   const [stepperCounts, setStepperCounts] = useState(() => ({ "v-1": 1, "v-4": 2 }));
   const [segment, setSegment] = useState("shops");
+  const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleFavorite = (id) => {
     setFavorites((prev) => {
@@ -468,115 +494,99 @@ const App = () => {
   ]);
 
   return (
-    <div className="flex justify-center bg-[var(--color-bg-page)] pb-[96px]">
-      <div className="relative w-[390px] rounded-[var(--radius-l)] bg-[var(--color-bg-page)] pb-[120px]">
-        <StatusBar />
-        <div className="sticky top-0 z-20 bg-[var(--color-bg-header)]">
-          <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-header)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
-            <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
-              <Avatar />
-              <VStack className="gap-[var(--space-0-5)]">
-                <HStack className="gap-[var(--space-1)]">
-                  <p className="text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
-                    {mockUser.name}
-                  </p>
-                  {mockUser.isPremium && (
-                    <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
-                      <Icon name="premium" alt="premium" className="h-full w-full" />
-                    </span>
-                  )}
-                </HStack>
-                <p className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
-                  {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
+    <>
+      <StatusBar debugStyle={debugStyle} />
+      <div
+        className="sticky top-0 z-20 bg-[var(--color-bg-header)]"
+        style={debugStyle}
+      >
+        <HStack className="h-[var(--size-header-h)] items-end bg-[var(--color-bg-header)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+          <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
+            <Avatar />
+            <VStack className="min-w-0 gap-[var(--space-0-5)]">
+              <HStack className="gap-[var(--space-1)]">
+                <p className="truncate text-[var(--font-size-title)] font-[var(--font-weight-semibold)] leading-[var(--line-height-title)] text-[var(--color-text-primary)]">
+                  {mockUser.name}
                 </p>
-              </VStack>
-            </Island>
-            <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
-              <IconButton
-                iconName="chat"
-                badgeIconName="chat-badge"
-                onClick={() => console.log("Open messages")}
-              />
-              <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
-            </HStack>
+                {mockUser.isPremium && (
+                  <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
+                    <Icon name="premium" alt="premium" className="h-full w-full" />
+                  </span>
+                )}
+              </HStack>
+              <p className="truncate text-[var(--font-size-caption)] leading-[var(--line-height-caption)] text-[var(--color-text-secondary)]">
+                {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
+              </p>
+            </VStack>
+          </Island>
+          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
+            <IconButton
+              iconName="chat"
+              badgeIconName="chat-badge"
+              onClick={() => console.log("Open messages")}
+            />
+            <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
           </HStack>
-        </div>
-
-        <VStack className="gap-[var(--space-3)] px-[var(--space-4)] pt-[var(--space-3)]">
-          <Section className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-4)]">
-            <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
-              {shortcutItems.map((item) => (
-                <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
-              ))}
-            </div>
-          </Section>
-
-          <HStack className="h-[var(--size-order-row-h)] gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
-            <div className="flex min-w-[var(--size-barcode-tile-w)] flex-col items-center justify-center rounded-r-[var(--radius-m)] bg-[var(--color-text-primary)] p-[var(--space-2)] text-[var(--color-surface)]">
-              <span className="h-[var(--size-barcode-icon)] w-[var(--size-barcode-icon)]">
-                <Icon name="barcode" alt="barcode" className="h-full w-full" />
-              </span>
-              <span className="text-[var(--font-size-caption)] leading-[var(--line-height-caption)]">Штрихкод</span>
-            </div>
-            {orderItems.map((order) => (
-              <OrderTrackingCard key={order.id} order={order} />
-            ))}
-          </HStack>
-
-          <VStack className="gap-[var(--space-1)]">
-            <MorkovskEntryPoint />
-            <FinanceSection />
-          </VStack>
-
-          <div>
-            <p className="pb-[4px] text-[20px] font-bold text-[var(--color-text-primary)]">Вы смотрели</p>
-            <div className="flex gap-[10px] overflow-x-auto pb-[4px]">
-              {horizontalItems.map((item) => (
-                <ProductCardCompact
-                  key={item.id}
-                  item={item}
-                  isFavorite={horizontalFavorites.has(item.id)}
-                  onToggle={() => toggleFavorite(item.id)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <SegmentedControl
-            items={[
-              { id: "shops", label: "Мои магазины", icon: "🏬" },
-              { id: "feed", label: "Лента обзоров", icon: "▶" },
-            ]}
-            activeId={segment}
-            onChange={setSegment}
-          />
-
-          <div>
-            <p className="pb-[4px] text-[20px] font-bold text-[var(--color-text-primary)]">Возможно, вам понравится</p>
-            <div className="grid grid-cols-2 gap-[12px]">
-              {verticalItems.map((item) => (
-                <VerticalProductCard
-                  key={item.id}
-                  item={item}
-                  isFavorite={favorites.has(item.id)}
-                  onToggle={() => toggleFavorite(item.id)}
-                  stepper={stepperCounts[item.id]}
-                  onStep={(delta) => handleStepper(item.id, delta)}
-                />
-              ))}
-            </div>
-          </div>
-        </VStack>
+        </HStack>
       </div>
-      <BottomNav activeTab={activeTab} onChange={setActiveTab} />
-    </div>
+      <div className="flex-1 overflow-y-auto" style={debugStyle}>
+        <div
+          className="px-[var(--space-4)] pt-[var(--space-3)]"
+          style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottom-nav-h))" }}
+        >
+          <Section style={debugStyle}>
+            <HStack
+              className="h-[var(--size-order-row-h)] gap-[var(--space-2)] overflow-x-auto"
+            >
+              <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-m)] bg-[var(--color-text-primary)]">
+                <span className="h-[var(--size-barcode-icon)] w-[var(--size-barcode-icon)]">
+                  <Icon name="barcode" alt="barcode" className="h-full w-full" />
+                </span>
+              </div>
+              {orderItems.map((order) => (
+                <OrderTrackingCard key={order.id} order={order} />
+              ))}
+            </HStack>
+          </Section>
+          <div className="h-[var(--space-1)]" />
+          <Section style={debugStyle}>
+            <Island className="h-[var(--size-shortcuts-h)] rounded-[var(--radius-l)] p-[var(--space-4)]">
+              <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
+                {shortcutItems.map((item) => (
+                  <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
+                ))}
+              </div>
+            </Island>
+          </Section>
+          <div className="h-[var(--space-1)]" />
+          <MorkovskEntryPoint debugStyle={debugStyle} />
+          <div className="h-[var(--space-1)]" />
+          <FinanceSection debugStyle={debugStyle} />
+        </div>
+      </div>
+      <BottomNav activeTab={activeTab} onChange={setActiveTab} debugStyle={debugStyle} />
+    </>
   );
 };
 
-const Root = () => (
-  <DeviceFrame>
-    <App />
-  </DeviceFrame>
-);
+const Root = () => {
+  const [showLayoutDebug, setShowLayoutDebug] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "o" || event.key === "O") {
+        setShowLayoutDebug((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  return (
+    <DeviceFrame debug={showLayoutDebug}>
+      <App debug={showLayoutDebug} />
+    </DeviceFrame>
+  );
+};
 
 export default Root;

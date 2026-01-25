@@ -64,13 +64,13 @@ Components should only use these tokens. Overlay tokens are transformed into rea
 - `--size-status-icons-w`: 46px
 - `--size-order-row-h`: 80px
 - `--size-order-image`: 64px
-- `--size-order-text-h`: 56px
 - `--size-barcode-icon`: 32px
 - `--size-barcode-tile-w`: 66px
 - `--size-shortcuts-h`: 108px
 - `--size-shortcut-pill-h`: 76px
 - `--size-shortcut-icon`: 20px
 - `--size-morkovsk-illustration`: 52px
+- `--size-bottom-nav-h`: 56px
 
 ## Spacing tokens
 
