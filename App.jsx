@@ -431,7 +431,7 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
 
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
   <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
-    <div className="bg-[var(--color-bg-page)] px-[var(--space-4)] pb-[var(--space-4)]">
+    <div className="px-[var(--space-4)] pb-[var(--space-4)]">
       <div className="flex h-[var(--size-bottom-nav-h)] items-center justify-between rounded-[var(--radius-m)] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[var(--space-3)]">
         {bottomTabs.map((tab) => (
           <button
@@ -495,42 +495,40 @@ const App = ({ debug }) => {
   ]);
 
   return (
-    <>
-      <div className="w-full bg-[var(--color-bg-page)]">
-        <StatusBar debugStyle={debugStyle} />
-        <div
-          className="sticky top-0 z-20 w-full"
-          style={debugStyle}
-        >
-          <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
-            <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
-              <Avatar />
-              <VStack className="min-w-0 gap-[var(--space-0-5)]">
-                <HStack className="gap-[var(--space-1)]">
-                  <p className="text-title-s truncate text-[var(--color-text-primary)]">
-                    {mockUser.name}
-                  </p>
-                  {mockUser.isPremium && (
-                    <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
-                      <Icon name="premium" alt="premium" className="h-full w-full" />
-                    </span>
-                  )}
-                </HStack>
-                <p className="text-body-s truncate text-[var(--color-text-secondary)]">
-                  {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
+    <div className="flex h-full w-full flex-col">
+      <StatusBar debugStyle={debugStyle} />
+      <div
+        className="sticky top-0 z-20 w-full"
+        style={debugStyle}
+      >
+        <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+          <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
+            <Avatar />
+            <VStack className="min-w-0 gap-[var(--space-0-5)]">
+              <HStack className="gap-[var(--space-1)]">
+                <p className="text-title-s truncate text-[var(--color-text-primary)]">
+                  {mockUser.name}
                 </p>
-              </VStack>
-            </Island>
-            <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
-              <IconButton
-                iconName="chat"
-                badgeIconName="chat-badge"
-                onClick={() => console.log("Open messages")}
-              />
-              <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
-            </HStack>
+                {mockUser.isPremium && (
+                  <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
+                    <Icon name="premium" alt="premium" className="h-full w-full" />
+                  </span>
+                )}
+              </HStack>
+              <p className="text-body-s truncate text-[var(--color-text-secondary)]">
+                {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
+              </p>
+            </VStack>
+          </Island>
+          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
+            <IconButton
+              iconName="chat"
+              badgeIconName="chat-badge"
+              onClick={() => console.log("Open messages")}
+            />
+            <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
           </HStack>
-        </div>
+        </HStack>
       </div>
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
@@ -572,7 +570,7 @@ const App = ({ debug }) => {
         </div>
       </div>
       <BottomNav activeTab={activeTab} onChange={setActiveTab} debugStyle={debugStyle} />
-    </>
+    </div>
   );
 };
 
