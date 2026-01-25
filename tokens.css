@@ -99,6 +99,7 @@ body {
   font-family: var(--font-family-base);
   background: var(--color-bg-page);
   color: var(--color-text-primary);
+  margin: 0;
 }
 
 .text-title-s {

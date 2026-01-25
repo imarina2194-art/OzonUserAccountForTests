@@ -148,7 +148,7 @@ const bottomTabs = [
 
 const StatusBar = ({ debugStyle }) => (
   <HStack
-    className="box-border h-[var(--size-statusbar-h)] w-full justify-between bg-[var(--color-bg-page)] px-[var(--space-4)] text-body-m text-[var(--color-text-primary)]"
+    className="box-border h-[var(--size-statusbar-h)] w-full justify-between px-[var(--space-4)] text-body-m text-[var(--color-text-primary)]"
     style={debugStyle}
   >
     <span className="font-[var(--font-weight-semibold)]">9:30</span>
@@ -496,39 +496,41 @@ const App = ({ debug }) => {
 
   return (
     <>
-      <StatusBar debugStyle={debugStyle} />
-      <div
-        className="sticky top-0 z-20 w-full bg-[var(--color-bg-page)]"
-        style={debugStyle}
-      >
-        <HStack className="box-border h-[var(--size-header-h)] w-full items-end bg-[var(--color-bg-page)] pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
-          <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
-            <Avatar />
-            <VStack className="min-w-0 gap-[var(--space-0-5)]">
-              <HStack className="gap-[var(--space-1)]">
-                <p className="text-title-s truncate text-[var(--color-text-primary)]">
-                  {mockUser.name}
+      <div className="w-full bg-[var(--color-bg-page)]">
+        <StatusBar debugStyle={debugStyle} />
+        <div
+          className="sticky top-0 z-20 w-full"
+          style={debugStyle}
+        >
+          <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-[var(--space-4)]">
+            <Island className="flex h-[var(--size-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-island-pill)] px-[var(--space-3)]">
+              <Avatar />
+              <VStack className="min-w-0 gap-[var(--space-0-5)]">
+                <HStack className="gap-[var(--space-1)]">
+                  <p className="text-title-s truncate text-[var(--color-text-primary)]">
+                    {mockUser.name}
+                  </p>
+                  {mockUser.isPremium && (
+                    <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
+                      <Icon name="premium" alt="premium" className="h-full w-full" />
+                    </span>
+                  )}
+                </HStack>
+                <p className="text-body-s truncate text-[var(--color-text-secondary)]">
+                  {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
                 </p>
-                {mockUser.isPremium && (
-                  <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
-                    <Icon name="premium" alt="premium" className="h-full w-full" />
-                  </span>
-                )}
-              </HStack>
-              <p className="text-body-s truncate text-[var(--color-text-secondary)]">
-                {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
-              </p>
-            </VStack>
-          </Island>
-          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
-            <IconButton
-              iconName="chat"
-              badgeIconName="chat-badge"
-              onClick={() => console.log("Open messages")}
-            />
-            <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
+              </VStack>
+            </Island>
+            <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
+              <IconButton
+                iconName="chat"
+                badgeIconName="chat-badge"
+                onClick={() => console.log("Open messages")}
+              />
+              <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
+            </HStack>
           </HStack>
-        </HStack>
+        </div>
       </div>
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
