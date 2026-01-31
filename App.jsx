@@ -268,14 +268,14 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
 );
 
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] flex-col gap-[var(--space-0_5)] rounded-[var(--radius-16)] p-[var(--space-2)]">
+  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] flex-col items-center justify-center rounded-[var(--radius-16)]">
     <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
     </span>
     <p className="text-title-s text-[var(--color-text-primary)]">
       {title}
     </p>
-    <p className="text-body-s text-[var(--color-text-secondary)]">
+    <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
       {subtitle}
     </p>
   </MutedPill>
@@ -552,8 +552,8 @@ const App = ({ debug }) => {
           style={{ paddingBottom: "0px" }}
         >
           <Section className="w-[390px] box-border" style={debugStyle}>
-            <Island className="h-[var(--size-shortcuts-h)] w-[390px] rounded-[var(--radius-24)] p-[var(--space-4)]">
-              <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
+            <Island className="flex h-[var(--size-shortcuts-h)] w-[390px] items-center justify-center rounded-[var(--radius-24)]">
+              <div className="flex gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
                   <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
                 ))}
