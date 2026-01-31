@@ -9,7 +9,7 @@
   --figma-gray-cell: rgba(0, 48, 120, 0.04);
 
   /* Semantic colors */
-  --color-bg-page: var(--figma-overlay-bg);
+  --color-bg-page: rgba(0, 26, 52, 0.06);
   --color-bg-header: var(--color-bg-page);
   --color-surface: var(--figma-white);
   --color-surface-muted: var(--figma-gray-cell);

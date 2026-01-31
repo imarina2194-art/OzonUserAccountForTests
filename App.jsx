@@ -549,9 +549,9 @@ const App = ({ debug }) => {
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
           className="w-full box-border"
-          style={{ paddingBottom: "var(--size-bottomnav-h)" }}
+          style={{ paddingBottom: "0px" }}
         >
-          <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
+          <Section className="w-full box-border" style={debugStyle}>
             <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-24)] p-[var(--space-4)]">
               <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
@@ -561,7 +561,7 @@ const App = ({ debug }) => {
             </Island>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
+          <Section className="w-full box-border" style={debugStyle}>
             <HStack
               className="h-[var(--size-order-row-h)] w-full gap-[var(--space-2)] overflow-x-auto"
             >
@@ -576,11 +576,11 @@ const App = ({ debug }) => {
             </HStack>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <div className="w-full box-border px-[var(--space-4)]">
+          <div className="w-full box-border">
             <MorkovskEntryPoint debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
-          <div className="w-full box-border px-[var(--space-4)]">
+          <div className="w-full box-border">
             <FinanceSection debugStyle={debugStyle} />
           </div>
         </div>
