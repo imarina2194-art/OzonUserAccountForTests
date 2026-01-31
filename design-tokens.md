@@ -74,6 +74,7 @@ Components should only use these tokens. Overlay tokens are transformed into rea
 - `--size-barcode-tile-w`: 66px
 - `--size-shortcuts-h`: 108px
 - `--size-shortcut-pill-h`: 76px
+- `--size-shortcut-pill-w`: 114px
 - `--size-shortcut-icon`: 20px
 - `--size-pill-h`: 76px
 - `--size-icon-s`: 20px

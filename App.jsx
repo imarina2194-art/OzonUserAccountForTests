@@ -268,7 +268,7 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
 );
 
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="flex h-[var(--size-pill-h)] flex-1 flex-col gap-[var(--space-0_5)] rounded-[var(--radius-16)] p-[var(--space-2)]">
+  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] flex-col gap-[var(--space-0_5)] rounded-[var(--radius-16)] p-[var(--space-2)]">
     <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
       <Icon name={iconName} alt={title} className="h-full w-full" />
     </span>
@@ -517,7 +517,7 @@ const App = ({ debug }) => {
         className="sticky top-0 z-20 w-full"
         style={debugStyle}
       >
-        <HStack className="box-border h-[var(--size-header-h)] w-full items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-0">
+        <HStack className="box-border h-[var(--size-header-h)] w-[390px] items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-0">
           <Island className="flex h-[var(--size-header-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-32)] px-[var(--space-3)]">
             <Avatar />
             <VStack className="min-w-0 gap-[var(--space-0_5)]">
@@ -551,8 +551,8 @@ const App = ({ debug }) => {
           className="w-full box-border"
           style={{ paddingBottom: "0px" }}
         >
-          <Section className="w-full box-border" style={debugStyle}>
-            <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-24)] p-[var(--space-4)]">
+          <Section className="w-[390px] box-border" style={debugStyle}>
+            <Island className="h-[var(--size-shortcuts-h)] w-[390px] rounded-[var(--radius-24)] p-[var(--space-4)]">
               <div className="grid h-full grid-cols-3 gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
                   <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
@@ -561,9 +561,9 @@ const App = ({ debug }) => {
             </Island>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <Section className="w-full box-border" style={debugStyle}>
+          <Section className="w-[390px] box-border" style={debugStyle}>
             <HStack
-              className="h-[var(--size-order-row-h)] w-full gap-[var(--space-2)] overflow-x-auto"
+              className="h-[var(--size-order-row-h)] w-[390px] gap-[var(--space-2)] overflow-x-auto"
             >
               <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-16)] bg-black">
                 <span className="h-[var(--size-icon-m)] w-[var(--size-icon-m)]">
@@ -576,11 +576,11 @@ const App = ({ debug }) => {
             </HStack>
           </Section>
           <div className="h-[var(--space-1)]" />
-          <div className="w-full box-border">
+          <div className="w-[390px] box-border">
             <MorkovskEntryPoint debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
-          <div className="w-full box-border">
+          <div className="w-[390px] box-border">
             <FinanceSection debugStyle={debugStyle} />
           </div>
         </div>
