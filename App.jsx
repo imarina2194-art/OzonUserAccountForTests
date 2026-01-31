@@ -252,7 +252,7 @@ const DeviceFrame = ({ children, debug }) => (
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center"
+    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center border-0 bg-transparent p-0"
   >
     <span className="h-[var(--size-icon-button-icon)] w-[var(--size-icon-button-icon)]">
       <Icon name={iconName} alt="" className="h-full w-full" />
@@ -468,7 +468,7 @@ const BottomNav = ({ activeTab, onChange, debugStyle }) => (
               onChange(tab.id);
               console.log("Navigate", tab.id);
             }}
-            className="flex h-[var(--size-bottomnav-h)] w-[var(--size-bottomtab-w)] items-center justify-center"
+            className="flex h-[var(--size-bottomnav-h)] w-[var(--size-bottomtab-w)] items-center justify-center border-0 bg-transparent p-0"
             aria-label={tab.label}
           >
             <img
@@ -540,7 +540,7 @@ const App = ({ debug }) => {
               </p>
             </VStack>
           </Island>
-          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)]">
+          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)] self-center">
             <IconButton
               iconName="chat"
               badgeIconName="chat-badge"
