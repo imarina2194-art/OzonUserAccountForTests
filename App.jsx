@@ -268,16 +268,20 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
 );
 
 const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="flex h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] flex-col items-center justify-center rounded-[var(--radius-16)]">
-    <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
-      <Icon name={iconName} alt={title} className="h-full w-full" />
-    </span>
-    <p className="text-title-s text-[var(--color-text-primary)]">
-      {title}
-    </p>
-    <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
-      {subtitle}
-    </p>
+  <MutedPill className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]">
+    <div className="absolute left-[var(--space-2)] top-[var(--space-2)] text-left">
+      <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
+        <Icon name={iconName} alt={title} className="h-full w-full" />
+      </span>
+      <div className="mt-[var(--space-2)]">
+        <p className="text-title-s text-[var(--color-text-primary)]">
+          {title}
+        </p>
+        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+          {subtitle}
+        </p>
+      </div>
+    </div>
   </MutedPill>
 );
 
