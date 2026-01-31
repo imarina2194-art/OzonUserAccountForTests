@@ -548,8 +548,8 @@ const App = ({ debug }) => {
       </div>
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
-          className="w-full box-border pt-[var(--space-3)]"
-          style={{ paddingBottom: "calc(var(--space-6) + var(--size-bottomnav-h))" }}
+          className="w-full box-border"
+          style={{ paddingBottom: "var(--size-bottomnav-h)" }}
         >
           <Section className="w-full box-border px-[var(--space-4)]" style={debugStyle}>
             <Island className="h-[var(--size-shortcuts-h)] w-full rounded-[var(--radius-24)] p-[var(--space-4)]">
