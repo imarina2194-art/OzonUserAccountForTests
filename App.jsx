@@ -352,7 +352,7 @@ const FinanceSection = ({ debugStyle }) => (
       <p className="text-title-l text-[var(--color-text-primary)]">
         Финансы
       </p>
-      <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px]">
+      <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px] pr-[6px]">
         <span className="text-body-m text-[var(--color-text-link)]">Баллы и бонусы</span>
         <img
           src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
@@ -365,22 +365,36 @@ const FinanceSection = ({ debugStyle }) => (
       <VStack className="gap-[var(--space-2)]">
         {financeCells.map((cell) => (
           <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-              {cell.title}
-            </p>
+            <div className="flex items-center gap-[2px]">
+              <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+                {cell.title}
+              </p>
+              <img
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+                alt=""
+                className="h-[16px] w-[16px] object-contain"
+              />
+            </div>
             <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
               {cell.value}
             </p>
           </MutedPill>
         ))}
       </VStack>
-      <MutedPill className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+      <MutedPill className="relative overflow-hidden rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
+        <div className="max-w-[calc(100%-79px)]">
+          <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
           Ozon Premium
-        </p>
-        <p className="text-body-m text-[var(--color-text-link)]">
-          Получить больше привилегий
-        </p>
+          </p>
+          <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
+            Получить больше привилегий
+          </p>
+        </div>
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
+          alt=""
+          className="absolute bottom-0 right-0 h-[79px] w-[79px] object-contain"
+        />
       </MutedPill>
     </div>
   </Island>
