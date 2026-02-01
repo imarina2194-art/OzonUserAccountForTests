@@ -285,7 +285,7 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex h-[80px] w-[264px] flex-none items-center overflow-hidden rounded-[16px] bg-[var(--color-surface)] p-[8px]">
+  <Island className="flex h-[80px] w-[264px] flex-none items-center overflow-hidden rounded-[16px] bg-[var(--color-surface)] px-[var(--space-2)] py-0">
     <div className="relative h-[64px] w-[64px]">
       <img
         src={order.image}
@@ -575,7 +575,7 @@ const App = ({ debug }) => {
           <Section className="w-[390px] box-border" style={debugStyle}>
             <div className="relative h-[80px] w-[390px] overflow-visible">
               <div className="flex h-[80px] gap-[8px] overflow-x-auto overflow-y-visible p-0">
-                <div className="flex h-[80px] w-[52px] flex-none items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
+                <div className="flex h-[80px] w-[52px] flex-none items-center justify-center rounded-l-none rounded-r-[16px] bg-[var(--color-text-primary)]">
                   <span className="h-[32px] w-[32px]">
                     <Icon name="barcode" alt="barcode" className="h-full w-full" />
                   </span>
