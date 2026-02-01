@@ -332,7 +332,7 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
       <p className="text-body-m truncate text-[var(--color-text-secondary)]">
         Суперприз — квартира
       </p>
-      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] shadow-none">
+      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none">
         Узнать больше
       </button>
     </VStack>
@@ -352,25 +352,30 @@ const FinanceSection = ({ debugStyle }) => (
       <p className="text-title-l text-[var(--color-text-primary)]">
         Финансы
       </p>
-      <button className="text-body-m font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
-        Баллы и бонусы
-      </button>
+      <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px]">
+        <span className="text-body-m text-[var(--color-text-link)]">Баллы и бонусы</span>
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
+          alt=""
+          className="h-[20px] w-[30px] object-contain"
+        />
+      </div>
     </HStack>
     <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
       <VStack className="gap-[var(--space-2)]">
         {financeCells.map((cell) => (
           <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <p className="text-title-cell text-[var(--color-text-secondary)]">
+            <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
               {cell.title}
             </p>
-            <p className="text-title-m text-[var(--color-text-primary)]">
+            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
               {cell.value}
             </p>
           </MutedPill>
         ))}
       </VStack>
-      <MutedPill className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-        <p className="text-title-m text-[var(--color-text-primary)]">
+      <MutedPill className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
+        <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
           Ozon Premium
         </p>
         <p className="text-body-m text-[var(--color-text-link)]">
