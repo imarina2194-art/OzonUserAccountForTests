@@ -312,26 +312,35 @@ const OrderTrackingCard = ({ order }) => (
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
   <Island
-    className="h-[var(--size-morkovsk-h)] overflow-hidden rounded-[var(--radius-24)] p-[var(--space-4)]"
+    className="relative h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-24)] bg-[var(--color-surface)] pl-[var(--space-4)] pr-0"
     style={debugStyle}
   >
-    <VStack className="h-full gap-[var(--space-2)]">
+    <VStack className="h-full max-w-[250px] gap-[var(--space-2)] py-[var(--space-4)]">
       <HStack className="gap-[var(--space-2)]">
         <p className="text-title-l truncate text-[var(--color-text-primary)]">
           Морковск
         </p>
-        <MutedPill className="text-body-s inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] px-[var(--space-2)] py-[var(--space-0_5)] text-[var(--color-text-primary)]">
+        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] px-[var(--space-2)] py-[var(--space-0_5)] text-[var(--color-text-primary)]">
           <span>312</span>
-          <span aria-hidden="true">🥕</span>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
+            alt=""
+            className="h-[20px] w-[13px] object-contain"
+          />
         </MutedPill>
       </HStack>
       <p className="text-body-m truncate text-[var(--color-text-secondary)]">
         Суперприз — квартира
       </p>
-      <button className="text-body-m truncate font-[var(--font-weight-semibold)] text-[var(--color-text-link)]">
+      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] shadow-none">
         Узнать больше
       </button>
     </VStack>
+    <img
+      src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
+      alt=""
+      className="absolute right-0 top-0 h-[114px] w-[140px] object-cover"
+    />
   </Island>
 );
 

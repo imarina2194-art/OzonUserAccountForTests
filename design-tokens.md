@@ -28,6 +28,8 @@ Components should only use these tokens. Overlay tokens are transformed into rea
 - `--color-text-link`: var(--figma-text-secondary)
 - `--color-border-subtle`: rgba(0, 26, 52, 0.12)
 - `--color-badge`: rgba(255, 59, 48, 1.00)
+- `--color-cell-button-bg`: rgba(91, 81, 222, 0.08)
+- `--color-cell-button-text`: rgba(91, 81, 222, 1.00)
 
 ## Typography tokens
 
