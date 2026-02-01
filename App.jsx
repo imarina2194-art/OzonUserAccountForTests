@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 const mockUser = {
-  name: "Александр Р.",
+  name: "Марина И.",
   subscribers: 175,
   subscriptions: 4,
   isPremium: true,
@@ -45,7 +45,7 @@ const orderItems = [
     status: "В пути",
     carrier: "Курьер доставит",
     delivery: "20 сен, Чт • 20:00–21:00",
-    image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=300&q=80",
+    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc1000/7815322019.jpg",
     count: 2,
   },
   {
@@ -53,7 +53,7 @@ const orderItems = [
     status: "Готов к выдаче",
     carrier: "Пункт выдачи",
     delivery: "21 сен, Пт • после 12:00",
-    image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=300&q=80",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc1000/7729411041.jpg",
     count: 1,
   },
 ];
@@ -196,7 +196,7 @@ const Avatar = () => (
   <div className="h-[var(--size-avatar)] w-[var(--size-avatar)] overflow-hidden rounded-full bg-[var(--color-surface-muted)]">
     <img
       className="h-full w-full object-cover"
-      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+      src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/avatar.png"
       alt="avatar"
     />
   </div>
@@ -571,7 +571,7 @@ const App = ({ debug }) => {
                   {mockUser.name}
                 </p>
                 {mockUser.isPremium && (
-                  <span className="ml-[4px] h-[14px] w-[14px] translate-y-[1px]">
+                  <span className="ml-[4px] h-[14px] w-[14px]">
                     <Icon name="premium" alt="premium" className="h-full w-full" />
                   </span>
                 )}
