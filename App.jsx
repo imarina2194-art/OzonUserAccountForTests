@@ -285,7 +285,7 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex h-[80px] w-[264px] shrink-0 rounded-[16px] bg-[var(--color-surface)] p-[8px]">
+  <Island className="flex h-[80px] w-[264px] flex-none items-center rounded-[16px] bg-[var(--color-surface)] p-[8px]">
     <div className="relative h-[64px] w-[64px]">
       <img
         src={order.image}
@@ -296,7 +296,7 @@ const OrderTrackingCard = ({ order }) => (
         {order.count}
       </span>
     </div>
-    <div className="ml-[10px] flex min-w-0 flex-1 flex-col justify-center">
+    <div className="ml-[10px] flex min-w-0 flex-1 flex-col">
       <p className="m-0 text-[16px] font-[var(--font-weight-semibold)] leading-[18px] text-[var(--color-text-primary)]">
         {order.status}
       </p>
@@ -575,16 +575,18 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <Section className="w-[390px] box-border" style={debugStyle}>
-            <HStack className="-ml-[var(--space-4)] h-[80px] w-[390px] gap-[8px] overflow-x-auto overflow-y-hidden">
-              <div className="flex h-[80px] w-[52px] flex-none items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
-                <span className="h-[32px] w-[32px]">
-                  <Icon name="barcode" alt="barcode" className="h-full w-full" />
-                </span>
+            <div className="relative h-[80px] w-[390px] overflow-hidden">
+              <div className="flex h-[80px] gap-[8px] overflow-x-auto overflow-y-hidden p-0">
+                <div className="flex h-[80px] w-[52px] flex-none items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
+                  <span className="h-[32px] w-[32px]">
+                    <Icon name="barcode" alt="barcode" className="h-full w-full" />
+                  </span>
+                </div>
+                {orderItems.map((order) => (
+                  <OrderTrackingCard key={order.id} order={order} />
+                ))}
               </div>
-              {orderItems.map((order) => (
-                <OrderTrackingCard key={order.id} order={order} />
-              ))}
-            </HStack>
+            </div>
           </Section>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
