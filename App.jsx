@@ -551,7 +551,7 @@ const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       <button
         onClick={() => onToggle(item.title)}
-        className="absolute right-[8px] top-[8px] h-[24px] w-[24px] border-0 bg-transparent p-0"
+        className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center border-0 bg-transparent p-0 leading-none"
         aria-label="Toggle favorite"
       >
         <img
@@ -561,7 +561,7 @@ const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
               : "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fav_icon_empty.png"
           }
           alt=""
-          className="h-full w-full object-contain"
+          className="block h-[24px] w-[24px]"
         />
       </button>
     </div>
@@ -578,7 +578,11 @@ const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
         </span>
       </div>
     )}
-    <p className="text-title-s mt-[var(--space-0_5)] truncate font-[var(--font-weight-regular)] text-[var(--color-text-primary)]">
+    <p
+      className={`text-title-s mt-[var(--space-0_5)] font-[var(--font-weight-regular)] text-[var(--color-text-primary)] ${
+        item.oldPrice ? "line-clamp-1" : "line-clamp-2"
+      }`}
+    >
       {item.title}
     </p>
   </div>
