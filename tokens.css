@@ -1,21 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap");
 
 :root {
-  /* Palette (base colors) */
-  --palette-bg-overlay: rgba(0, 26, 52, 0.40);
-  --palette-text-main: rgba(7, 7, 7, 1.00);
-  --palette-text-secondary: rgba(0, 26, 52, 0.60);
-  --palette-surface: rgba(255, 255, 255, 1.00);
-  --palette-surface-muted: rgba(0, 48, 120, 0.04);
+  /* Figma source tokens (primitives) */
+  --figma-overlay-bg: rgba(0, 26, 52, 0.40);
+  --figma-text-primary: rgba(7, 7, 7, 1.00);
+  --figma-text-secondary: rgba(0, 26, 52, 0.60);
+  --figma-white: #fff;
+  --figma-gray-cell: rgba(0, 48, 120, 0.04);
 
   /* Semantic colors */
-  --color-bg-page: rgba(153, 163, 174, 1.00);
-  --color-surface: var(--palette-surface);
-  --color-surface-muted: var(--palette-surface-muted);
-  --color-text-primary: var(--palette-text-main);
-  --color-text-secondary: var(--palette-text-secondary);
-  --color-icon-primary: var(--palette-text-main);
-  --color-text-link: var(--palette-text-secondary);
+  --color-bg-page: rgba(0, 26, 52, 0.06);
+  --color-bg-header: var(--color-bg-page);
+  --color-surface: var(--figma-white);
+  --color-surface-muted: var(--figma-gray-cell);
+  --color-text-primary: var(--figma-text-primary);
+  --color-text-secondary: var(--figma-text-secondary);
+  --color-icon-primary: var(--figma-text-primary);
+  --color-text-link: var(--figma-text-secondary);
   --color-border-subtle: rgba(0, 26, 52, 0.12);
   --color-badge: rgba(255, 59, 48, 1.00);
 
@@ -32,13 +33,70 @@
   --line-height-body: 18px;
   --line-height-caption: 16px;
 
+  /* Semantic typography */
+  --text-title-s-size: 14px;
+  --text-title-s-line: 16px;
+  --text-title-s-weight: 500;
+  --text-body-s-size: 12px;
+  --text-body-s-line: 14px;
+  --text-body-s-weight: 400;
+  --text-title-m-size: 16px;
+  --text-title-m-line: 18px;
+  --text-title-m-weight: 700;
+  --text-body-m-size: 14px;
+  --text-body-m-line: 16px;
+  --text-body-m-weight: 400;
+  --text-title-l-size: 20px;
+  --text-title-l-line: 24px;
+  --text-title-l-weight: 700;
+  --text-title-cell-size: 16px;
+  --text-title-cell-line: 24px;
+  --text-title-cell-weight: 500;
+
   /* Radius */
   --radius-s: 12px;
   --radius-m: 16px;
   --radius-l: 24px;
   --radius-pill: 999px;
+  --radius-island-pill: 32px;
+  --radius-8: 8px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+
+  /* Sizes */
+  --size-statusbar-h: 44px;
+  --size-header-h: 56px;
+  --size-island-h: 48px;
+  --size-header-island-h: 48px;
+  --size-avatar: 44px;
+  --size-premium-icon: 14px;
+  --size-icon-button: 28px;
+  --size-icon-button-icon: 16px;
+  --size-badge: 16px;
+  --size-badge-icon: 10px;
+  --size-status-icons-w: 46px;
+  --size-order-row-h: 80px;
+  --size-order-image: 64px;
+  --size-barcode-icon: 32px;
+  --size-icon-m: 32px;
+  --size-barcode-tile-w: 66px;
+  --size-shortcuts-h: 108px;
+  --size-shortcut-pill-h: 76px;
+  --size-shortcut-pill-w: 114px;
+  --size-pill-h: 76px;
+  --size-shortcut-icon: 20px;
+  --size-icon-s: 20px;
+  --size-morkovsk-illustration: 52px;
+  --size-morkovsk-h: 56px;
+  --size-bottom-nav-h: 56px;
+  --size-bottomnav-h: 49px;
+  --size-bottomtab-w: 62.67px;
+  --size-bottomicon: 24px;
 
   /* Spacing */
+  --space-0-5: 2px;
+  --space-0_5: 2px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -55,4 +113,62 @@ body {
   font-family: var(--font-family-base);
   background: var(--color-bg-page);
   color: var(--color-text-primary);
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+.text-title-s {
+  font-size: var(--text-title-s-size);
+  line-height: var(--text-title-s-line);
+  font-weight: var(--text-title-s-weight);
+}
+
+.text-body-s {
+  font-size: var(--text-body-s-size);
+  line-height: var(--text-body-s-line);
+  font-weight: var(--text-body-s-weight);
+}
+
+.text-title-m {
+  font-size: var(--text-title-m-size);
+  line-height: var(--text-title-m-line);
+  font-weight: var(--text-title-m-weight);
+}
+
+.text-body-m {
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-line);
+  font-weight: var(--text-body-m-weight);
+}
+
+.text-title-l {
+  font-size: var(--text-title-l-size);
+  line-height: var(--text-title-l-line);
+  font-weight: var(--text-title-l-weight);
+}
+
+.text-title-cell {
+  font-size: var(--text-title-cell-size);
+  line-height: var(--text-title-cell-line);
+  font-weight: var(--text-title-cell-weight);
 }
