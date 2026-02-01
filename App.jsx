@@ -224,15 +224,6 @@ const MutedPill = ({ className, children, ...props }) => (
   </div>
 );
 
-const Badge = ({ className, children, ...props }) => (
-  <span
-    className={`inline-flex items-center justify-center rounded-full bg-[var(--color-badge)] text-[var(--color-surface)] ${className || ""}`}
-    {...props}
-  >
-    {children}
-  </span>
-);
-
 const DeviceFrame = ({ children, debug }) => (
   <div className="flex min-h-screen items-center justify-center bg-black">
     <div className="relative h-[852px] w-[410px] rounded-[40px] bg-black p-[10px]">
@@ -254,15 +245,15 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
     onClick={onClick}
     className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center border-0 bg-transparent p-0"
   >
-    <span className="h-[var(--size-icon-button-icon)] w-[var(--size-icon-button-icon)]">
+    <span className="block h-[24px] w-[24px]">
       <Icon name={iconName} alt="" className="h-full w-full" />
     </span>
     {badgeIconName && (
-      <Badge className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] h-[var(--size-badge)] min-w-[var(--size-badge)] p-[var(--space-0-5)] text-body-s font-[var(--font-weight-semibold)]">
-        <span className="h-[var(--size-badge-icon)] w-[var(--size-badge-icon)]">
+      <span className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] block h-[16px] w-[16px]">
+        <span className="block h-full w-full">
           <Icon name={badgeIconName} alt="" className="h-full w-full" />
         </span>
-      </Badge>
+      </span>
     )}
   </button>
 );
