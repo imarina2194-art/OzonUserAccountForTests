@@ -243,7 +243,7 @@ const DeviceFrame = ({ children, debug }) => (
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center border-0 bg-transparent p-0"
+    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
   >
     <span className="block h-[24px] w-[24px]">
       <Icon name={iconName} alt="" className="h-full w-full" />
@@ -518,33 +518,37 @@ const App = ({ debug }) => {
         className="sticky top-0 z-20 w-full"
         style={debugStyle}
       >
-        <HStack className="box-border h-[var(--size-header-h)] w-[390px] items-end pb-[var(--space-2)] pl-[var(--space-4)] pr-0">
-          <Island className="flex h-[var(--size-header-island-h)] flex-1 items-center gap-[var(--space-3)] rounded-[var(--radius-32)] px-[var(--space-3)]">
-            <Avatar />
-            <VStack className="min-w-0 gap-[var(--space-0_5)]">
-              <HStack className="gap-[var(--space-1)]">
-                <p className="text-title-s truncate text-[var(--color-text-primary)]">
+        <HStack className="relative box-border h-[var(--size-header-h)] w-[390px] items-center pl-[var(--space-4)] pr-0">
+          <Island className="relative h-[48px] w-[268px] rounded-[var(--radius-32)]">
+            <div className="absolute left-[2px] top-[2px]">
+              <Avatar />
+            </div>
+            <div className="absolute left-[58px] top-1/2 min-w-0 -translate-y-1/2">
+              <div className="flex items-center">
+                <p className="m-0 text-title-s truncate text-[var(--color-text-primary)]">
                   {mockUser.name}
                 </p>
                 {mockUser.isPremium && (
-                  <span className="h-[var(--size-premium-icon)] w-[var(--size-premium-icon)]">
+                  <span className="ml-[4px] h-[14px] w-[14px] translate-y-[1px]">
                     <Icon name="premium" alt="premium" className="h-full w-full" />
                   </span>
                 )}
-              </HStack>
-              <p className="text-body-s truncate text-[var(--color-text-secondary)]">
+              </div>
+              <p className="m-0 mt-[2px] text-body-s truncate text-[var(--color-text-secondary)]">
                 {mockUser.subscribers} подписчиков • {mockUser.subscriptions} подписчика
               </p>
-            </VStack>
+            </div>
           </Island>
-          <HStack className="ml-[var(--space-2)] gap-[var(--space-2)] self-center">
+          <div className="absolute right-[39px] top-1/2 -translate-y-1/2">
             <IconButton
               iconName="chat"
               badgeIconName="chat-badge"
               onClick={() => console.log("Open messages")}
             />
+          </div>
+          <div className="absolute right-[19px] top-1/2 -translate-y-1/2">
             <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
-          </HStack>
+          </div>
         </HStack>
       </div>
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
