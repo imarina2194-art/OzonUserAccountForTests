@@ -48,6 +48,14 @@ const orderItems = [
     image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=300&q=80",
     count: 2,
   },
+  {
+    id: "order-2",
+    status: "Готов к выдаче",
+    carrier: "Пункт выдачи",
+    delivery: "21 сен, Пт • после 12:00",
+    image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=300&q=80",
+    count: 1,
+  },
 ];
 
 const financeCells = [
@@ -277,28 +285,28 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex min-w-[252px] items-center gap-[var(--space-2)] rounded-[var(--radius-16)] p-[var(--space-2)]">
-    <div className="relative">
+  <Island className="flex h-[80px] w-[264px] rounded-[16px] bg-[var(--color-surface)] p-[8px]">
+    <div className="relative h-[64px] w-[64px]">
       <img
         src={order.image}
         alt="order"
-        className="h-[var(--size-order-image)] w-[var(--size-order-image)] rounded-[var(--radius-8)] object-cover"
+        className="h-full w-full rounded-[8px] object-cover"
       />
-      <span className="text-body-s absolute -bottom-[var(--space-1)] -left-[var(--space-1)] flex h-[var(--size-badge)] w-[var(--size-badge)] items-center justify-center rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+      <span className="absolute bottom-[4px] left-[4px] flex h-[16px] w-[16px] items-center justify-center rounded-[5px] bg-[var(--color-surface)] text-[12px] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
         {order.count}
       </span>
     </div>
-    <VStack className="flex-1 justify-center gap-[var(--space-0_5)]">
-      <p className="text-title-m text-[var(--color-text-primary)]">
+    <div className="ml-[10px] flex min-w-0 flex-1 flex-col justify-center">
+      <p className="m-0 text-[16px] font-[var(--font-weight-semibold)] leading-[18px] text-[var(--color-text-primary)]">
         {order.status}
       </p>
-      <p className="text-body-m text-[var(--color-text-secondary)]">
+      <p className="m-0 mt-[2px] text-[14px] leading-[16px] text-[var(--color-text-primary)]">
         {order.carrier}
       </p>
-      <p className="text-body-m text-[var(--color-text-secondary)]">
+      <p className="m-0 mt-[2px] text-[14px] leading-[16px] text-[var(--color-text-primary)]">
         {order.delivery}
       </p>
-    </VStack>
+    </div>
   </Island>
 );
 
@@ -567,11 +575,9 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <Section className="w-[390px] box-border" style={debugStyle}>
-            <HStack
-              className="h-[var(--size-order-row-h)] w-[390px] gap-[var(--space-2)] overflow-x-auto"
-            >
-              <div className="flex min-w-[var(--size-barcode-tile-w)] items-center justify-center rounded-l-none rounded-r-[var(--radius-16)] bg-black">
-                <span className="h-[var(--size-icon-m)] w-[var(--size-icon-m)]">
+            <HStack className="h-[80px] w-[390px] gap-[8px] overflow-x-auto">
+              <div className="flex h-[80px] w-[52px] items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
+                <span className="h-[32px] w-[32px]">
                   <Icon name="barcode" alt="barcode" className="h-full w-full" />
                 </span>
               </div>
