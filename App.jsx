@@ -251,13 +251,13 @@ const DeviceFrame = ({ children, debug }) => (
 const IconButton = ({ iconName, badgeIconName, onClick }) => (
   <button
     onClick={onClick}
-    className="relative flex h-[var(--size-icon-button)] w-[var(--size-icon-button)] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
+    className="relative flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
   >
     <span className="block h-[24px] w-[24px]">
       <Icon name={iconName} alt="" className="h-full w-full" />
     </span>
     {badgeIconName && (
-      <span className="absolute -right-[var(--space-0-5)] -top-[var(--space-1)] block h-[16px] w-[16px]">
+      <span className="absolute right-[5px] top-[5px] block h-[16px] w-[16px]">
         <span className="block h-full w-full">
           <Icon name={badgeIconName} alt="" className="h-full w-full" />
         </span>
@@ -547,14 +547,12 @@ const App = ({ debug }) => {
               </p>
             </div>
           </Island>
-          <div className="absolute right-[39px] top-1/2 -translate-y-1/2">
+          <div className="absolute right-[9px] top-1/2 flex -translate-y-1/2 items-center">
             <IconButton
               iconName="chat"
               badgeIconName="chat-badge"
               onClick={() => console.log("Open messages")}
             />
-          </div>
-          <div className="absolute right-[19px] top-1/2 -translate-y-1/2">
             <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
           </div>
         </HStack>
