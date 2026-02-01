@@ -312,10 +312,10 @@ const OrderTrackingCard = ({ order }) => (
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
   <Island
-    className="relative h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
+    className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
     style={debugStyle}
   >
-    <VStack className="h-full max-w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
+    <VStack className="h-full w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
       <HStack className="gap-[var(--space-2)]">
         <p className="text-title-l truncate text-[var(--color-text-primary)]">
           Морковск
@@ -336,11 +336,13 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
         Узнать больше
       </button>
     </VStack>
-    <img
-      src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
-      alt=""
-      className="absolute right-0 top-0 h-[114px] w-[140px] object-cover"
-    />
+    <div className="h-[114px] w-[140px]">
+      <img
+        src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
+        alt=""
+        className="h-full w-full object-cover"
+      />
+    </div>
   </Island>
 );
 
