@@ -285,7 +285,7 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex h-[80px] w-[264px] rounded-[16px] bg-[var(--color-surface)] p-[8px]">
+  <Island className="flex h-[80px] w-[264px] shrink-0 rounded-[16px] bg-[var(--color-surface)] p-[8px]">
     <div className="relative h-[64px] w-[64px]">
       <img
         src={order.image}
@@ -300,7 +300,7 @@ const OrderTrackingCard = ({ order }) => (
       <p className="m-0 text-[16px] font-[var(--font-weight-semibold)] leading-[18px] text-[var(--color-text-primary)]">
         {order.status}
       </p>
-      <p className="m-0 mt-[2px] text-[14px] leading-[16px] text-[var(--color-text-primary)]">
+      <p className="m-0 mt-[2px] text-[14px] leading-[16px] text-[var(--color-text-secondary)]">
         {order.carrier}
       </p>
       <p className="m-0 mt-[2px] text-[14px] leading-[16px] text-[var(--color-text-primary)]">
@@ -575,8 +575,8 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <Section className="w-[390px] box-border" style={debugStyle}>
-            <HStack className="h-[80px] w-[390px] gap-[8px] overflow-x-auto">
-              <div className="flex h-[80px] w-[52px] items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
+            <HStack className="-ml-[var(--space-4)] h-[80px] w-[390px] gap-[8px] overflow-x-auto overflow-y-hidden">
+              <div className="flex h-[80px] w-[52px] flex-none items-center justify-center rounded-l-none rounded-r-[16px] bg-black">
                 <span className="h-[32px] w-[32px]">
                   <Icon name="barcode" alt="barcode" className="h-full w-full" />
                 </span>
