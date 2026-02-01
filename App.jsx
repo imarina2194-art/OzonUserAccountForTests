@@ -353,11 +353,11 @@ const FinanceSection = ({ debugStyle }) => (
         Финансы
       </p>
       <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px] pr-[6px]">
-        <span className="text-body-m text-[var(--color-text-link)]">Баллы и бонусы</span>
+        <span className="text-body-m min-w-0 truncate text-[var(--color-text-link)]">Баллы и бонусы</span>
         <img
           src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
           alt=""
-          className="h-[20px] w-[30px] object-contain"
+          className="ml-auto h-[20px] w-[30px] object-contain"
         />
       </div>
     </HStack>
@@ -381,21 +381,25 @@ const FinanceSection = ({ debugStyle }) => (
           </MutedPill>
         ))}
       </VStack>
-      <MutedPill className="relative overflow-hidden rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <div className="max-w-[calc(100%-79px)]">
-          <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-          Ozon Premium
-          </p>
-          <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
-            Получить больше привилегий
-          </p>
+      <div className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
+        <div className="flex w-full">
+          <div className="min-w-0 flex-1">
+            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+              Ozon Premium
+            </p>
+            <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
+              Получить больше привилегий
+            </p>
+          </div>
+          <div className="h-[79px] w-[79px] flex-none self-end">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
+              alt=""
+              className="h-full w-full object-contain"
+            />
+          </div>
         </div>
-        <img
-          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
-          alt=""
-          className="absolute bottom-0 right-0 h-[79px] w-[79px] object-contain"
-        />
-      </MutedPill>
+      </div>
     </div>
   </Island>
 );
