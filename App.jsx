@@ -550,7 +550,7 @@ const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
     <div className="relative h-[134px] w-[101px] overflow-hidden rounded-[12px]">
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       <button
-        onClick={onToggle}
+        onClick={() => onToggle(item.title)}
         className="absolute right-[8px] top-[8px] h-[24px] w-[24px] border-0 bg-transparent p-0"
         aria-label="Toggle favorite"
       >
@@ -565,14 +565,20 @@ const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
         />
       </button>
     </div>
-    <p className="text-title-l mt-[var(--space-1)] text-[var(--color-text-primary)]">{item.price}</p>
+    <p className="text-title-s mt-[var(--space-1)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+      {item.price}
+    </p>
     {item.oldPrice && item.discount && (
       <div className="mt-[var(--space-0_5)] flex items-center gap-[var(--space-1)]">
-        <span className="text-body-s text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
-        <span className="text-body-s text-[var(--color-badge)]">{item.discount}</span>
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
+          {item.oldPrice}
+        </span>
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
+          {item.discount}
+        </span>
       </div>
     )}
-    <p className="text-body-s mt-[var(--space-0_5)] line-clamp-2 text-[var(--color-text-secondary)]">
+    <p className="text-title-s mt-[var(--space-0_5)] truncate font-[var(--font-weight-regular)] text-[var(--color-text-primary)]">
       {item.title}
     </p>
   </div>
@@ -588,8 +594,8 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
         <ViewedProductCard
           key={item.id}
           item={item}
-          isFavorite={favorites.has(item.id)}
-          onToggle={() => onToggle(item.id)}
+          isFavorite={favorites.has(item.title)}
+          onToggle={onToggle}
         />
       ))}
     </div>
