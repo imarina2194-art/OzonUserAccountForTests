@@ -206,6 +206,109 @@ const viewedItems = [
   },
 ];
 
+const recommendedItems = [
+  {
+    title: "GISOU Обогащённое мёдом масло для губ 8 мл / Honey Infused Lip Oil 8 ml (Vanilla Glaze)",
+    href: "/product/gisou-obogashchennoe-medom-maslo-dlya-gub-8-ml-honey-infused-lip-oil-8-ml-vanilla-glaze-3054682507/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-1/wc300/8256062089.jpg",
+    price: "4 600 ₽",
+    oldPrice: "10 000 ₽",
+    discount: "−54%",
+    rating: "4.6",
+    reviews: "45",
+  },
+  {
+    title: "RHODE Румяна 5.3 гр / Pocket Blush 5.3 gr (tan line)",
+    href: "/product/rhode-rumyana-5-3-gr-pocket-blush-5-3-gr-tan-line-2680905540/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc300/7815322019.jpg",
+    price: "4 685 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "4.8",
+    reviews: "284",
+  },
+  {
+    title: "Туфли ECCO SCULPTED LX 35",
+    href: "/product/tufli-ecco-sculpted-lx-35-1626209541/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-k/wc300/7685691176.jpg",
+    price: "10 244 ₽",
+    oldPrice: "21 990 ₽",
+    discount: "−53%",
+    rating: "4.9",
+    reviews: "167",
+  },
+  {
+    title: "Джинсы SHWЭDAR",
+    href: "/product/dzhinsy-shwedar-1912214751/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-n/wc300/7414654415.jpg",
+    price: "1 647 ₽",
+    oldPrice: "7 043 ₽",
+    discount: "−76%",
+    rating: "4.8",
+    reviews: "674",
+  },
+  {
+    title: "Виноград Узбекский, Киш-Миш белый, 500 г",
+    href: "/product/vinograd-uzbekskiy-kish-mish-belyy-500-g-160571964/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-q/wc300/7930220066.jpg",
+    price: "199 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "4.8",
+    reviews: "29 796",
+  },
+  {
+    title: "VT Cosmetics Массажный крем для кожи вокруг глаз с ПДРН и золотом PDRN Reedle Shot Eye Lifter",
+    href: "/product/vt-cosmetics-massazhnyy-krem-dlya-kozhi-vokrug-glaz-s-pdrn-i-zolotom-pdrn-reedle-shot-eye-lifter-3245970666/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-k/wc300/7923917720.jpg",
+    price: "2 058 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "4.6",
+    reviews: "7",
+  },
+  {
+    title: "Лоферы EKONIKA",
+    href: "/product/lofery-ekonika-1668634545/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
+    price: "10 440 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "5.0",
+    reviews: "12",
+  },
+  {
+    title: "KOKOSHNIKI Колье На цепочке",
+    href: "/product/kokoshniki-kole-na-tsepochke-3149615593/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-i/wc300/8393204790.jpg",
+    price: "5 500 ₽",
+    oldPrice: "15 000 ₽",
+    discount: "−63%",
+    rating: "4.8",
+    reviews: "187",
+  },
+  {
+    title: "Балетки EKONIKA",
+    href: "/product/baletki-ekonika-2336450331/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-8/wc300/8128971548.jpg",
+    price: "8 540 ₽",
+    oldPrice: "18 990 ₽",
+    discount: "−55%",
+    rating: "5.0",
+    reviews: "4",
+  },
+  {
+    title: "Ботинки JOG DOG THE DOG",
+    href: "/product/botinki-jog-dog-the-dog-1695892837/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-t/wc300/7439451833.jpg",
+    price: "17 793 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "4.2",
+    reviews: "11",
+  },
+];
+
 const bottomTabs = [
   {
     id: "home",
@@ -606,6 +709,65 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
+const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
+  <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
+    <div className="relative h-[260px] w-[195px] overflow-hidden rounded-t-[16px]">
+      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      <button
+        onClick={() => onToggle(item.title)}
+        className="absolute right-[8px] top-[8px] h-[24px] w-[24px] border-0 bg-transparent p-0"
+        aria-label="Toggle favorite"
+      >
+        <img
+          src={
+            isFavorite
+              ? "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fav_icon_full.png"
+              : "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fav_icon_empty.png"
+          }
+          alt=""
+          className="h-[24px] w-[24px] object-contain"
+        />
+      </button>
+    </div>
+    <div className="flex flex-col gap-[var(--space-0_5)] px-[var(--space-2)] pb-[var(--space-2)] pt-[12px]">
+      <p className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+        {item.price}
+      </p>
+      {item.oldPrice && item.discount && (
+        <div className="flex items-center gap-[var(--space-1)]">
+          <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
+            {item.oldPrice}
+          </span>
+          <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
+            {item.discount}
+          </span>
+        </div>
+      )}
+      <p className="text-title-s line-clamp-2 font-[var(--font-weight-regular)] text-[var(--color-text-primary)]">
+        {item.title}
+      </p>
+      <div className="flex items-center gap-[2px]">
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/raiting_star.png"
+          alt=""
+          className="h-[16px] w-[16px] object-contain"
+        />
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+          {item.rating}
+        </span>
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/review_counter.png"
+          alt=""
+          className="h-[16px] w-[16px] object-contain"
+        />
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          {item.reviews}
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
   <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
     <div className="flex h-[var(--size-bottomnav-h)] w-full items-center justify-center bg-[var(--color-surface)]">
@@ -757,6 +919,22 @@ const App = ({ debug }) => {
               favorites={favorites}
               onToggle={toggleFavorite}
             />
+          </div>
+          <div className="h-[32px]" />
+          <div className="w-[390px] box-border px-[var(--space-4)]">
+            <p className="text-title-l font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+              Возможно, вам понравится
+            </p>
+            <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[12px]">
+              {recommendedItems.map((item) => (
+                <RecommendedProductCard
+                  key={item.href}
+                  item={item}
+                  isFavorite={favorites.has(item.title)}
+                  onToggle={toggleFavorite}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
