@@ -145,6 +145,67 @@ const verticalItems = [
   },
 ];
 
+const viewedItems = [
+  {
+    id: "viewed-1",
+    title: "Подвеска Оливка MonMenu",
+    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc250/8260392359.jpg",
+    price: "2 995 ₽",
+  },
+  {
+    id: "viewed-2",
+    title: "Westman Atelier Мини-стик для губ и щёк / Baby Cheeks Lip + Cheek Cream Blush Stick (Coquette)",
+    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
+    price: "3 566 ₽",
+    oldPrice: "12 830 ₽",
+    discount: "−72%",
+  },
+  {
+    id: "viewed-3",
+    title: "SUMMER FRIDAYS Бальзам для губ / Lip Butter Balm (Vanilla Beige)",
+    image: "https://ir.ozone.ru/s3/multimedia-1-c/wc250/7115249424.jpg",
+    price: "3 286 ₽",
+    oldPrice: "9 590 ₽",
+    discount: "−65%",
+  },
+  {
+    id: "viewed-4",
+    title: "RHODE Пептидный тинт для губ 10 мл / Peptide Lip Tint 10 ml (espresso)",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
+    price: "3 271 ₽",
+    oldPrice: "8 280 ₽",
+    discount: "−60%",
+  },
+  {
+    id: "viewed-5",
+    title: "Pelate cерьги винтаж Agnes",
+    image: "https://ir.ozone.ru/s3/multimedia-1-0/wc250/7715502576.jpg",
+    price: "3 745 ₽",
+  },
+  {
+    id: "viewed-6",
+    title: "Keune Спрей для укладки волос, 200 мл",
+    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/8028781005.jpg",
+    price: "2 015 ₽",
+    oldPrice: "3 551 ₽",
+    discount: "−43%",
+  },
+  {
+    id: "viewed-7",
+    title: "Ботильоны EKONIKA",
+    image: "https://ir.ozone.ru/s3/multimedia-1-f/wc250/7155499983.jpg",
+    price: "14 240 ₽",
+  },
+  {
+    id: "viewed-8",
+    title: "Часы Burker Watches Diana Gold Silver",
+    image: "https://ir.ozone.ru/s3/multimedia-1-2/wc250/8180249834.jpg",
+    price: "14 784 ₽",
+    oldPrice: "44 000 ₽",
+    discount: "−66%",
+  },
+];
+
 const bottomTabs = [
   {
     id: "home",
@@ -484,6 +545,57 @@ const SegmentedControl = ({ items, activeId, onChange }) => (
   </div>
 );
 
+const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
+  <div className="flex w-[101px] flex-none flex-col">
+    <div className="relative h-[134px] w-[101px] overflow-hidden rounded-[12px]">
+      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      <button
+        onClick={onToggle}
+        className="absolute right-[8px] top-[8px] h-[24px] w-[24px] border-0 bg-transparent p-0"
+        aria-label="Toggle favorite"
+      >
+        <img
+          src={
+            isFavorite
+              ? "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fav_icon_full.png"
+              : "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fav_icon_empty.png"
+          }
+          alt=""
+          className="h-full w-full object-contain"
+        />
+      </button>
+    </div>
+    <p className="text-title-l mt-[var(--space-1)] text-[var(--color-text-primary)]">{item.price}</p>
+    {item.oldPrice && item.discount && (
+      <div className="mt-[var(--space-0_5)] flex items-center gap-[var(--space-1)]">
+        <span className="text-body-s text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
+        <span className="text-body-s text-[var(--color-badge)]">{item.discount}</span>
+      </div>
+    )}
+    <p className="text-body-s mt-[var(--space-0_5)] line-clamp-2 text-[var(--color-text-secondary)]">
+      {item.title}
+    </p>
+  </div>
+);
+
+const ViewedProductsSection = ({ items, favorites, onToggle }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+    <HStack className="justify-between">
+      <p className="text-title-l text-[var(--color-text-primary)]">Вы смотрели</p>
+    </HStack>
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+      {items.map((item) => (
+        <ViewedProductCard
+          key={item.id}
+          item={item}
+          isFavorite={favorites.has(item.id)}
+          onToggle={() => onToggle(item.id)}
+        />
+      ))}
+    </div>
+  </Island>
+);
+
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
   <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
     <div className="flex h-[var(--size-bottomnav-h)] w-full items-center justify-center bg-[var(--color-surface)]">
@@ -523,7 +635,7 @@ const HomeIndicator = () => (
 );
 
 const App = ({ debug }) => {
-  const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1"]));
+  const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1", "viewed-2"]));
   const [activeTab, setActiveTab] = useState("account");
   const [stepperCounts, setStepperCounts] = useState(() => ({ "v-1": 1, "v-4": 2 }));
   const [segment, setSegment] = useState("shops");
@@ -627,6 +739,14 @@ const App = ({ debug }) => {
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
             <FinanceSection debugStyle={debugStyle} />
+          </div>
+          <div className="h-[var(--space-1)]" />
+          <div className="w-[390px] box-border">
+            <ViewedProductsSection
+              items={viewedItems}
+              favorites={favorites}
+              onToggle={toggleFavorite}
+            />
           </div>
         </div>
       </div>
