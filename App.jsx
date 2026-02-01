@@ -921,11 +921,13 @@ const App = ({ debug }) => {
             />
           </div>
           <div className="h-[32px]" />
-          <div className="w-[390px] box-border px-[var(--space-4)]">
-            <p className="text-title-l font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
-              Возможно, вам понравится
-            </p>
-            <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[12px]">
+          <div className="w-[390px] box-border">
+            <div className="px-[var(--space-4)]">
+              <p className="text-title-l font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+                Возможно, вам понравится
+              </p>
+            </div>
+            <div className="mt-[var(--space-2)] grid w-full grid-cols-2 gap-x-[1px] gap-y-[6px] px-0">
               {recommendedItems.map((item) => (
                 <RecommendedProductCard
                   key={item.href}
