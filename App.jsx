@@ -312,15 +312,15 @@ const OrderTrackingCard = ({ order }) => (
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
   <Island
-    className="relative h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-24)] bg-[var(--color-surface)] pl-[var(--space-4)] pr-0"
+    className="relative h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
     style={debugStyle}
   >
-    <VStack className="h-full max-w-[250px] gap-[var(--space-2)] py-[var(--space-4)]">
+    <VStack className="h-full max-w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
       <HStack className="gap-[var(--space-2)]">
         <p className="text-title-l truncate text-[var(--color-text-primary)]">
           Морковск
         </p>
-        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] px-[var(--space-2)] py-[var(--space-0_5)] text-[var(--color-text-primary)]">
+        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] text-[var(--color-text-primary)]">
           <span>312</span>
           <img
             src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
