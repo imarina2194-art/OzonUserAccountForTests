@@ -474,6 +474,12 @@ const BottomNav = ({ activeTab, onChange, debugStyle }) => (
   </div>
 );
 
+const HomeIndicator = () => (
+  <div className="relative h-[34px] w-[390px] bg-[var(--color-surface)]">
+    <span className="absolute bottom-[8px] left-1/2 h-[5px] w-[134px] -translate-x-1/2 rounded-[999px] bg-[var(--color-text-primary)]" />
+  </div>
+);
+
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1"]));
   const [activeTab, setActiveTab] = useState("account");
@@ -544,7 +550,7 @@ const App = ({ debug }) => {
       <div className="flex-1 overflow-y-auto" style={debugStyle}>
         <div
           className="w-full box-border"
-          style={{ paddingBottom: "0px" }}
+          style={{ paddingBottom: "calc(var(--size-bottomnav-h) + 34px)" }}
         >
           <Section className="w-[390px] box-border" style={debugStyle}>
             <Island className="flex h-[var(--size-shortcuts-h)] w-[390px] items-center justify-center rounded-[var(--radius-24)]">
@@ -581,6 +587,7 @@ const App = ({ debug }) => {
         </div>
       </div>
       <BottomNav activeTab={activeTab} onChange={setActiveTab} debugStyle={debugStyle} />
+      <HomeIndicator />
     </div>
   );
 };
