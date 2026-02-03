@@ -838,7 +838,7 @@ const App = ({ debug }) => {
   ]);
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
       <div
         className="sticky top-0 z-20 w-full"
@@ -875,7 +875,7 @@ const App = ({ debug }) => {
           </div>
         </HStack>
       </div>
-      <div className="flex-1 overflow-y-auto" style={debugStyle}>
+      <div className="min-h-0 flex-1 overflow-y-auto" style={debugStyle}>
         <div
           className="w-full box-border"
           style={{ paddingBottom: "calc(var(--size-bottomnav-h) + 34px)" }}
