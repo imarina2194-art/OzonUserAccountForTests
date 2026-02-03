@@ -218,16 +218,6 @@ const recommendedItems = [
     reviews: "45",
   },
   {
-    title: "RHODE Румяна 5.3 гр / Pocket Blush 5.3 gr (tan line)",
-    href: "/product/rhode-rumyana-5-3-gr-pocket-blush-5-3-gr-tan-line-2680905540/",
-    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc300/7815322019.jpg",
-    price: "4 685 ₽",
-    oldPrice: null,
-    discount: null,
-    rating: "4.8",
-    reviews: "284",
-  },
-  {
     title: "Туфли ECCO SCULPTED LX 35",
     href: "/product/tufli-ecco-sculpted-lx-35-1626209541/",
     image: "https://ir.ozone.ru/s3/multimedia-1-k/wc300/7685691176.jpg",
@@ -246,6 +236,16 @@ const recommendedItems = [
     discount: "−76%",
     rating: "4.8",
     reviews: "674",
+  },
+  {
+    title: "RHODE Румяна 5.3 гр / Pocket Blush 5.3 gr (tan line)",
+    href: "/product/rhode-rumyana-5-3-gr-pocket-blush-5-3-gr-tan-line-2680905540/",
+    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc300/7815322019.jpg",
+    price: "4 685 ₽",
+    oldPrice: null,
+    discount: null,
+    rating: "4.8",
+    reviews: "284",
   },
   {
     title: "Виноград Узбекский, Киш-Миш белый, 500 г",
