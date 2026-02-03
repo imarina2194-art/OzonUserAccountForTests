@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const mockUser = {
   name: "Марина И.",
@@ -61,88 +61,6 @@ const orderItems = [
 const financeCells = [
   { id: "card", title: "Ozon Карта", value: "3 845,41 ₽" },
   { id: "install", title: "Рассрочка", value: "до 300 000 ₽" },
-];
-
-const horizontalItems = [
-  {
-    id: "prod-1",
-    title: "Смартфон Apple iPho…",
-    price: "65 845 ₽",
-    oldPrice: "75 367 ₽",
-    discount: "−70%",
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: "prod-2",
-    title: "Кофе Ozon fresh Medi…",
-    price: "148 ₽",
-    oldPrice: "499 ₽",
-    discount: "−70%",
-    image: "https://images.unsplash.com/photo-1523906630133-f6934a1ab2b9?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: "prod-3",
-    title: "Штатив для телеф…",
-    price: "845 ₽",
-    oldPrice: "967 ₽",
-    discount: "−70%",
-    image: "https://images.unsplash.com/photo-1519183071298-a2962be96c5e?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: "prod-4",
-    title: "Бас гитара…",
-    price: "18 348 ₽",
-    oldPrice: "24 499 ₽",
-    discount: "−70%",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80",
-  },
-];
-
-const verticalItems = [
-  {
-    id: "v-1",
-    title: "Диван механизм Юниор",
-    price: "4 450 ₽",
-    oldPrice: "7 367 ₽",
-    discount: "−79%",
-    rating: "4.8",
-    reviews: "132 отзыва",
-    image: "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&fit=crop&w=600&q=80",
-    hasStepper: true,
-  },
-  {
-    id: "v-2",
-    title: "Диван с ящиком для хранения Boss",
-    price: "15 800 ₽",
-    oldPrice: "23 367 ₽",
-    discount: "−79%",
-    rating: "4.8",
-    reviews: "132 отзыва",
-    image: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=600&q=80",
-    hasStepper: false,
-  },
-  {
-    id: "v-3",
-    title: "Шкаф распашной Трио",
-    price: "4 450 ₽",
-    oldPrice: "7 367 ₽",
-    discount: "−79%",
-    rating: "4.8",
-    reviews: "132 отзыва",
-    image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
-    hasStepper: false,
-  },
-  {
-    id: "v-4",
-    title: "Puzzlemobel Тумба под телевизор",
-    price: "15 800 ₽",
-    oldPrice: "23 567 ₽",
-    discount: "−79%",
-    rating: "4.8",
-    reviews: "132 отзыва",
-    image: "https://images.unsplash.com/photo-1455792244736-3ed96c3d7f7e?auto=format&fit=crop&w=600&q=80",
-    hasStepper: true,
-  },
 ];
 
 const viewedItems = [
@@ -449,7 +367,7 @@ const ShortcutCard = ({ title, subtitle, iconName }) => (
 );
 
 const OrderTrackingCard = ({ order }) => (
-  <Island className="flex h-[80px] w-[264px] flex-none items-center overflow-hidden rounded-[16px] bg-[var(--color-surface)] px-[var(--space-2)] py-0">
+  <Island className="flex h-[80px] w-[264px] flex-none items-center overflow-hidden rounded-[16px] px-[var(--space-2)] py-0">
     <div className="relative h-[64px] w-[64px]">
       <img
         src={order.image}
@@ -475,10 +393,7 @@ const OrderTrackingCard = ({ order }) => (
 );
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
-  <Island
-    className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
-    style={debugStyle}
-  >
+  <Island className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)]" style={debugStyle}>
     <VStack className="h-full w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
       <HStack className="gap-[var(--space-2)]">
         <p className="text-title-l truncate text-[var(--color-text-primary)]">
@@ -566,86 +481,6 @@ const FinanceSection = ({ debugStyle }) => (
       </div>
     </div>
   </Island>
-);
-
-const ProductCardCompact = ({ item, isFavorite, onToggle }) => (
-  <div className="flex w-[140px] flex-col gap-[4px]">
-    <div className="relative overflow-hidden rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
-      <img src={item.image} alt={item.title} className="h-[116px] w-full object-cover" />
-      <button
-        onClick={onToggle}
-        className="absolute right-[6px] top-[6px] flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[var(--color-surface)]"
-      >
-        <span className="text-body-s text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
-      </button>
-    </div>
-    <p className="text-title-s text-[var(--color-text-primary)]">{item.price}</p>
-    <div className="text-body-s flex items-center gap-[6px] font-[var(--font-weight-semibold)]">
-      <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
-      <span className="text-[var(--color-text-primary)]">{item.discount}</span>
-    </div>
-    <p className="text-body-s text-[var(--color-text-secondary)]">{item.title}</p>
-  </div>
-);
-
-const VerticalProductCard = ({ item, isFavorite, onToggle, stepper, onStep }) => (
-  <div className="flex flex-col gap-[4px]">
-    <div className="relative overflow-hidden rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
-      <img src={item.image} alt={item.title} className="h-[144px] w-full object-cover" />
-      <button
-        onClick={onToggle}
-        className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center rounded-full bg-[var(--color-surface)]"
-      >
-        <span className="text-body-s text-[var(--color-text-primary)]">{isFavorite ? "❤" : "♡"}</span>
-      </button>
-    </div>
-    <p className="text-title-s text-[var(--color-text-primary)]">{item.price}</p>
-    <div className="text-body-s flex items-center gap-[6px] font-[var(--font-weight-semibold)]">
-      <span className="text-[var(--color-text-secondary)] line-through">{item.oldPrice}</span>
-      <span className="text-[var(--color-text-primary)]">{item.discount}</span>
-    </div>
-    <p className="text-body-s text-[var(--color-text-secondary)]">{item.title}</p>
-    <div className="text-body-s flex items-center gap-[6px] text-[var(--color-text-primary)]">
-      <span className="text-[var(--color-text-secondary)]">★</span>
-      <span>{item.rating}</span>
-      <span className="text-[var(--color-text-secondary)]">• {item.reviews}</span>
-    </div>
-    {stepper && (
-      <div className="text-body-m mt-[2px] flex items-center justify-between rounded-[12px] bg-[var(--color-surface-muted)] px-[10px] py-[4px] text-[var(--color-text-link)]">
-        <button onClick={() => onStep(-1)}>
-          −
-        </button>
-        <span className="text-body-s font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
-          {stepper}
-        </span>
-        <button onClick={() => onStep(1)}>
-          +
-        </button>
-      </div>
-    )}
-  </div>
-);
-
-const SegmentedControl = ({ items, activeId, onChange }) => (
-  <div className="flex gap-[10px]">
-    {items.map((item) => (
-      <button
-        key={item.id}
-        onClick={() => {
-          onChange(item.id);
-          console.log("Segment", item.id);
-        }}
-        className={`text-title-m flex flex-1 items-center justify-center gap-[6px] rounded-[16px] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] px-[12px] py-[8px] ${
-          activeId === item.id
-            ? "text-[var(--color-text-primary)]"
-            : "text-[var(--color-text-secondary)]"
-        }`}
-      >
-        <span className="text-title-m">{item.icon}</span>
-        <span>{item.label}</span>
-      </button>
-    ))}
-  </div>
 );
 
 const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
@@ -809,8 +644,6 @@ const HomeIndicator = () => (
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set(["prod-1", "prod-3", "v-1", "viewed-2"]));
   const [activeTab, setActiveTab] = useState("account");
-  const [stepperCounts, setStepperCounts] = useState(() => ({ "v-1": 1, "v-4": 2 }));
-  const [segment, setSegment] = useState("shops");
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleFavorite = (id) => {
@@ -825,17 +658,6 @@ const App = ({ debug }) => {
     });
     console.log("Toggle favorite", id);
   };
-
-  const handleStepper = (id, delta) => {
-    setStepperCounts((prev) => {
-      const nextCount = Math.max(0, (prev[id] || 0) + delta);
-      return { ...prev, [id]: nextCount };
-    });
-  };
-
-  const horizontalFavorites = useMemo(() => new Set([...favorites].filter((id) => id.startsWith("prod"))), [
-    favorites,
-  ]);
 
   return (
     <div className="flex h-full w-full min-h-0 flex-col">
