@@ -397,7 +397,7 @@ const MutedPill = ({ className, children, ...props }) => (
 );
 
 const DeviceFrame = ({ children, debug }) => (
-  <div className="flex min-h-screen items-center justify-center">
+  <div className="flex min-h-screen items-center justify-center bg-black">
     <div className="relative w-full max-w-[410px] h-[100dvh] sm:h-[852px] rounded-[40px] p-[10px]">
       <div
         className="screen box-border flex h-full w-full flex-col overflow-hidden rounded-[30px] bg-[var(--color-bg-page)]"
