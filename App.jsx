@@ -400,7 +400,7 @@ const DeviceFrame = ({ children, debug }) => (
   <div className="flex min-h-screen items-center justify-center">
     <div className="relative h-[852px] w-[410px] rounded-[40px] p-[10px]">
       <div
-        className="screen box-border flex h-full w-[390px] flex-col overflow-hidden overflow-x-hidden rounded-[30px] bg-[var(--color-bg-page)]"
+        className="screen relative box-border flex h-full w-[390px] flex-col overflow-hidden overflow-x-hidden rounded-[30px] bg-[var(--color-bg-page)]"
         style={{
           transform: "translateZ(0)",
           outline: debug ? "1px dashed var(--color-text-secondary)" : undefined,
@@ -769,7 +769,7 @@ const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
 );
 
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
-  <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
+  <div className="absolute bottom-0 z-30 w-full" style={debugStyle}>
     <div className="flex h-[var(--size-bottomnav-h)] w-full items-center justify-center bg-[var(--color-surface)]">
       <div
         className="grid h-full"
