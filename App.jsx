@@ -769,7 +769,7 @@ const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
 );
 
 const BottomNav = ({ activeTab, onChange, debugStyle }) => (
-  <div className="sticky bottom-0 z-30 w-full" style={debugStyle}>
+  <div className="flex-none z-30 w-full" style={debugStyle}>
     <div className="flex h-[var(--size-bottomnav-h)] w-full items-center justify-center bg-[var(--color-surface)]">
       <div
         className="grid h-full"
