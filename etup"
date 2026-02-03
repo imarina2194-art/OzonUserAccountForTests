@@ -1,0 +1,21 @@
+[1mdiff --git a/dist/index.html b/dist/index.html[m
+[1mindex 4398d1f..919ba76 100644[m
+[1m--- a/dist/index.html[m
+[1m+++ b/dist/index.html[m
+[36m@@ -4,16 +4,12 @@[m
+     <meta charset="UTF-8" />[m
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />[m
+     <title>ProfileHome Prototype</title>[m
+[31m-[m
+     <script src="https://cdn.tailwindcss.com"></script>[m
+[31m-[m
+     <script type="module" crossorigin src="/OzonUserAccountForTests/assets/index-DEOHvpc5.js"></script>[m
+     <link rel="stylesheet" crossorigin href="/OzonUserAccountForTests/assets/index-C0tur-zp.css">[m
+   </head>[m
+ [m
+   <body class="min-h-screen">[m
+     <div id="root"></div>[m
+[31m-[m
+[31m-    <!-- Vite entry -->[m
+   </body>[m
+ </html>[m
