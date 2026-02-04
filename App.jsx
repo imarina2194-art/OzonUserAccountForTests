@@ -456,14 +456,9 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <div className="mt-[6px] flex items-baseline gap-[6px] min-w-0">
-            <span className="text-body-s text-[var(--color-text-secondary)] truncate">
-              15 марта ·
-            </span>
-            <span className="text-title-s font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] whitespace-nowrap">
-              1 240 ₽
-            </span>
-          </div>
+          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+            15 марта · 1 240 ₽
+          </p>
           <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
             Лимит: 148 760 ₽
           </p>
@@ -484,86 +479,86 @@ const FinanceSection = ({ debugStyle }) => (
       </div>
       <div className="mt-[8px] flex gap-[12px] overflow-x-auto pb-[4px]">
         <div
-          className="min-w-[130px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px] shadow-sm"
+          className="min-w-[150px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
             Сертификаты
           </p>
-          <p className="mt-[6px] text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
+          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
             1 000 ₽
           </p>
         </div>
         <div
-          className="min-w-[130px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px] shadow-sm"
+          className="min-w-[150px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
             Баллы
           </p>
-          <p className="mt-[6px] text-title-s font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
-            3 240
-          </p>
-          <div className="mt-[4px] flex items-center">
+          <div className="mt-[6px] flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
               alt=""
               className="h-[20px] w-[20px] object-contain"
             />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              3 240
+            </p>
           </div>
         </div>
         <div
-          className="min-w-[130px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px] shadow-sm"
+          className="min-w-[150px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
             Звёзды
           </p>
-          <p className="mt-[6px] text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-            128
-          </p>
-          <div className="mt-[4px] flex items-center">
+          <div className="mt-[6px] flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
               alt=""
               className="h-[20px] w-[20px] object-contain"
             />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              128
+            </p>
           </div>
         </div>
         <div
-          className="min-w-[130px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px] shadow-sm"
+          className="min-w-[150px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
             Мили
           </p>
-          <p className="mt-[6px] text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-            2 100
-          </p>
-          <div className="mt-[4px] flex items-center">
+          <div className="mt-[6px] flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
               alt=""
               className="h-[20px] w-[20px] object-contain"
             />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              2 100
+            </p>
           </div>
         </div>
         <div
-          className="min-w-[130px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px] shadow-sm"
+          className="min-w-[150px] rounded-[var(--radius-16)] px-[10px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
             Бонусы
           </p>
-          <p className="mt-[6px] text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-            5
-          </p>
-          <div className="mt-[4px] flex items-center">
+          <div className="mt-[6px] flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
               alt=""
               className="h-[20px] w-[20px] object-contain"
             />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              5
+            </p>
           </div>
         </div>
       </div>
