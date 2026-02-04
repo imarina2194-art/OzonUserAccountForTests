@@ -64,7 +64,7 @@ const financeOverview = {
   ozonPoints: "3 240",
   bankStars: "128",
   travelMiles: "2 100",
-  otherRewardsCount: 3,
+  sellerBonus: "5",
   installmentLimitRub: "15 000 ₽",
   creditLimitRub: "25 000 ₽",
   nextPaymentDateLabel: "15 марта",
@@ -439,7 +439,6 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 );
 
 const FinanceSection = ({ debugStyle }) => {
-  const showCertificates = Boolean(financeOverview.certificatesAmountRub);
   const showInstallmentLimit = Boolean(financeOverview.installmentLimitRub);
   const showNextPayment =
     financeOverview.hasActiveInstallmentOrCredit &&
@@ -463,20 +462,25 @@ const FinanceSection = ({ debugStyle }) => {
             />
           </button>
           <div className="mt-[var(--space-2)] flex flex-col gap-[var(--space-1)]">
-            <HStack className="justify-between">
-              <span className="text-body-s text-[var(--color-text-secondary)]">Ozon карта</span>
-              <span className="text-title-m text-[var(--color-text-primary)]">
+            <div className="grid grid-cols-[1fr_1fr] items-center gap-[var(--space-1)]">
+              <span className="min-w-0 truncate text-body-s text-[var(--color-text-secondary)]">
+                Ozon карта
+              </span>
+              <span className="truncate text-right text-title-m text-[var(--color-text-primary)] whitespace-nowrap">
                 {financeOverview.cardBalanceRub}
               </span>
-            </HStack>
-            <HStack className="justify-between">
-              <span className="text-body-s text-[var(--color-text-secondary)]">Рассрочка</span>
-              <span className="text-body-m text-[var(--color-text-primary)]">
+            </div>
+            <div className="h-px w-full bg-[var(--color-surface)]" />
+            <div className="grid grid-cols-[1fr_1fr] items-center gap-[var(--space-1)]">
+              <span className="min-w-0 truncate text-body-s text-[var(--color-text-secondary)]">
+                Рассрочка
+              </span>
+              <span className="truncate text-right text-body-m text-[var(--color-text-primary)] whitespace-nowrap">
                 {showNextPayment
                   ? `Платёж: ${financeOverview.nextPaymentDateLabel} · ${financeOverview.nextPaymentAmountRub}`
                   : `Лимит: ${financeOverview.installmentLimitRub}`}
               </span>
-            </HStack>
+            </div>
           </div>
         </div>
         <div className="flex flex-col rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-3)]">
@@ -493,23 +497,57 @@ const FinanceSection = ({ debugStyle }) => {
             />
           </button>
           <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-1)]">
-            <div className="flex items-center justify-between">
-              <span className="text-body-s text-[var(--color-text-secondary)]">Баллы</span>
-              <span className="text-body-m text-[var(--color-text-primary)]">
-                {financeOverview.ozonPoints}
-              </span>
+            <div className="flex items-center gap-[var(--space-1)] rounded-[var(--radius-8)] bg-[var(--color-surface)] p-[var(--space-2)]">
+              <img
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
+                alt=""
+                className="h-[16px] w-[16px] object-contain"
+              />
+              <div className="min-w-0">
+                <p className="text-body-s text-[var(--color-text-secondary)]">Баллы</p>
+                <p className="text-body-m text-[var(--color-text-primary)]">
+                  {financeOverview.ozonPoints}
+                </p>
+              </div>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-body-s text-[var(--color-text-secondary)]">Звёзды</span>
-              <span className="text-body-m text-[var(--color-text-primary)]">
-                {financeOverview.bankStars}
-              </span>
+            <div className="flex items-center gap-[var(--space-1)] rounded-[var(--radius-8)] bg-[var(--color-surface)] p-[var(--space-2)]">
+              <img
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
+                alt=""
+                className="h-[16px] w-[16px] object-contain"
+              />
+              <div className="min-w-0">
+                <p className="text-body-s text-[var(--color-text-secondary)]">Звёзды</p>
+                <p className="text-body-m text-[var(--color-text-primary)]">
+                  {financeOverview.bankStars}
+                </p>
+              </div>
             </div>
-            <div className="col-span-2 flex items-center justify-between">
-              <span className="text-body-s text-[var(--color-text-secondary)]">Мили</span>
-              <span className="text-body-m text-[var(--color-text-primary)]">
-                {financeOverview.travelMiles}
-              </span>
+            <div className="flex items-center gap-[var(--space-1)] rounded-[var(--radius-8)] bg-[var(--color-surface)] p-[var(--space-2)]">
+              <img
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
+                alt=""
+                className="h-[16px] w-[16px] object-contain"
+              />
+              <div className="min-w-0">
+                <p className="text-body-s text-[var(--color-text-secondary)]">Мили</p>
+                <p className="text-body-m text-[var(--color-text-primary)]">
+                  {financeOverview.travelMiles}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-[var(--space-1)] rounded-[var(--radius-8)] bg-[var(--color-surface)] p-[var(--space-2)]">
+              <img
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
+                alt=""
+                className="h-[16px] w-[16px] object-contain"
+              />
+              <div className="min-w-0">
+                <p className="text-body-s text-[var(--color-text-secondary)]">Бонусы</p>
+                <p className="text-body-m text-[var(--color-text-primary)]">
+                  {financeOverview.sellerBonus}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -527,17 +565,22 @@ const FinanceSection = ({ debugStyle }) => {
             className="h-[14px] w-[14px] object-contain"
           />
         </button>
-        <div className="mt-[var(--space-2)] flex items-center justify-between">
+        <div className="mt-[var(--space-2)] grid grid-cols-[auto_1fr] items-center gap-[var(--space-2)]">
           <span className="rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[var(--space-2)] py-[var(--space-1)] text-body-s text-[var(--color-text-primary)]">
             Активировать
           </span>
-          <div className="flex items-center gap-[var(--space-1)]">
-            <span className="text-body-s text-[var(--color-text-secondary)]">Баланс средств</span>
-            <span className="text-body-m text-[var(--color-text-primary)]">
+          <div className="grid min-w-0 grid-cols-[1fr_auto] items-center gap-[var(--space-1)]">
+            <span className="min-w-0 truncate text-body-s text-[var(--color-text-secondary)]">
+              Баланс средств
+            </span>
+            <span className="text-body-m text-[var(--color-text-primary)] whitespace-nowrap">
               {financeOverview.walletBalanceRub}
             </span>
           </div>
         </div>
+        <p className="mt-[var(--space-1)] text-body-s text-[var(--color-text-secondary)]">
+          Промокоды и сертификаты
+        </p>
       </div>
     </Island>
   );
