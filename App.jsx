@@ -467,31 +467,42 @@ const FinanceSection = ({ debugStyle }) => (
           />
         </div>
         <div className="grid gap-[14px]">
-          <div className="grid grid-cols-[1fr_auto] gap-x-[8px] gap-y-[6px]">
-            <div className="grid min-w-0 grid-cols-[auto_1fr] items-center gap-[6px]">
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
-                alt=""
-                className="h-[16px] w-[20px] object-contain opacity-70"
-              />
-              <p className="text-body-s text-[var(--color-text-secondary)]">Баллы Ozon</p>
-            </div>
-            <p className="text-title-l row-start-2 col-start-2 whitespace-nowrap text-[var(--color-text-primary)]">
+          <div className="inline-flex items-center gap-[8px]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
+              alt=""
+              className="h-[18px] w-[18px] object-contain"
+            />
+            <p className="text-title-l whitespace-nowrap text-[var(--color-text-primary)]">
               3 240
             </p>
           </div>
           <div className="flex flex-wrap gap-[10px]">
             {[
-              { label: "⭐", value: "128" },
-              { label: "✈️", value: "2 100" },
-              { label: "🎁", value: "5" },
+              {
+                label: "Stars",
+                value: "128",
+                icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png",
+              },
+              {
+                label: "Miles",
+                value: "2 100",
+                icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png",
+              },
+              {
+                label: "Bonuses",
+                value: "5",
+                icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png",
+              },
             ].map((chip) => (
               <span
                 key={chip.label}
                 className="text-body-s inline-flex items-center gap-[6px] rounded-[var(--radius-8)] bg-[rgba(0,48,120,0.03)] px-[10px] py-[6px] text-[var(--color-text-secondary)]"
               >
-                <span className="opacity-70">{chip.label}</span>
-                <span className="font-[var(--font-weight-medium)]">{chip.value}</span>
+                <img src={chip.icon} alt="" className="h-[14px] w-[14px] object-contain opacity-70" />
+                <span className="font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+                  {chip.value}
+                </span>
               </span>
             ))}
           </div>
