@@ -41,19 +41,18 @@ const Icon = ({ name, alt, className }) => {
 const shortcutItems = [
   {
     id: "orders",
-    title: "Заказы и покупки",
+    title: ["Заказы", "и покупки"],
     iconName: "purchases",
   },
   {
     id: "favorites",
-    title: "Избранное и вишлисты",
+    title: ["Избранное", "и вишлисты"],
     iconName: "favorites",
   },
   {
     id: "waitlist",
     title: ["Лист", "ожидания"],
     titleText: "Лист ожидания",
-    subtitle: `Ждут: ${mockUser.waitlistCount}`,
     iconName: "waitlist",
     badgeCount: mockUser.waitlistCount,
   },
