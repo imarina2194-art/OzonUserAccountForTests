@@ -428,7 +428,7 @@ const FinanceSection = ({ debugStyle }) => (
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
       <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
       <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[12px] items-stretch">
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
               Ozon карта
@@ -444,7 +444,7 @@ const FinanceSection = ({ debugStyle }) => (
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
               Рассрочка
@@ -469,7 +469,7 @@ const FinanceSection = ({ debugStyle }) => (
       <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
       <div className="mt-[var(--space-2)] flex gap-[12px] overflow-x-auto pb-[4px]">
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[12px] pt-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
@@ -480,7 +480,7 @@ const FinanceSection = ({ debugStyle }) => (
           </p>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[12px] pt-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
@@ -498,7 +498,7 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[12px] pt-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
@@ -516,7 +516,7 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[12px] pt-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
@@ -534,7 +534,7 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[12px] pt-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px]"
           style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
         >
           <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
