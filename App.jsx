@@ -432,10 +432,10 @@ const FinanceSection = ({ debugStyle }) => (
           Ещё
         </MutedPill>
       </HStack>
-      <div className="mt-[var(--space-4)] grid grid-cols-2 gap-x-[12px] items-stretch">
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[16px] min-w-0 h-full">
+      <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-2)] items-stretch">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-4)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
-            <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+            <p className="text-title-s text-[var(--color-text-secondary)]">
               Ozon карта
             </p>
             <img
@@ -444,14 +444,14 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[8px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
             2 450 ₽
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[16px] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-4)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
-            <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+            <p className="text-title-s text-[var(--color-text-secondary)]">
               Рассрочка
             </p>
             <img
@@ -460,10 +460,10 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[8px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
             15 марта · 1 240 ₽
           </p>
-          <p className="mt-[8px] text-body-s text-[var(--color-text-secondary)]">
+          <p className="mt-[var(--space-2)] text-body-s text-[var(--color-text-secondary)]">
             Лимит: 148 760 ₽
           </p>
         </div>
@@ -477,26 +477,26 @@ const FinanceSection = ({ debugStyle }) => (
           Активировать
         </MutedPill>
       </HStack>
-      <div className="mt-[var(--space-4)] flex gap-[12px] overflow-x-auto pb-[4px]">
+      <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
           style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <p className="text-title-s text-[var(--color-text-secondary)]">
             Сертификаты
           </p>
-          <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
             1 000 ₽
           </p>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <p className="text-title-s text-[var(--color-text-secondary)]">
             Баллы
           </p>
-          <div className="flex items-center gap-[6px]">
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
               alt=""
@@ -508,13 +508,13 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
           style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <p className="text-title-s text-[var(--color-text-secondary)]">
             Звёзды
           </p>
-          <div className="flex items-center gap-[6px]">
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
               alt=""
@@ -526,13 +526,13 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
           style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <p className="text-title-s text-[var(--color-text-secondary)]">
             Мили
           </p>
-          <div className="flex items-center gap-[6px]">
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
               alt=""
@@ -544,13 +544,13 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
           style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <p className="text-title-s text-[var(--color-text-secondary)]">
             Бонусы продавцов
           </p>
-          <div className="flex items-center gap-[6px]">
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
               alt=""
