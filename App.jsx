@@ -425,25 +425,28 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 
 const FinanceSection = ({ debugStyle }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
-    <div className="grid grid-cols-2 gap-[12px]">
+    <div className="grid grid-cols-[1.25fr_0.75fr] gap-[12px]">
       <div className="grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[16px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
-          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-            Оплата
-          </p>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[16px] w-[16px] object-contain"
-          />
+        <div className="flex items-center justify-between">
+          <div className="inline-flex items-center gap-[2px]">
+            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+              Финансы
+            </p>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[16px] w-[16px] object-contain"
+            />
+          </div>
+          <span aria-hidden="true" />
         </div>
-        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
-          <p className="text-body-s min-w-0 text-[var(--color-text-secondary)]">Ozon карта</p>
+        <div className="grid gap-[6px]">
+          <p className="text-body-s text-[var(--color-text-secondary)]">Ozon карта</p>
           <p className="text-title-l whitespace-nowrap text-[var(--color-text-primary)]">
             2 450 ₽
           </p>
         </div>
-        <div className="grid gap-[8px]">
+        <div className="grid gap-[6px]">
           <p className="text-body-s text-[var(--color-text-secondary)]">Рассрочка</p>
           <p className="text-body-m truncate text-[var(--color-text-primary)]">
             Платёж: 15 марта · 1 240 ₽
@@ -454,30 +457,31 @@ const FinanceSection = ({ debugStyle }) => (
         </div>
       </div>
       <div className="grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[16px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
-          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-            Баллы и бонусы
-          </p>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[16px] w-[16px] object-contain"
-          />
+        <div className="flex items-center justify-between">
+          <div className="inline-flex items-center gap-[2px]">
+            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+              Баллы и бонусы
+            </p>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[16px] w-[16px] object-contain"
+            />
+          </div>
+          <span aria-hidden="true" />
         </div>
         <div className="grid gap-[12px]">
-          <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
-            <div className="min-w-0">
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
-                alt=""
-                className="h-[18px] w-[18px] object-contain"
-              />
-            </div>
+          <div className="grid gap-[6px]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
+              alt=""
+              className="h-[18px] w-[18px] object-contain"
+            />
             <p className="text-title-l whitespace-nowrap text-[var(--color-text-primary)]">
               3 240
             </p>
           </div>
-          <div className="flex flex-wrap gap-[10px]">
+          <div className="grid gap-[8px]">
             {[
               {
                 label: "Stars",
@@ -495,29 +499,32 @@ const FinanceSection = ({ debugStyle }) => (
                 icon: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png",
               },
             ].map((chip) => (
-              <span
+              <div
                 key={chip.label}
-                className="text-body-s inline-flex items-center gap-[6px] rounded-[var(--radius-8)] bg-[rgba(0,48,120,0.03)] px-[10px] py-[6px] text-[var(--color-text-secondary)]"
+                className="inline-flex items-center gap-[6px] rounded-[var(--radius-8)] bg-[rgba(0,48,120,0.03)] px-[10px] py-[6px]"
               >
                 <img src={chip.icon} alt="" className="h-[14px] w-[14px] object-contain opacity-70" />
-                <span className="font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+                <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
                   {chip.value}
                 </span>
-              </span>
+              </div>
             ))}
           </div>
         </div>
       </div>
       <div className="col-span-2 grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[16px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
-          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-            Сертификаты и коды
-          </p>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[16px] w-[16px] object-contain"
-          />
+        <div className="flex items-center justify-between">
+          <div className="inline-flex items-center gap-[2px]">
+            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+              Сертификаты и коды
+            </p>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[16px] w-[16px] object-contain"
+            />
+          </div>
+          <span aria-hidden="true" />
         </div>
         <div className="grid grid-cols-[1fr_auto] items-center gap-[12px]">
           <div className="grid min-w-0 gap-[6px]">
