@@ -427,47 +427,32 @@ const FinanceSection = ({ debugStyle }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
     <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
 
-    <div className="mt-[var(--space-2)] grid grid-cols-[1fr_1.2fr] gap-x-[12px]">
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[12px] min-w-0">
-        <div className="flex items-center gap-[2px]">
+    <div className="mt-[var(--space-2)] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[12px]">
+      <div className="grid grid-cols-[1fr_1.2fr] gap-x-[12px]">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface)] p-[12px] min-w-0">
           <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Ozon карта
           </p>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[14px] w-[14px] object-contain"
-          />
+          <p className="mt-[6px] text-title-l font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+            2 450 ₽
+          </p>
         </div>
-        <p className="mt-[6px] text-title-l font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
-          2 450 ₽
-        </p>
-      </div>
 
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[12px] min-w-0">
-        <div className="flex items-center gap-[2px]">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface)] p-[12px] min-w-0">
           <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Рассрочка
           </p>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[14px] w-[14px] object-contain"
-          />
+          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] min-w-0 truncate">
+            15 марта · 1 240 ₽
+          </p>
+          <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
+            Лимит: 148 760 ₽
+          </p>
         </div>
-        <div className="mt-[6px] flex items-baseline gap-[6px] min-w-0">
-          <span className="text-body-s text-[var(--color-text-secondary)] truncate">15 марта</span>
-          <span className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] whitespace-nowrap">
-            1 240 ₽
-          </span>
-        </div>
-        <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
-          Лимит: 148 760 ₽
-        </p>
       </div>
     </div>
 
-    <div className="mt-[var(--space-2)]">
+    <div className="mt-[var(--space-2)] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[12px]">
       <div className="flex items-center gap-[2px]">
         <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
           Бонусы и сертификаты
@@ -479,60 +464,57 @@ const FinanceSection = ({ debugStyle }) => (
         />
       </div>
       <div className="mt-[8px] flex gap-[12px] overflow-x-auto pb-[4px]">
-        <div className="min-w-[140px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
-          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-            Сертификаты
-          </p>
-          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface)] p-[10px] shadow-sm">
+          <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
             1 000 ₽
           </p>
         </div>
         <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-cell-button-bg)] p-[10px] shadow-sm">
-          <div className="flex items-center gap-[6px]">
+          <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+            3 240
+          </p>
+          <div className="mt-[6px] flex items-center">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
               alt=""
               className="h-[16px] w-[16px] object-contain"
             />
-            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
-              3 240
-            </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
-          <div className="flex items-center gap-[6px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface)] p-[10px] shadow-sm">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
+            128
+          </p>
+          <div className="mt-[6px] flex items-center">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
               alt=""
               className="h-[16px] w-[16px] object-contain"
             />
-            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-              128
-            </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
-          <div className="flex items-center gap-[6px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface)] p-[10px] shadow-sm">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
+            2 100
+          </p>
+          <div className="mt-[6px] flex items-center">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
               alt=""
               className="h-[16px] w-[16px] object-contain"
             />
-            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-              2 100
-            </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
-          <div className="flex items-center gap-[6px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface)] p-[10px] shadow-sm">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
+            5
+          </p>
+          <div className="mt-[6px] flex items-center">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
               alt=""
               className="h-[16px] w-[16px] object-contain"
             />
-            <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)] whitespace-nowrap">
-              5
-            </p>
           </div>
         </div>
       </div>
