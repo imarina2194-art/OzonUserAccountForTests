@@ -41,21 +41,18 @@ const Icon = ({ name, alt, className }) => {
 const shortcutItems = [
   {
     id: "orders",
-    title: "Заказы",
-    subtitle: mockUser.activeOrdersCount
-      ? `Активные: ${mockUser.activeOrdersCount}`
-      : "История и статусы",
+    title: "Заказы и покупки",
     iconName: "purchases",
   },
   {
     id: "favorites",
-    title: "Избранное",
-    subtitle: `${mockUser.favoritesCount} товаров`,
+    title: "Избранное и вишлисты",
     iconName: "favorites",
   },
   {
     id: "waitlist",
-    title: "Лист ожидания",
+    title: ["Лист", "ожидания"],
+    titleText: "Лист ожидания",
     subtitle: `Ждут: ${mockUser.waitlistCount}`,
     iconName: "waitlist",
     badgeCount: mockUser.waitlistCount,
@@ -422,7 +419,7 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
   </button>
 );
 
-const ShortcutCard = ({ title, subtitle, iconName, badgeCount, onClick }) => (
+const ShortcutCard = ({ title, titleText, subtitle, iconName, badgeCount, onClick }) => (
   <MutedPill
     className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]"
     onClick={onClick}
@@ -435,15 +432,27 @@ const ShortcutCard = ({ title, subtitle, iconName, badgeCount, onClick }) => (
     )}
     <div className="absolute left-[var(--space-2)] top-[var(--space-2)] text-left">
       <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
-        <Icon name={iconName} alt={title} className="h-full w-full" />
+        <Icon name={iconName} alt={titleText || title} className="h-full w-full" />
       </span>
       <div className="mt-[var(--space-2)]">
-        <p className="text-title-s text-[var(--color-text-primary)]">
-          {title}
-        </p>
-        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
-          {subtitle}
-        </p>
+        {Array.isArray(title) ? (
+          <p className="text-title-s text-[var(--color-text-primary)] leading-[16px]">
+            {title.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </p>
+        ) : (
+          <p className="text-title-s text-[var(--color-text-primary)]">
+            {title}
+          </p>
+        )}
+        {subtitle && (
+          <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+            {subtitle}
+          </p>
+        )}
       </div>
     </div>
   </MutedPill>
@@ -673,7 +682,7 @@ const ReviewCard = ({ item, rating, onRate }) => (
     <div className="relative h-[156px] w-full overflow-hidden rounded-t-[16px]">
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       <div
-        className="absolute bottom-[var(--space-2)] left-[var(--space-2)] rounded-[var(--radius-8)] px-[6px] py-[4px] shadow-sm"
+        className="absolute bottom-[var(--space-2)] left-1/2 -translate-x-1/2 rounded-[var(--radius-8)] px-[6px] py-[4px] shadow-sm"
         style={{
           backgroundColor: "color-mix(in srgb, var(--color-surface) 70%, transparent)",
         }}
@@ -894,6 +903,7 @@ const App = ({ debug }) => {
                   <ShortcutCard
                     key={item.id}
                     title={item.title}
+                    titleText={item.titleText}
                     subtitle={item.subtitle}
                     iconName={item.iconName}
                     badgeCount={item.badgeCount}
