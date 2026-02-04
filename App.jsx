@@ -427,8 +427,8 @@ const FinanceSection = ({ debugStyle }) => (
   <div className="flex flex-col gap-[var(--space-2)]" style={debugStyle}>
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
       <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
-      <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[12px] items-stretch">
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
+      <div className="mt-[var(--space-4)] grid grid-cols-2 gap-x-[12px] items-stretch">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[16px] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
               Ozon карта
@@ -439,12 +439,12 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+          <p className="mt-[8px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
             2 450 ₽
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] px-[12px] pb-[12px] pt-[6px] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[16px] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
               Рассрочка
@@ -455,10 +455,10 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+          <p className="mt-[8px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
             15 марта · 1 240 ₽
           </p>
-          <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
+          <p className="mt-[8px] text-body-s text-[var(--color-text-secondary)]">
             Лимит: 148 760 ₽
           </p>
         </div>
@@ -467,12 +467,12 @@ const FinanceSection = ({ debugStyle }) => (
 
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
       <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
-      <div className="mt-[var(--space-2)] flex gap-[12px] overflow-x-auto pb-[4px]">
+      <div className="mt-[var(--space-4)] flex gap-[12px] overflow-x-auto pb-[4px]">
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px] flex flex-col gap-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
           style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Сертификаты
           </p>
           <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
@@ -480,10 +480,10 @@ const FinanceSection = ({ debugStyle }) => (
           </p>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px] flex flex-col gap-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Баллы
           </p>
           <div className="flex items-center gap-[6px]">
@@ -498,10 +498,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px] flex flex-col gap-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
           style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Звёзды
           </p>
           <div className="flex items-center gap-[6px]">
@@ -516,10 +516,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px] flex flex-col gap-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
           style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Мили
           </p>
           <div className="flex items-center gap-[6px]">
@@ -534,10 +534,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] px-[12px] pb-[10px] pt-[6px] flex flex-col gap-[6px]"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
           style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
         >
-          <p className="text-body-s font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Бонусы продавцов
           </p>
           <div className="flex items-center gap-[6px]">
