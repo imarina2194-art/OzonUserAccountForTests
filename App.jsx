@@ -439,7 +439,7 @@ const FinanceSection = ({ debugStyle }) => (
             className="h-[14px] w-[14px] object-contain"
           />
         </div>
-        <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+        <p className="mt-[6px] text-title-l font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
           2 450 ₽
         </p>
       </div>
@@ -455,12 +455,12 @@ const FinanceSection = ({ debugStyle }) => (
             className="h-[14px] w-[14px] object-contain"
           />
         </div>
-        <p className="mt-[6px] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] whitespace-nowrap">
-          1 240 ₽
-        </p>
-        <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
-          15 марта
-        </p>
+        <div className="mt-[6px] flex items-baseline gap-[6px] min-w-0">
+          <span className="text-body-s text-[var(--color-text-secondary)] truncate">15 марта</span>
+          <span className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] whitespace-nowrap">
+            1 240 ₽
+          </span>
+        </div>
         <p className="mt-[4px] text-body-s text-[var(--color-text-secondary)]">
           Лимит: 148 760 ₽
         </p>
@@ -479,7 +479,7 @@ const FinanceSection = ({ debugStyle }) => (
         />
       </div>
       <div className="mt-[8px] flex gap-[12px] overflow-x-auto pb-[4px]">
-        <div className="min-w-[140px] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[10px]">
+        <div className="min-w-[140px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
           <p className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
             Сертификаты
           </p>
@@ -487,7 +487,7 @@ const FinanceSection = ({ debugStyle }) => (
             1 000 ₽
           </p>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[10px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-cell-button-bg)] p-[10px] shadow-sm">
           <div className="flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
@@ -499,7 +499,7 @@ const FinanceSection = ({ debugStyle }) => (
             </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[10px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
           <div className="flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
@@ -511,7 +511,7 @@ const FinanceSection = ({ debugStyle }) => (
             </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[10px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
           <div className="flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
@@ -523,7 +523,7 @@ const FinanceSection = ({ debugStyle }) => (
             </p>
           </div>
         </div>
-        <div className="min-w-[120px] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[10px]">
+        <div className="min-w-[120px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[10px] shadow-sm">
           <div className="flex items-center gap-[6px]">
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
