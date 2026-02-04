@@ -65,7 +65,7 @@ const financeOverview = {
   bankStars: "128",
   travelMiles: "2 100",
   sellerBonus: "5",
-  installmentLimitRub: "15 000 ₽",
+  installmentLimitRub: "148 760 ₽",
   creditLimitRub: "25 000 ₽",
   nextPaymentDateLabel: "15 марта",
   nextPaymentAmountRub: "1 240 ₽",
@@ -478,6 +478,11 @@ const FinanceSection = ({ debugStyle }) => {
                   ? `Платёж: ${financeOverview.nextPaymentDateLabel} · ${financeOverview.nextPaymentAmountRub}`
                   : `Лимит: ${financeOverview.installmentLimitRub}`}
               </span>
+              {showInstallmentLimit && (
+                <span className="text-body-s text-[var(--color-text-secondary)] truncate whitespace-nowrap">
+                  Лимит: {financeOverview.installmentLimitRub}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -496,7 +501,12 @@ const FinanceSection = ({ debugStyle }) => {
           </button>
           <div className="mt-[var(--space-2)]">
             <div className="grid grid-cols-[1fr_auto] items-center gap-[var(--space-1)]">
-              <span className="min-w-0 truncate text-body-s text-[var(--color-text-secondary)]">
+              <span className="min-w-0 flex items-center gap-[var(--space-0_5)] truncate text-body-s text-[var(--color-text-secondary)]">
+                <img
+                  src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
+                  alt=""
+                  className="h-[16px] w-[16px] object-contain"
+                />
                 Баллы Ozon
               </span>
               <span className="text-title-m text-[var(--color-text-primary)] whitespace-nowrap">
