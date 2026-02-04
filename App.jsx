@@ -426,7 +426,12 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 const FinanceSection = ({ debugStyle }) => (
   <div className="flex flex-col gap-[var(--space-2)]" style={debugStyle}>
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
+      <HStack className="justify-between">
+        <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
+        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          Ещё
+        </MutedPill>
+      </HStack>
       <div className="mt-[var(--space-4)] grid grid-cols-2 gap-x-[12px] items-stretch">
         <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[16px] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
@@ -466,7 +471,12 @@ const FinanceSection = ({ debugStyle }) => (
     </Island>
 
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
+      <HStack className="justify-between">
+        <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
+        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          Активировать
+        </MutedPill>
+      </HStack>
       <div className="mt-[var(--space-4)] flex gap-[12px] overflow-x-auto pb-[4px]">
         <div
           className="min-w-[145px] rounded-[var(--radius-s)] p-[16px] flex flex-col gap-[8px]"
