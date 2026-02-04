@@ -437,19 +437,15 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 
 const FinanceSection = ({ debugStyle }) => {
   const showCertificates = Boolean(financeOverview.certificatesAmountRub);
-  const showNextPayment =
-    (financeOverview.hasActiveInstallmentOrCredit || financeOverview.nextPaymentAmountRub) &&
-    financeOverview.nextPaymentDateLabel &&
-    financeOverview.nextPaymentAmountRub;
   const showInstallmentLimit = Boolean(financeOverview.installmentLimitRub);
 
   return (
-    <VStack className="gap-[var(--space-2)]" style={debugStyle}>
-      <div className="grid grid-cols-2 gap-[var(--space-2)]">
-        <Island className="rounded-[var(--radius-16)] p-[var(--space-3)]">
+    <VStack className="gap-[var(--space-2)] px-[var(--space-4)]" style={debugStyle}>
+      <div className="grid w-full grid-cols-2 gap-[var(--space-2)]">
+        <Island className="min-w-0 rounded-[var(--radius-16)] p-[var(--space-3)]">
           <button
             onClick={() => console.log("Open wallet")}
-            className="flex h-full w-full flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
+            className="flex h-full w-full min-w-0 flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
             aria-label="Открыть баланс Ozon карты"
           >
             <HStack className="gap-[var(--space-1)]">
@@ -468,36 +464,12 @@ const FinanceSection = ({ debugStyle }) => {
                 Сертификаты: {financeOverview.certificatesAmountRub}
               </p>
             )}
-            <span
-              onClick={(event) => {
-                event.stopPropagation();
-                console.log("Open operations", "/balance-operations");
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  console.log("Open operations", "/balance-operations");
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              className="mt-auto flex items-center justify-end gap-[2px] text-body-s text-[var(--color-text-secondary)]"
-              aria-label="Открыть все операции"
-            >
-              Все операции
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-                alt=""
-                className="h-[12px] w-[12px] object-contain"
-              />
-            </span>
           </button>
         </Island>
-        <Island className="rounded-[var(--radius-16)] p-[var(--space-3)]">
+        <Island className="min-w-0 rounded-[var(--radius-16)] p-[var(--space-3)]">
           <button
             onClick={() => console.log("Open rewards")}
-            className="flex h-full w-full flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
+            className="flex h-full w-full min-w-0 flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
             aria-label="Открыть баллы и бонусы"
           >
             <HStack className="gap-[var(--space-1)]">
@@ -517,10 +489,10 @@ const FinanceSection = ({ debugStyle }) => {
           </button>
         </Island>
       </div>
-      <Island className="rounded-[var(--radius-16)] p-[var(--space-3)]">
+      <Island className="min-w-0 rounded-[var(--radius-16)] p-[var(--space-3)]">
         <button
           onClick={() => console.log("Open installment")}
-          className="flex w-full flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
+          className="flex w-full min-w-0 flex-col gap-[var(--space-1)] border-0 bg-transparent p-0 text-left"
           aria-label="Открыть рассрочку"
         >
           <HStack className="gap-[var(--space-1)]">
@@ -532,9 +504,7 @@ const FinanceSection = ({ debugStyle }) => {
             </span>
           </HStack>
           <p className="text-body-m text-[var(--color-text-primary)] line-clamp-1">
-            {showNextPayment
-              ? `Платёж: ${financeOverview.nextPaymentDateLabel} · ${financeOverview.nextPaymentAmountRub}`
-              : "Доступна при оплате"}
+            Платёж: {financeOverview.nextPaymentDateLabel} · {financeOverview.nextPaymentAmountRub}
           </p>
           {showInstallmentLimit && (
             <p className="text-body-s text-[var(--color-text-secondary)] line-clamp-1">
