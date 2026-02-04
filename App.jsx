@@ -62,12 +62,15 @@ const financeOverview = {
   cardBalanceRub: "2 450 ₽",
   certificatesAmountRub: "1 000 ₽",
   ozonPoints: "3 240",
+  bankStars: "128",
+  travelMiles: "2 100",
   otherRewardsCount: 3,
   installmentLimitRub: "15 000 ₽",
   creditLimitRub: "25 000 ₽",
   nextPaymentDateLabel: "15 марта",
   nextPaymentAmountRub: "1 240 ₽",
   hasActiveInstallmentOrCredit: true,
+  walletBalanceRub: "3 845,41 ₽",
 };
 
 const viewedItems = [
@@ -438,84 +441,104 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 const FinanceSection = ({ debugStyle }) => {
   const showCertificates = Boolean(financeOverview.certificatesAmountRub);
   const showInstallmentLimit = Boolean(financeOverview.installmentLimitRub);
+  const showNextPayment =
+    financeOverview.hasActiveInstallmentOrCredit &&
+    financeOverview.nextPaymentDateLabel &&
+    financeOverview.nextPaymentAmountRub;
 
   return (
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
-      <button
-        onClick={() => console.log("Open finance root")}
-        className="flex w-full items-center justify-between border-0 bg-transparent p-0 text-title-l text-[var(--color-text-primary)]"
-        aria-label="Открыть финансы"
-      >
-        <span>Финансы</span>
-        <img
-          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-          alt=""
-          className="h-[16px] w-[16px] object-contain"
-        />
-      </button>
-      <VStack className="mt-[var(--space-2)] gap-[var(--space-2)]">
-        <div>
-          <p className="text-body-s text-[var(--color-text-secondary)]">Средства</p>
+      <div className="grid w-full grid-cols-2 gap-[var(--space-2)]">
+        <div className="flex flex-col rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-3)]">
           <button
-            onClick={() => console.log("Open card balance")}
-            className="flex h-[52px] w-full items-center justify-between border-0 bg-transparent px-0 text-body-m text-[var(--color-text-primary)]"
-            aria-label="Баланс Ozon карты"
+            onClick={() => console.log("Open payment overview")}
+            className="flex w-full items-center justify-between border-0 bg-transparent p-0 text-body-m text-[var(--color-text-primary)]"
+            aria-label="Открыть оплату"
           >
-            <span className="min-w-0 truncate">Баланс Ozon карты</span>
-            <span className="ml-[var(--space-1)] text-body-m text-[var(--color-text-primary)]">
-              {financeOverview.cardBalanceRub}
-            </span>
+            <span className="min-w-0 truncate">Оплата</span>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[14px] w-[14px] object-contain"
+            />
           </button>
-          {showCertificates && (
-            <>
-              <div className="h-px w-full bg-[var(--color-surface-muted)]" />
-              <button
-                onClick={() => console.log("Open certificates")}
-                className="flex h-[52px] w-full items-center justify-between border-0 bg-transparent px-0 text-body-m text-[var(--color-text-primary)]"
-                aria-label="Сертификаты"
-              >
-                <span className="min-w-0 truncate">Сертификаты</span>
-                <span className="ml-[var(--space-1)] text-body-m text-[var(--color-text-primary)]">
-                  {financeOverview.certificatesAmountRub}
-                </span>
-              </button>
-            </>
-          )}
+          <div className="mt-[var(--space-2)] flex flex-col gap-[var(--space-1)]">
+            <HStack className="justify-between">
+              <span className="text-body-s text-[var(--color-text-secondary)]">Ozon карта</span>
+              <span className="text-title-m text-[var(--color-text-primary)]">
+                {financeOverview.cardBalanceRub}
+              </span>
+            </HStack>
+            <HStack className="justify-between">
+              <span className="text-body-s text-[var(--color-text-secondary)]">Рассрочка</span>
+              <span className="text-body-m text-[var(--color-text-primary)]">
+                {showNextPayment
+                  ? `Платёж: ${financeOverview.nextPaymentDateLabel} · ${financeOverview.nextPaymentAmountRub}`
+                  : `Лимит: ${financeOverview.installmentLimitRub}`}
+              </span>
+            </HStack>
+          </div>
         </div>
-        <div className="h-px w-full bg-[var(--color-surface-muted)]" />
-        <div>
-          <p className="text-body-s text-[var(--color-text-secondary)]">Выгоды</p>
+        <div className="flex flex-col rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-3)]">
           <button
-            onClick={() => console.log("Open ozon points")}
-            className="flex h-[52px] w-full items-center justify-between border-0 bg-transparent px-0 text-body-m text-[var(--color-text-primary)]"
-            aria-label="Баллы Ozon"
+            onClick={() => console.log("Open rewards")}
+            className="flex w-full items-center justify-between border-0 bg-transparent p-0 text-body-m text-[var(--color-text-primary)]"
+            aria-label="Открыть баллы и бонусы"
           >
-            <span className="min-w-0 truncate">Баллы Ozon</span>
-            <span className="ml-[var(--space-1)] text-body-m text-[var(--color-text-primary)]">
-              {financeOverview.ozonPoints}
-            </span>
+            <span className="min-w-0 truncate">Баллы и бонусы</span>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[14px] w-[14px] object-contain"
+            />
           </button>
+          <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-1)]">
+            <div className="flex items-center justify-between">
+              <span className="text-body-s text-[var(--color-text-secondary)]">Баллы</span>
+              <span className="text-body-m text-[var(--color-text-primary)]">
+                {financeOverview.ozonPoints}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-body-s text-[var(--color-text-secondary)]">Звёзды</span>
+              <span className="text-body-m text-[var(--color-text-primary)]">
+                {financeOverview.bankStars}
+              </span>
+            </div>
+            <div className="col-span-2 flex items-center justify-between">
+              <span className="text-body-s text-[var(--color-text-secondary)]">Мили</span>
+              <span className="text-body-m text-[var(--color-text-primary)]">
+                {financeOverview.travelMiles}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="h-px w-full bg-[var(--color-surface-muted)]" />
-        <div>
-          <p className="text-body-s text-[var(--color-text-secondary)]">Рассрочка</p>
-          <button
-            onClick={() => console.log("Open installment")}
-            className="flex h-[52px] w-full items-center justify-between border-0 bg-transparent px-0 text-body-m text-[var(--color-text-primary)]"
-            aria-label="Платёж по рассрочке"
-          >
-            <span className="min-w-0 truncate">Платёж</span>
-            <span className="ml-[var(--space-1)] text-body-m text-[var(--color-text-primary)]">
-              {financeOverview.nextPaymentDateLabel} · {financeOverview.nextPaymentAmountRub}
+      </div>
+      <div className="mt-[var(--space-2)] rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-3)]">
+        <button
+          onClick={() => console.log("Open certificates and codes")}
+          className="flex w-full items-center justify-between border-0 bg-transparent p-0 text-body-m text-[var(--color-text-primary)]"
+          aria-label="Открыть сертификаты и коды"
+        >
+          <span className="min-w-0 truncate">Сертификаты и коды</span>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+            alt=""
+            className="h-[14px] w-[14px] object-contain"
+          />
+        </button>
+        <div className="mt-[var(--space-2)] flex items-center justify-between">
+          <span className="rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[var(--space-2)] py-[var(--space-1)] text-body-s text-[var(--color-text-primary)]">
+            Активировать
+          </span>
+          <div className="flex items-center gap-[var(--space-1)]">
+            <span className="text-body-s text-[var(--color-text-secondary)]">Баланс средств</span>
+            <span className="text-body-m text-[var(--color-text-primary)]">
+              {financeOverview.walletBalanceRub}
             </span>
-          </button>
-          {showInstallmentLimit && (
-            <p className="text-body-s text-[var(--color-text-secondary)] line-clamp-1">
-              Лимит: {financeOverview.installmentLimitRub}
-            </p>
-          )}
+          </div>
         </div>
-      </VStack>
+      </div>
     </Island>
   );
 };
