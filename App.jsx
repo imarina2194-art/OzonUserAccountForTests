@@ -25,29 +25,11 @@ const iconRegistry = {
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/favorites_shortcut_icon.png",
   premium:
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/premium_crown_icon.png",
+  waitlist:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/waiting_oos_icon.png",
 };
 
 const Icon = ({ name, alt, className }) => {
-  if (name === "waitlist") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        aria-hidden={alt ? undefined : true}
-        role={alt ? "img" : "presentation"}
-        className={`text-[var(--color-text-primary)] ${className || ""}`}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="3" y="4" width="18" height="16" rx="4" />
-        <path d="M7 10h6" />
-        <path d="M7 14h10" />
-        <path d="M16.5 9.5l1.5 1.5l-2.8 2.8" />
-      </svg>
-    );
-  }
   const src = iconRegistry[name];
   if (!src) {
     return null;
