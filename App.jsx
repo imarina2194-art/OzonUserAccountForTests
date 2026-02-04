@@ -478,7 +478,7 @@ const FinanceSection = ({ debugStyle }) => {
                   ? `Платёж: ${financeOverview.nextPaymentDateLabel} · ${financeOverview.nextPaymentAmountRub}`
                   : `Лимит: ${financeOverview.installmentLimitRub}`}
               </span>
-              {showInstallmentLimit && (
+              {showNextPayment && showInstallmentLimit && (
                 <span className="text-body-s text-[var(--color-text-secondary)] truncate whitespace-nowrap">
                   Лимит: {financeOverview.installmentLimitRub}
                 </span>
@@ -513,8 +513,8 @@ const FinanceSection = ({ debugStyle }) => {
                 {financeOverview.ozonPoints}
               </span>
             </div>
-            <div className="mt-[var(--space-2)] flex flex-wrap gap-[var(--space-1)]">
-              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
+            <div className="mt-[var(--space-2)] flex flex-wrap gap-[var(--space-2)]">
+              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-s)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
                 <img
                   src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
                   alt=""
@@ -522,7 +522,7 @@ const FinanceSection = ({ debugStyle }) => {
                 />
                 <span className="whitespace-nowrap">{financeOverview.bankStars}</span>
               </span>
-              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
+              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-s)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
                 <img
                   src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
                   alt=""
@@ -530,7 +530,7 @@ const FinanceSection = ({ debugStyle }) => {
                 />
                 <span className="whitespace-nowrap">{financeOverview.travelMiles}</span>
               </span>
-              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
+              <span className="inline-flex items-center gap-[var(--space-0_5)] rounded-[var(--radius-s)] bg-[var(--color-surface)] px-[var(--space-1)] py-[var(--space-0_5)] text-body-s text-[var(--color-text-primary)]">
                 <img
                   src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
                   alt=""
