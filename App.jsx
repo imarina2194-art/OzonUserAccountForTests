@@ -642,10 +642,55 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
-const ReviewCard = ({ item, onReview }) => (
+const StarIcon = ({ filled, className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    fill={filled ? "currentColor" : "none"}
+    stroke="currentColor"
+    strokeWidth="1.6"
+  >
+    <path d="M12 3.5l2.7 5.47 6.03.88-4.36 4.25 1.03 6.02L12 17.4l-5.4 2.77 1.03-6.02-4.36-4.25 6.03-.88L12 3.5z" />
+  </svg>
+);
+
+const StarRating = ({ rating, onRate, labelPrefix }) => (
+  <div className="flex items-center gap-[2px]">
+    {Array.from({ length: 5 }, (_, index) => {
+      const value = index + 1;
+      const isFilled = value <= rating;
+      return (
+        <button
+          key={value}
+          type="button"
+          onClick={() => onRate(value)}
+          className="flex h-[24px] w-[24px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-transparent p-0"
+          aria-label={`${labelPrefix} ${value} out of 5`}
+        >
+          <StarIcon
+            filled={isFilled}
+            className={`h-[16px] w-[16px] ${
+              isFilled ? "text-[var(--color-text-magenta)]" : "text-[var(--color-text-secondary)]"
+            }`}
+          />
+        </button>
+      );
+    })}
+  </div>
+);
+
+const ReviewCard = ({ item, rating, onRate }) => (
   <div className="flex w-[168px] flex-none flex-col overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
-    <div className="h-[140px] w-full overflow-hidden rounded-t-[16px]">
+    <div className="relative h-[140px] w-full overflow-hidden rounded-t-[16px]">
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      <div className="absolute bottom-[var(--space-2)] left-[var(--space-2)] rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[6px] py-[4px] shadow-sm">
+        <StarRating
+          rating={rating}
+          onRate={(value) => onRate(item, value)}
+          labelPrefix="Rating"
+        />
+      </div>
     </div>
     <div className="flex flex-1 flex-col px-[var(--space-2)] pb-[var(--space-2)] pt-[var(--space-1)]">
       <p className="text-title-s line-clamp-2 font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
@@ -654,17 +699,19 @@ const ReviewCard = ({ item, onReview }) => (
       <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
         {item.purchasedAt}
       </p>
-      <button
-        onClick={() => onReview(item)}
-        className="text-body-m mt-[var(--space-2)] inline-flex h-[40px] w-full items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none"
-      >
-        Оставить отзыв
-      </button>
+      <div className="mt-[var(--space-2)] flex h-[40px] items-center">
+        {rating > 0 && (
+          <p className="text-body-s text-[var(--color-text-secondary)]">
+            Спасибо! Оценка: {rating}
+          </p>
+        )}
+      </div>
     </div>
   </div>
 );
 
 const ReviewsSection = ({ items, onReview }) => {
+  const [ratings, setRatings] = useState({});
   if (!items.length) {
     return null;
   }
@@ -683,7 +730,15 @@ const ReviewsSection = ({ items, onReview }) => {
       </HStack>
       <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
         {items.map((item) => (
-          <ReviewCard key={item.id} item={item} onReview={onReview} />
+          <ReviewCard
+            key={item.id}
+            item={item}
+            rating={ratings[item.id] || 0}
+            onRate={(target, value) => {
+              setRatings((prev) => ({ ...prev, [target.id]: value }));
+              onReview(target);
+            }}
+          />
         ))}
       </div>
     </Island>
