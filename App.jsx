@@ -5,6 +5,9 @@ const mockUser = {
   subscribers: 175,
   subscriptions: 4,
   isPremium: true,
+  activeOrdersCount: 2,
+  favoritesCount: 250,
+  waitlistCount: 3,
 };
 
 const iconRegistry = {
@@ -25,6 +28,26 @@ const iconRegistry = {
 };
 
 const Icon = ({ name, alt, className }) => {
+  if (name === "waitlist") {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden={alt ? undefined : true}
+        role={alt ? "img" : "presentation"}
+        className={`text-[var(--color-text-primary)] ${className || ""}`}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="3" y="4" width="18" height="16" rx="4" />
+        <path d="M7 10h6" />
+        <path d="M7 14h10" />
+        <path d="M16.5 9.5l1.5 1.5l-2.8 2.8" />
+      </svg>
+    );
+  }
   const src = iconRegistry[name];
   if (!src) {
     return null;
@@ -34,9 +57,27 @@ const Icon = ({ name, alt, className }) => {
 };
 
 const shortcutItems = [
-  { id: "favorites", title: "Избранное", subtitle: "250 товаров", iconName: "favorites" },
-  { id: "purchases", title: "Покупки", subtitle: "Заказать снова", iconName: "purchases" },
-  { id: "reviews", title: "Ждут отзыва", subtitle: "8 товаров", iconName: "reviews" },
+  {
+    id: "orders",
+    title: "Заказы",
+    subtitle: mockUser.activeOrdersCount
+      ? `Активные: ${mockUser.activeOrdersCount}`
+      : "История и статусы",
+    iconName: "purchases",
+  },
+  {
+    id: "favorites",
+    title: "Избранное",
+    subtitle: `${mockUser.favoritesCount} товаров`,
+    iconName: "favorites",
+  },
+  {
+    id: "waitlist",
+    title: "Лист ожидания",
+    subtitle: `Ждут: ${mockUser.waitlistCount}`,
+    iconName: "waitlist",
+    badgeCount: mockUser.waitlistCount,
+  },
 ];
 
 const orderItems = [
@@ -227,6 +268,51 @@ const recommendedItems = [
   },
 ];
 
+const reviewPendingItems = [
+  {
+    id: "review-1",
+    title: viewedItems[1].title,
+    image: viewedItems[1].image,
+    purchasedAt: "Куплено недавно",
+    deepLink: "/reviews/1",
+  },
+  {
+    id: "review-2",
+    title: viewedItems[3].title,
+    image: viewedItems[3].image,
+    purchasedAt: "20 сен • заказ №4821",
+    deepLink: "/reviews/2",
+  },
+  {
+    id: "review-3",
+    title: recommendedItems[0].title,
+    image: recommendedItems[0].image,
+    purchasedAt: "Куплено недавно",
+    deepLink: "/reviews/3",
+  },
+  {
+    id: "review-4",
+    title: recommendedItems[2].title,
+    image: recommendedItems[2].image,
+    purchasedAt: "19 сен • заказ №4759",
+    deepLink: "/reviews/4",
+  },
+  {
+    id: "review-5",
+    title: viewedItems[6].title,
+    image: viewedItems[6].image,
+    purchasedAt: "18 сен • заказ №4702",
+    deepLink: "/reviews/5",
+  },
+  {
+    id: "review-6",
+    title: recommendedItems[4].title,
+    image: recommendedItems[4].image,
+    purchasedAt: "Куплено недавно",
+    deepLink: "/reviews/6",
+  },
+];
+
 const bottomTabs = [
   {
     id: "home",
@@ -348,8 +434,17 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
   </button>
 );
 
-const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]">
+const ShortcutCard = ({ title, subtitle, iconName, badgeCount, onClick }) => (
+  <MutedPill
+    className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]"
+    onClick={onClick}
+    role={onClick ? "button" : undefined}
+  >
+    {badgeCount > 0 && (
+      <span className="absolute right-[6px] top-[6px] inline-flex h-[20px] min-w-[20px] items-center justify-center rounded-[999px] bg-[var(--color-cell-button-bg)] px-[6px] text-body-s font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)]">
+        {badgeCount}
+      </span>
+    )}
     <div className="absolute left-[var(--space-2)] top-[var(--space-2)] text-left">
       <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
         <Icon name={iconName} alt={title} className="h-full w-full" />
@@ -547,6 +642,54 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
+const ReviewCard = ({ item, onReview }) => (
+  <div className="flex w-[168px] flex-none flex-col overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
+    <div className="h-[140px] w-full overflow-hidden rounded-t-[16px]">
+      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+    </div>
+    <div className="flex flex-1 flex-col px-[var(--space-2)] pb-[var(--space-2)] pt-[var(--space-1)]">
+      <p className="text-title-s line-clamp-2 font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+        {item.title}
+      </p>
+      <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+        {item.purchasedAt}
+      </p>
+      <button
+        onClick={() => onReview(item)}
+        className="text-body-m mt-[var(--space-2)] inline-flex h-[40px] w-full items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none"
+      >
+        Оставить отзыв
+      </button>
+    </div>
+  </div>
+);
+
+const ReviewsSection = ({ items, onReview }) => {
+  if (!items.length) {
+    return null;
+  }
+
+  return (
+    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+      <HStack className="justify-between">
+        <HStack className="gap-[6px]">
+          <p className="text-title-l text-[var(--color-text-primary)]">
+            Ждут отзыва
+          </p>
+          <span className="text-body-s text-[var(--color-text-secondary)]">
+            {items.length}
+          </span>
+        </HStack>
+      </HStack>
+      <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+        {items.map((item) => (
+          <ReviewCard key={item.id} item={item} onReview={onReview} />
+        ))}
+      </div>
+    </Island>
+  );
+};
+
 const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
     <div className="relative h-[260px] w-[195px] overflow-hidden rounded-t-[16px]">
@@ -707,7 +850,14 @@ const App = ({ debug }) => {
             <Island className="flex h-[var(--size-shortcuts-h)] w-[390px] items-center justify-center rounded-[var(--radius-24)]">
               <div className="flex gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
-                  <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
+                  <ShortcutCard
+                    key={item.id}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    iconName={item.iconName}
+                    badgeCount={item.badgeCount}
+                    onClick={() => console.log("Open shortcut", item.id)}
+                  />
                 ))}
               </div>
             </Island>
@@ -727,6 +877,13 @@ const App = ({ debug }) => {
               </div>
             </div>
           </Section>
+          <div className="h-[var(--space-1)]" />
+          <div className="w-[390px] box-border">
+            <ReviewsSection
+              items={reviewPendingItems}
+              onReview={(item) => console.log("Leave review", item.id)}
+            />
+          </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
             <MorkovskEntryPoint debugStyle={debugStyle} />
