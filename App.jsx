@@ -483,6 +483,48 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
+const ChevronRightIcon = ({ className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
+
+const SeeAllCard = ({ title, subtitle, icon, className, onClick, media, layout = "column" }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`flex flex-none rounded-[16px] text-left ${layout === "row" ? "items-center" : "flex-col"} ${className || ""}`}
+  >
+    {media}
+    <div
+      className={`flex w-full ${layout === "row" ? "items-center justify-between" : "flex-1 flex-col"} px-[var(--space-2)]`}
+    >
+      <div className={`flex min-w-0 ${layout === "row" ? "flex-1 flex-col" : "flex-col"}`}>
+        <p className="text-title-s text-[var(--color-text-primary)]">
+          {title}
+        </p>
+        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+          {subtitle}
+        </p>
+      </div>
+      {icon && (
+        <span className="ml-[var(--space-2)] text-[var(--color-text-secondary)]">
+          {icon}
+        </span>
+      )}
+    </div>
+  </button>
+);
+
 const MorkovskEntryPoint = ({ debugStyle }) => (
   <Island
     className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
@@ -704,7 +746,7 @@ const ReviewCard = ({ item, rating, onRate }) => (
   </div>
 );
 
-const ReviewsSection = ({ items, onReview }) => {
+const ReviewsSection = ({ items, onReview, onOpenAllReviews }) => {
   const [ratings, setRatings] = useState({});
   if (!items.length) {
     return null;
@@ -734,6 +776,17 @@ const ReviewsSection = ({ items, onReview }) => {
             }}
           />
         ))}
+        <SeeAllCard
+          title="Все отзывы"
+          subtitle="Оценки и комментарии"
+          onClick={onOpenAllReviews}
+          className="w-[168px] bg-[var(--color-surface-muted)]"
+          media={
+            <div className="flex h-[156px] w-full items-center justify-center rounded-t-[16px] bg-[var(--color-surface-muted)]">
+              <StarIcon className="h-[24px] w-[24px] text-[var(--color-text-secondary)]" filled={false} />
+            </div>
+          }
+        />
       </div>
     </Island>
   );
@@ -852,6 +905,14 @@ const App = ({ debug }) => {
     console.log("Toggle favorite", id);
   };
 
+  const onOpenAllOrders = () => {
+    console.log("Open all orders", "/orders");
+  };
+
+  const onOpenAllReviews = () => {
+    console.log("Open all reviews", "/reviews");
+  };
+
   return (
     <div className="flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
@@ -924,6 +985,14 @@ const App = ({ debug }) => {
                 {orderItems.map((order) => (
                   <OrderTrackingCard key={order.id} order={order} />
                 ))}
+                <SeeAllCard
+                  title="Все заказы"
+                  subtitle="История и статусы"
+                  onClick={onOpenAllOrders}
+                  className="h-[80px] w-[264px] bg-[var(--color-surface-muted)]"
+                  layout="row"
+                  icon={<ChevronRightIcon className="h-[16px] w-[16px]" />}
+                />
               </div>
             </div>
           </Section>
@@ -932,6 +1001,7 @@ const App = ({ debug }) => {
             <ReviewsSection
               items={reviewPendingItems}
               onReview={(item) => console.log("Leave review", item.id)}
+              onOpenAllReviews={onOpenAllReviews}
             />
           </div>
           <div className="h-[var(--space-1)]" />
