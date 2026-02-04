@@ -58,11 +58,6 @@ const orderItems = [
   },
 ];
 
-const financeCells = [
-  { id: "card", title: "Ozon Карта", value: "3 845,41 ₽" },
-  { id: "install", title: "Рассрочка", value: "до 300 000 ₽" },
-];
-
 const viewedItems = [
   {
     id: "viewed-1",
@@ -430,55 +425,98 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 
 const FinanceSection = ({ debugStyle }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
-    <HStack className="justify-between">
-      <p className="text-title-l text-[var(--color-text-primary)]">
-        Финансы
-      </p>
-      <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px] pr-[6px]">
-        <span className="text-body-m min-w-0 truncate text-[var(--color-text-link)]">Баллы и бонусы</span>
-        <img
-          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
-          alt=""
-          className="ml-auto h-[20px] w-[30px] object-contain"
-        />
+    <div className="grid grid-cols-2 gap-[12px]">
+      <div className="grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[12px]">
+        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+            Оплата
+          </p>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+            alt=""
+            className="h-[16px] w-[16px] object-contain"
+          />
+        </div>
+        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
+          <p className="text-body-s text-[var(--color-text-secondary)]">Ozon карта</p>
+          <p className="text-title-l whitespace-nowrap text-[var(--color-text-primary)]">
+            2 450 ₽
+          </p>
+        </div>
+        <div className="grid gap-[8px]">
+          <p className="text-body-s text-[var(--color-text-secondary)]">Рассрочка</p>
+          <p className="text-body-m truncate text-[var(--color-text-primary)]">
+            Платёж: 15 марта · 1 240 ₽
+          </p>
+          <p className="text-body-s text-[var(--color-text-secondary)]">
+            Лимит: 148 760 ₽
+          </p>
+        </div>
       </div>
-    </HStack>
-    <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
-      <VStack className="gap-[var(--space-2)]">
-        {financeCells.map((cell) => (
-          <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <div className="flex items-center gap-[2px]">
-              <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-                {cell.title}
-              </p>
+      <div className="grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[12px]">
+        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+            Баллы и бонусы
+          </p>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+            alt=""
+            className="h-[16px] w-[16px] object-contain"
+          />
+        </div>
+        <div className="grid gap-[10px]">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
+            <div className="grid min-w-0 grid-cols-[auto_1fr] items-center gap-[6px]">
               <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
                 alt=""
-                className="h-[16px] w-[16px] object-contain"
+                className="h-[16px] w-[20px] object-contain"
               />
+              <p className="text-body-s text-[var(--color-text-secondary)]">Баллы Ozon</p>
             </div>
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              {cell.value}
-            </p>
-          </MutedPill>
-        ))}
-      </VStack>
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <div className="flex w-full">
-          <div className="min-w-0 flex-1">
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              Ozon Premium
-            </p>
-            <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
-              Получить больше привилегий
+            <p className="text-title-l whitespace-nowrap text-[var(--color-text-primary)]">
+              3 240
             </p>
           </div>
-          <div className="h-[79px] w-[79px] flex-none self-end">
-            <img
-              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
-              alt=""
-              className="h-full w-full object-contain"
-            />
+          <div className="flex flex-wrap gap-[8px]">
+            {[
+              { label: "⭐", value: "128" },
+              { label: "✈️", value: "2 100" },
+              { label: "🎁", value: "5" },
+            ].map((chip) => (
+              <span
+                key={chip.label}
+                className="text-body-s inline-flex items-center gap-[6px] rounded-[var(--radius-8)] bg-[var(--color-cell-button-bg)] px-[8px] py-[6px] text-[var(--color-text-secondary)]"
+              >
+                <span>{chip.label}</span>
+                <span className="font-[var(--font-weight-medium)]">{chip.value}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="col-span-2 grid gap-[12px] rounded-[var(--radius-16)] bg-[var(--color-surface-muted)] p-[12px]">
+        <div className="grid grid-cols-[1fr_auto] items-center gap-[8px]">
+          <p className="text-body-m font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+            Сертификаты и коды
+          </p>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+            alt=""
+            className="h-[16px] w-[16px] object-contain"
+          />
+        </div>
+        <div className="grid grid-cols-[auto_1fr] items-center gap-[12px]">
+          <MutedPill className="inline-flex items-center justify-center rounded-[var(--radius-8)] px-[10px] py-[4px] text-body-s text-[var(--color-text-secondary)]">
+            Активировать
+          </MutedPill>
+          <div className="grid justify-items-end text-right">
+            <p className="text-body-m text-[var(--color-text-secondary)]">
+              Баланс средств{" "}
+              <span className="font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+                3 845,41 ₽
+              </span>
+            </p>
           </div>
         </div>
       </div>
