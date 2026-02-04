@@ -273,42 +273,48 @@ const reviewPendingItems = [
     id: "review-1",
     title: viewedItems[1].title,
     image: viewedItems[1].image,
-    purchasedAt: "Куплено недавно",
+    orderDateLabel: "20 сен",
+    fulfillmentStatus: "выкуплен",
     deepLink: "/reviews/1",
   },
   {
     id: "review-2",
     title: viewedItems[3].title,
     image: viewedItems[3].image,
-    purchasedAt: "20 сен • заказ №4821",
+    orderDateLabel: "20 сен",
+    fulfillmentStatus: "возвращён",
     deepLink: "/reviews/2",
   },
   {
     id: "review-3",
     title: recommendedItems[0].title,
     image: recommendedItems[0].image,
-    purchasedAt: "Куплено недавно",
+    orderDateLabel: "19 сен",
+    fulfillmentStatus: "выкуплен",
     deepLink: "/reviews/3",
   },
   {
     id: "review-4",
     title: recommendedItems[2].title,
     image: recommendedItems[2].image,
-    purchasedAt: "19 сен • заказ №4759",
+    orderDateLabel: "19 сен",
+    fulfillmentStatus: "выкуплен",
     deepLink: "/reviews/4",
   },
   {
     id: "review-5",
     title: viewedItems[6].title,
     image: viewedItems[6].image,
-    purchasedAt: "18 сен • заказ №4702",
+    orderDateLabel: "18 сен",
+    fulfillmentStatus: "возвращён",
     deepLink: "/reviews/5",
   },
   {
     id: "review-6",
     title: recommendedItems[4].title,
     image: recommendedItems[4].image,
-    purchasedAt: "Куплено недавно",
+    orderDateLabel: "18 сен",
+    fulfillmentStatus: "выкуплен",
     deepLink: "/reviews/6",
   },
 ];
@@ -682,9 +688,14 @@ const StarRating = ({ rating, onRate, labelPrefix }) => (
 
 const ReviewCard = ({ item, rating, onRate }) => (
   <div className="flex w-[168px] flex-none flex-col overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
-    <div className="relative h-[140px] w-full overflow-hidden rounded-t-[16px]">
+    <div className="relative h-[156px] w-full overflow-hidden rounded-t-[16px]">
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-      <div className="absolute bottom-[var(--space-2)] left-[var(--space-2)] rounded-[var(--radius-8)] bg-[var(--color-surface)] px-[6px] py-[4px] shadow-sm">
+      <div
+        className="absolute bottom-[var(--space-2)] left-[var(--space-2)] rounded-[var(--radius-8)] px-[6px] py-[4px] shadow-sm"
+        style={{
+          backgroundColor: "color-mix(in srgb, var(--color-surface) 70%, transparent)",
+        }}
+      >
         <StarRating
           rating={rating}
           onRate={(value) => onRate(item, value)}
@@ -692,20 +703,13 @@ const ReviewCard = ({ item, rating, onRate }) => (
         />
       </div>
     </div>
-    <div className="flex flex-1 flex-col px-[var(--space-2)] pb-[var(--space-2)] pt-[var(--space-1)]">
+    <div className="flex flex-1 flex-col px-[var(--space-2)] pb-[var(--space-1)] pt-[var(--space-1)]">
       <p className="text-title-s line-clamp-2 font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
         {item.title}
       </p>
       <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
-        {item.purchasedAt}
+        {item.orderDateLabel} • {item.fulfillmentStatus || "выкуплен"}
       </p>
-      <div className="mt-[var(--space-2)] flex h-[40px] items-center">
-        {rating > 0 && (
-          <p className="text-body-s text-[var(--color-text-secondary)]">
-            Спасибо! Оценка: {rating}
-          </p>
-        )}
-      </div>
     </div>
   </div>
 );
