@@ -475,14 +475,14 @@ const FinanceSection = ({ debugStyle }) => {
     <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
       <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
         <HStack className="justify-between">
-          <p className="text-title-m text-[var(--color-text-secondary)] font-[var(--font-weight-medium)]">Финансы</p>
+          <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
           <button
             onClick={() => console.log("finance promo clicked", currentPromo.text)}
-            className="inline-flex h-[24px] w-[182px] items-center gap-[2px] rounded-full border-0 px-[var(--space-2)] text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-primary)]"
+            className="inline-flex h-[24px] w-[175px] items-center justify-start overflow-hidden rounded-full border-0 pl-[var(--space-2)] pr-[var(--space-2)] text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]"
             style={{ backgroundColor: currentPromo.bg }}
             aria-label={currentPromo.text}
           >
-            <span className="min-w-0 flex-1 overflow-hidden">
+            <span className="min-w-0 flex-1 truncate whitespace-nowrap">
               <span
                 className="block truncate whitespace-nowrap"
                 style={{
@@ -497,7 +497,7 @@ const FinanceSection = ({ debugStyle }) => {
             <img
               src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
               alt=""
-              className="h-[14px] w-[14px] object-contain"
+              className="ml-[2px] h-[14px] w-[14px] shrink-0 object-contain"
             />
           </button>
         </HStack>
