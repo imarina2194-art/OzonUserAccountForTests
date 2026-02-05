@@ -423,10 +423,84 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
   </Island>
 );
 
-const FinanceSection = ({ debugStyle }) => (
-  <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
-    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
+const financePromoOffers = [
+  { text: "Товары за 1 рубль", bg: "rgba(214, 236, 255, 0.45)" },
+  { text: "Новые категории кэшбека", bg: "rgba(214, 250, 232, 0.4)" },
+  { text: "Копите со ставкой 18%", bg: "rgba(231, 224, 255, 0.4)" },
+  { text: "Кредит до 3 млн ₽", bg: "rgba(255, 225, 210, 0.4)" },
+  { text: "Выгоды с Ozon Premium", bg: "rgba(255, 236, 214, 0.4)" },
+];
+
+const FinanceSection = ({ debugStyle }) => {
+  const [promoIndex, setPromoIndex] = useState(0);
+  const [promoVisible, setPromoVisible] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    syncMotionPreference();
+    mediaQuery.addEventListener("change", syncMotionPreference);
+
+    return () => mediaQuery.removeEventListener("change", syncMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setPromoIndex(0);
+      setPromoVisible(true);
+      return;
+    }
+
+    let switchTimeout;
+    const rotationInterval = setInterval(() => {
+      setPromoVisible(false);
+      switchTimeout = window.setTimeout(() => {
+        setPromoIndex((prev) => (prev + 1) % financePromoOffers.length);
+        setPromoVisible(true);
+      }, 220);
+    }, 3600);
+
+    return () => {
+      clearInterval(rotationInterval);
+      if (switchTimeout) {
+        window.clearTimeout(switchTimeout);
+      }
+    };
+  }, [prefersReducedMotion]);
+
+  const currentPromo = financePromoOffers[promoIndex];
+
+  return (
+    <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
+      <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+        <HStack className="justify-between">
+          <p className="text-title-m text-[var(--color-text-secondary)] font-[var(--font-weight-medium)]">Финансы</p>
+          <button
+            onClick={() => console.log("finance promo clicked", currentPromo.text)}
+            className="inline-flex h-[24px] w-[182px] items-center gap-[2px] rounded-full border-0 px-[var(--space-2)] text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-primary)]"
+            style={{ backgroundColor: currentPromo.bg }}
+            aria-label={currentPromo.text}
+          >
+            <span className="min-w-0 flex-1 overflow-hidden">
+              <span
+                className="block truncate whitespace-nowrap"
+                style={{
+                  opacity: promoVisible ? 1 : 0,
+                  transform: promoVisible ? "translateY(0)" : "translateY(4px)",
+                  transition: prefersReducedMotion ? "none" : "opacity 220ms ease, transform 220ms ease",
+                }}
+              >
+                {currentPromo.text}
+              </span>
+            </span>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[14px] w-[14px] object-contain"
+            />
+          </button>
+        </HStack>
       <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-2)] items-stretch">
         <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
@@ -553,8 +627,9 @@ const FinanceSection = ({ debugStyle }) => (
         </div>
       </div>
     </Island>
-  </div>
-);
+    </div>
+  );
+};
 
 const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="flex w-[101px] flex-none flex-col">
