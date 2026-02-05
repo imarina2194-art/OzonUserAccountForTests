@@ -466,17 +466,7 @@ const FinanceSection = ({ debugStyle }) => (
     </Island>
 
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <HStack className="justify-between">
-        <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
-        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-          <span>Активировать</span>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-            alt=""
-            className="h-[14px] w-[14px] object-contain"
-          />
-        </MutedPill>
-      </HStack>
+      <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
       <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
         <div
           className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
