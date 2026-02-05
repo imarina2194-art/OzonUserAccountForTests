@@ -424,16 +424,11 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 );
 
 const FinanceSection = ({ debugStyle }) => (
-  <div className="flex flex-col gap-[var(--space-2)]" style={debugStyle}>
+  <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <HStack className="justify-between">
-        <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
-        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-          Ещё
-        </MutedPill>
-      </HStack>
+      <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
       <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-2)] items-stretch">
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-4)] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-title-s text-[var(--color-text-secondary)]">
               Ozon карта
@@ -449,7 +444,7 @@ const FinanceSection = ({ debugStyle }) => (
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-4)] min-w-0 h-full">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
             <p className="text-title-s text-[var(--color-text-secondary)]">
               Рассрочка
@@ -460,7 +455,7 @@ const FinanceSection = ({ debugStyle }) => (
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] min-w-0 truncate">
             15 марта · 1 240 ₽
           </p>
           <p className="mt-[var(--space-2)] text-body-s text-[var(--color-text-secondary)]">
@@ -473,16 +468,21 @@ const FinanceSection = ({ debugStyle }) => (
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
       <HStack className="justify-between">
         <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
-        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
-          Активировать
+        <MutedPill className="text-body-s inline-flex h-[24px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] px-[10px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+          <span>Активировать</span>
+          <img
+            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+            alt=""
+            className="h-[14px] w-[14px] object-contain"
+          />
         </MutedPill>
       </HStack>
       <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
         >
-          <p className="text-title-s text-[var(--color-text-secondary)]">
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Сертификаты
           </p>
           <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
@@ -490,10 +490,10 @@ const FinanceSection = ({ debugStyle }) => (
           </p>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
-          <p className="text-title-s text-[var(--color-text-secondary)]">
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Баллы
           </p>
           <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
@@ -508,10 +508,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
         >
-          <p className="text-title-s text-[var(--color-text-secondary)]">
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Звёзды
           </p>
           <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
@@ -526,10 +526,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
         >
-          <p className="text-title-s text-[var(--color-text-secondary)]">
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Мили
           </p>
           <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
@@ -544,10 +544,10 @@ const FinanceSection = ({ debugStyle }) => (
           </div>
         </div>
         <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-4)] flex flex-col"
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
         >
-          <p className="text-title-s text-[var(--color-text-secondary)]">
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Бонусы продавцов
           </p>
           <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
