@@ -426,7 +426,7 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
 const FinanceSection = ({ debugStyle }) => (
   <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <p className="text-title-m text-[var(--color-text-secondary)] font-[var(--font-weight-medium)]">Финансы</p>
+      <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
       <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-2)] items-stretch">
         <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
           <div className="flex items-center gap-[2px]">
@@ -466,7 +466,7 @@ const FinanceSection = ({ debugStyle }) => (
     </Island>
 
     <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <p className="text-title-m text-[var(--color-text-secondary)] font-[var(--font-weight-medium)]">Бонусы и сертификаты</p>
+      <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
       <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
         <div
           className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
