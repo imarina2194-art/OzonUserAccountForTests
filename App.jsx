@@ -135,7 +135,7 @@ const reminderItems = [
   },
   {
     title: "Сухой диетический корм Farmina Vet Life Renal для собак при почечной недостаточности , 12 кг",
-    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc1000/7570746093.jpg",
+    image: "https://ir.ozone.ru/s3/multimedia-q/wc1000/6797641346.jpg",
     price: 11786,
     oldPrice: 17025,
     discount: 30,
