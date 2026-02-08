@@ -529,11 +529,8 @@ const FinanceSection = ({ debugStyle }) => {
               className="h-[14px] w-[14px] object-contain"
             />
           </div>
-          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-cell-button-text)] min-w-0 truncate">
-            15 марта · 1 240 ₽
-          </p>
-          <p className="mt-[var(--space-2)] text-body-s text-[var(--color-text-secondary)]">
-            Лимит: 148 760 ₽
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+            до 300 000 ₽
           </p>
         </div>
       </div>
