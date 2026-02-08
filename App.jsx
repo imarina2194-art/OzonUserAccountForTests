@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const mockUser = {
   name: "Марина И.",
@@ -516,9 +516,32 @@ const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
 const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
   const reminderIconBtn =
     "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none text-body-s text-[var(--color-text-secondary)]";
+  const priceRowRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(280);
+
+  useLayoutEffect(() => {
+    const priceRow = priceRowRef.current;
+    if (!priceRow) {
+      return;
+    }
+    const scrollWidth = priceRow.scrollWidth;
+    const clientWidth = priceRow.clientWidth;
+    if (scrollWidth > clientWidth) {
+      const safetyPadding = 12;
+      const nextWidth = Math.min(360, 280 + (scrollWidth - clientWidth) + safetyPadding);
+      if (nextWidth !== cardWidth) {
+        setCardWidth(nextWidth);
+      }
+    } else if (cardWidth !== 280) {
+      setCardWidth(280);
+    }
+  }, [cardWidth, item.discount, item.oldPrice, item.price, item.title]);
 
   return (
-    <Island className="relative grid min-w-[280px] w-max flex-none grid-cols-[auto_1fr_auto] items-center gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
+    <Island
+      className="relative grid w-[280px] min-w-[280px] flex-none grid-cols-[auto_1fr_auto] items-center gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]"
+      style={{ width: `${cardWidth}px`, minWidth: `${cardWidth}px` }}
+    >
       <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
         <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       </div>
@@ -526,7 +549,10 @@ const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
         <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
           {item.title}
         </p>
-        <div className="flex items-center gap-[var(--space-1)] whitespace-nowrap">
+        <div
+          ref={priceRowRef}
+          className="flex items-baseline gap-[var(--space-1)] whitespace-nowrap overflow-hidden"
+        >
           <span className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
             {formatPrice(item.price)}
           </span>
