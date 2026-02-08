@@ -514,8 +514,10 @@ const FinanceSection = ({ debugStyle }) => (
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
 
 const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
-  const reminderIconBtn =
-    "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none text-body-s text-[var(--color-text-secondary)]";
+  const reminderIconBtnPrimary =
+    "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-cell-button-bg)] p-0 shadow-none text-[var(--color-cell-button-text)]";
+  const reminderIconBtnSecondary =
+    "relative flex h-[32px] w-[32px] items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none text-[var(--color-text-secondary)]";
   const priceRowRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(280);
 
@@ -561,9 +563,9 @@ const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
               <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
                 {formatPrice(item.oldPrice)}
               </span>
-              <MutedPill className="inline-flex h-[18px] items-center justify-center rounded-[999px] px-[6px] text-[11px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+              <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
                 −{item.discount}%
-              </MutedPill>
+              </span>
             </>
           )}
         </div>
@@ -571,14 +573,14 @@ const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
       <div className="flex flex-col items-end gap-[var(--space-1)]">
         <button
           onClick={() => onDismiss(item.title)}
-          className={reminderIconBtn}
+          className={reminderIconBtnSecondary}
           aria-label="Dismiss reminder"
         >
           ✕
         </button>
         <button
           onClick={() => onAdd(item.title)}
-          className={reminderIconBtn}
+          className={reminderIconBtnPrimary}
           aria-label="Add reminder item to cart"
         >
           <Icon name="cart" alt="" className="h-[18px] w-[18px]" />
