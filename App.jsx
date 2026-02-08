@@ -514,17 +514,15 @@ const FinanceSection = ({ debugStyle }) => (
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
 
 const ReminderCard = ({ item, count, onAdd, onDismiss }) => (
-  <Island className="flex w-[300px] flex-none flex-col gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
-    <HStack className="justify-end">
-      <button
-        onClick={() => onDismiss(item.title)}
-        className="flex h-[28px] w-[28px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
-        aria-label="Dismiss reminder"
-      >
-        ✕
-      </button>
-    </HStack>
-    <HStack className="items-start gap-[var(--space-2)]">
+  <Island className="relative flex w-[268px] flex-none flex-col gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
+    <button
+      onClick={() => onDismiss(item.title)}
+      className="absolute right-[var(--space-2)] top-[var(--space-2)] flex h-[28px] w-[28px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
+      aria-label="Dismiss reminder"
+    >
+      ✕
+    </button>
+    <HStack className="items-start gap-[var(--space-2)] pr-[44px]">
       <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
         <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       </div>
