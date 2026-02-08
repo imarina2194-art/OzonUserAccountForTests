@@ -513,24 +513,20 @@ const FinanceSection = ({ debugStyle }) => (
 
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
 
-const ReminderCard = ({ item, count, onAdd, onDismiss }) => (
-  <Island className="relative flex w-[268px] flex-none flex-col gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
-    <button
-      onClick={() => onDismiss(item.title)}
-      className="absolute right-[var(--space-2)] top-[var(--space-2)] flex h-[28px] w-[28px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
-      aria-label="Dismiss reminder"
-    >
-      ✕
-    </button>
-    <HStack className="items-start gap-[var(--space-2)] pr-[44px]">
+const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
+  const reminderIconBtn =
+    "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none text-body-s text-[var(--color-text-secondary)]";
+
+  return (
+    <Island className="relative grid min-w-[280px] w-max flex-none grid-cols-[auto_1fr_auto] items-center gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
       <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
         <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-1)]">
+      <div className="flex min-w-0 flex-col gap-[var(--space-1)]">
         <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
           {item.title}
         </p>
-        <div className="flex flex-wrap items-center gap-[var(--space-1)]">
+        <div className="flex items-center gap-[var(--space-1)] whitespace-nowrap">
           <span className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
             {formatPrice(item.price)}
           </span>
@@ -546,21 +542,30 @@ const ReminderCard = ({ item, count, onAdd, onDismiss }) => (
           )}
         </div>
       </div>
-      <button
-        onClick={() => onAdd(item.title)}
-        className="relative flex h-[40px] w-[40px] flex-none items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none"
-        aria-label="Add reminder item to cart"
-      >
-        <Icon name="cart" alt="" className="h-[18px] w-[18px]" />
-        {count > 0 && (
-          <span className="absolute -right-[4px] -top-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-text-primary)] px-[4px] text-[11px] font-[var(--font-weight-semibold)] text-[var(--color-surface)]">
-            {count}
-          </span>
-        )}
-      </button>
-    </HStack>
-  </Island>
-);
+      <div className="flex flex-col items-end gap-[var(--space-1)]">
+        <button
+          onClick={() => onDismiss(item.title)}
+          className={reminderIconBtn}
+          aria-label="Dismiss reminder"
+        >
+          ✕
+        </button>
+        <button
+          onClick={() => onAdd(item.title)}
+          className={reminderIconBtn}
+          aria-label="Add reminder item to cart"
+        >
+          <Icon name="cart" alt="" className="h-[18px] w-[18px]" />
+          {count > 0 && (
+            <span className="absolute -right-[4px] -top-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-text-primary)] px-[4px] text-[11px] font-[var(--font-weight-semibold)] text-[var(--color-surface)]">
+              {count}
+            </span>
+          )}
+        </button>
+      </div>
+    </Island>
+  );
+};
 
 const ReplenishRemindersSection = ({ items, cartCounts, onAdd, onDismiss }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
