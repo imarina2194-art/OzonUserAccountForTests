@@ -127,34 +127,25 @@ const viewedItems = [
 
 const reminderItems = [
   {
-    id: "reminder-1",
-    title: "Ozon Fresh Молоко 3.2% — 2 л",
-    image: "https://ir.ozone.ru/s3/multimedia-1-g/wc250/7155520432.jpg",
-    isRecurrentLikely: true,
+    title: "Омега 3 1000 мг, 60 капсул / NFO Норвегия / Рыбий жир высокой очистки",
+    image: "https://ir.ozone.ru/s3/multimedia-1-7/wc1000/8227794211.jpg",
+    price: 3220,
+    oldPrice: null,
+    discount: null,
   },
   {
-    id: "reminder-2",
-    title: "Корм для кошек сухой, 1.5 кг",
-    image: "https://ir.ozone.ru/s3/multimedia-1-b/wc250/7815322019.jpg",
-    isRecurrentLikely: true,
+    title: "Сухой диетический корм Farmina Vet Life Renal для собак при почечной недостаточности , 12 кг",
+    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc1000/7570746093.jpg",
+    price: 11786,
+    oldPrice: 17025,
+    discount: 30,
   },
   {
-    id: "reminder-3",
-    title: "Витамин D3, 90 капсул",
-    image: "https://ir.ozone.ru/s3/multimedia-1-c/wc250/7115249424.jpg",
-    isRecurrentLikely: true,
-  },
-  {
-    id: "reminder-4",
-    title: "Средство для мытья посуды, 900 мл",
-    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
-    isRecurrentLikely: true,
-  },
-  {
-    id: "reminder-5",
-    title: "Премиальные наушники, лимитированная серия",
-    image: "https://ir.ozone.ru/s3/multimedia-1-0/wc250/7715502576.jpg",
-    isRecurrentLikely: false,
+    title: "Гель для мытья посуды KIX, концентрированный с дозатором, 1 л, Лимон",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc1000/8500870737.jpg",
+    price: 224,
+    oldPrice: 319,
+    discount: 29,
   },
 ];
 
@@ -520,10 +511,12 @@ const FinanceSection = ({ debugStyle }) => (
   </Island>
 );
 
-const ReminderCard = ({ item, onAdd, onDismiss }) => (
+const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
+
+const ReminderCard = ({ item, count, onAdd, onDismiss }) => (
   <div className="relative flex w-[140px] flex-none flex-col gap-[var(--space-1)]">
     <button
-      onClick={() => onDismiss(item.id)}
+      onClick={() => onDismiss(item.title)}
       className="absolute right-0 top-0 flex h-[24px] w-[24px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
       aria-label="Dismiss reminder"
     >
@@ -532,29 +525,53 @@ const ReminderCard = ({ item, onAdd, onDismiss }) => (
     <div className="relative h-[140px] w-[140px] overflow-hidden rounded-[14px] bg-[var(--color-surface-muted)]">
       <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       <button
-        onClick={() => onAdd(item.id)}
+        onClick={() => onAdd(item.title)}
         className="absolute bottom-[8px] right-[8px] flex h-[28px] w-[28px] items-center justify-center rounded-full border-0 bg-[var(--color-surface)] p-0 shadow-none"
         aria-label="Add reminder item to cart"
       >
         <Icon name="cart" alt="" className="h-[16px] w-[16px]" />
+        {count > 0 && (
+          <span className="absolute -right-[4px] -top-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-text-primary)] px-[4px] text-[11px] font-[var(--font-weight-semibold)] text-[var(--color-surface)]">
+            {count}
+          </span>
+        )}
       </button>
     </div>
+    <p className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+      {formatPrice(item.price)}
+    </p>
+    {item.oldPrice && item.discount && (
+      <div className="flex items-center gap-[var(--space-1)]">
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
+          {formatPrice(item.oldPrice)}
+        </span>
+        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
+          −{item.discount}%
+        </span>
+      </div>
+    )}
     <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
       {item.title}
     </p>
   </div>
 );
 
-const ReplenishRemindersSection = ({ items, onAdd, onDismiss }) => (
+const ReplenishRemindersSection = ({ items, cartCounts, onAdd, onDismiss }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
     <HStack className="justify-between">
       <p className="text-title-l text-[var(--color-text-primary)]">
-        Скоро закончатся — пора купить снова
+        Скоро закончатся — пора купить
       </p>
     </HStack>
     <div className="mt-[var(--space-3)] flex gap-[var(--space-2)] overflow-x-auto">
       {items.map((item) => (
-        <ReminderCard key={item.id} item={item} onAdd={onAdd} onDismiss={onDismiss} />
+        <ReminderCard
+          key={item.title}
+          item={item}
+          count={cartCounts[item.title] || 0}
+          onAdd={onAdd}
+          onDismiss={onDismiss}
+        />
       ))}
     </div>
   </Island>
@@ -719,7 +736,8 @@ const HomeIndicator = () => (
 
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
-  const [dismissedIds, setDismissedIds] = useState(() => new Set());
+  const [dismissedTitles, setDismissedTitles] = useState(() => new Set());
+  const [cartCounts, setCartCounts] = useState({});
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleFavorite = (id) => {
@@ -735,10 +753,7 @@ const App = ({ debug }) => {
     console.log("Toggle favorite", id);
   };
 
-  const reminderList = reminderItems
-    .filter((item) => item.isRecurrentLikely)
-    .filter((item) => !dismissedIds.has(item.id))
-    .slice(0, 4);
+  const reminderList = reminderItems.filter((item) => !dismissedTitles.has(item.title)).slice(0, 4);
   const showReminders = reminderList.length > 0;
 
   return (
@@ -822,14 +837,21 @@ const App = ({ debug }) => {
               <div className="w-[390px] box-border">
                 <ReplenishRemindersSection
                   items={reminderList}
-                  onAdd={(id) => console.log("reminder_add_to_cart", id)}
-                  onDismiss={(id) => {
-                    setDismissedIds((prev) => {
-                      const next = new Set(prev);
-                      next.add(id);
+                  cartCounts={cartCounts}
+                  onAdd={(title) => {
+                    setCartCounts((prev) => {
+                      const next = { ...prev, [title]: (prev[title] || 0) + 1 };
+                      console.log("reminder_add_to_cart", { title, count: next[title] });
                       return next;
                     });
-                    console.log("reminder_dismiss", id);
+                  }}
+                  onDismiss={(title) => {
+                    setDismissedTitles((prev) => {
+                      const next = new Set(prev);
+                      next.add(title);
+                      return next;
+                    });
+                    console.log("reminder_dismiss", title);
                   }}
                 />
               </div>
