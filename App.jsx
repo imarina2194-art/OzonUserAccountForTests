@@ -517,7 +517,7 @@ const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
   const reminderIconBtnPrimary =
     "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-cell-button-bg)] p-0 shadow-none text-[var(--color-cell-button-text)]";
   const reminderIconBtnSecondary =
-    "relative flex h-[32px] w-[32px] items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none text-[var(--color-text-secondary)]";
+    "relative flex h-[32px] w-[32px] items-center justify-center rounded-full border-0 bg-transparent p-0 shadow-none text-[var(--color-text-secondary)]";
   const priceRowRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(280);
 
