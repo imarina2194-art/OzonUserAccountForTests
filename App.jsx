@@ -514,46 +514,54 @@ const FinanceSection = ({ debugStyle }) => (
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
 
 const ReminderCard = ({ item, count, onAdd, onDismiss }) => (
-  <div className="relative flex w-[140px] flex-none flex-col gap-[var(--space-1)]">
-    <button
-      onClick={() => onDismiss(item.title)}
-      className="absolute right-0 top-0 flex h-[24px] w-[24px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
-      aria-label="Dismiss reminder"
-    >
-      ✕
-    </button>
-    <div className="relative h-[140px] w-[140px] overflow-hidden rounded-[14px] bg-[var(--color-surface-muted)]">
-      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+  <Island className="flex w-[300px] flex-none flex-col gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]">
+    <HStack className="justify-end">
+      <button
+        onClick={() => onDismiss(item.title)}
+        className="flex h-[28px] w-[28px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
+        aria-label="Dismiss reminder"
+      >
+        ✕
+      </button>
+    </HStack>
+    <HStack className="items-start gap-[var(--space-2)]">
+      <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
+        <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-1)]">
+        <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
+          {item.title}
+        </p>
+        <div className="flex flex-wrap items-center gap-[var(--space-1)]">
+          <span className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+            {formatPrice(item.price)}
+          </span>
+          {item.oldPrice && item.discount && (
+            <>
+              <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
+                {formatPrice(item.oldPrice)}
+              </span>
+              <MutedPill className="inline-flex h-[18px] items-center justify-center rounded-[999px] px-[6px] text-[11px] font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]">
+                −{item.discount}%
+              </MutedPill>
+            </>
+          )}
+        </div>
+      </div>
       <button
         onClick={() => onAdd(item.title)}
-        className="absolute bottom-[8px] right-[8px] flex h-[28px] w-[28px] items-center justify-center rounded-full border-0 bg-[var(--color-surface)] p-0 shadow-none"
+        className="relative flex h-[40px] w-[40px] flex-none items-center justify-center rounded-full border-0 bg-[var(--color-surface-muted)] p-0 shadow-none"
         aria-label="Add reminder item to cart"
       >
-        <Icon name="cart" alt="" className="h-[16px] w-[16px]" />
+        <Icon name="cart" alt="" className="h-[18px] w-[18px]" />
         {count > 0 && (
           <span className="absolute -right-[4px] -top-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-text-primary)] px-[4px] text-[11px] font-[var(--font-weight-semibold)] text-[var(--color-surface)]">
             {count}
           </span>
         )}
       </button>
-    </div>
-    <p className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
-      {formatPrice(item.price)}
-    </p>
-    {item.oldPrice && item.discount && (
-      <div className="flex items-center gap-[var(--space-1)]">
-        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
-          {formatPrice(item.oldPrice)}
-        </span>
-        <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
-          −{item.discount}%
-        </span>
-      </div>
-    )}
-    <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
-      {item.title}
-    </p>
-  </div>
+    </HStack>
+  </Island>
 );
 
 const ReplenishRemindersSection = ({ items, cartCounts, onAdd, onDismiss }) => (
