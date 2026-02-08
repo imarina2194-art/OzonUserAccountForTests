@@ -58,11 +58,6 @@ const orderItems = [
   },
 ];
 
-const financeCells = [
-  { id: "card", title: "Ozon Карта", value: "3 845,41 ₽" },
-  { id: "install", title: "Рассрочка", value: "до 300 000 ₽" },
-];
-
 const viewedItems = [
   {
     id: "viewed-1",
@@ -428,63 +423,210 @@ const MorkovskEntryPoint = ({ debugStyle }) => (
   </Island>
 );
 
-const FinanceSection = ({ debugStyle }) => (
-  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
-    <HStack className="justify-between">
-      <p className="text-title-l text-[var(--color-text-primary)]">
-        Финансы
-      </p>
-      <div className="flex h-[24px] w-[152px] items-center rounded-[var(--radius-8)] bg-[var(--color-surface-muted)] pl-[6px] pr-[6px]">
-        <span className="text-body-m min-w-0 truncate text-[var(--color-text-link)]">Баллы и бонусы</span>
-        <img
-          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/bonuses_icon.png"
-          alt=""
-          className="ml-auto h-[20px] w-[30px] object-contain"
-        />
+const financePromoOffers = [
+  { text: "Товары за 1 рубль", bg: "rgba(214, 236, 255, 0.45)" },
+  { text: "Новые категории кэшбека", bg: "rgba(214, 250, 232, 0.4)" },
+  { text: "Копите со ставкой 18%", bg: "rgba(231, 224, 255, 0.4)" },
+  { text: "Кредит до 3 млн ₽", bg: "rgba(255, 225, 210, 0.4)" },
+  { text: "Выгоды с Ozon Premium", bg: "rgba(255, 236, 214, 0.4)" },
+];
+
+const FinanceSection = ({ debugStyle }) => {
+  const [promoIndex, setPromoIndex] = useState(0);
+  const [promoVisible, setPromoVisible] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    syncMotionPreference();
+    mediaQuery.addEventListener("change", syncMotionPreference);
+
+    return () => mediaQuery.removeEventListener("change", syncMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setPromoIndex(0);
+      setPromoVisible(true);
+      return;
+    }
+
+    let switchTimeout;
+    const rotationInterval = setInterval(() => {
+      setPromoVisible(false);
+      switchTimeout = window.setTimeout(() => {
+        setPromoIndex((prev) => (prev + 1) % financePromoOffers.length);
+        setPromoVisible(true);
+      }, 220);
+    }, 3600);
+
+    return () => {
+      clearInterval(rotationInterval);
+      if (switchTimeout) {
+        window.clearTimeout(switchTimeout);
+      }
+    };
+  }, [prefersReducedMotion]);
+
+  const currentPromo = financePromoOffers[promoIndex];
+
+  return (
+    <div className="flex flex-col gap-[var(--space-1)]" style={debugStyle}>
+      <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+        <HStack className="justify-between">
+          <p className="text-title-l text-[var(--color-text-primary)]">Финансы</p>
+          <button
+            onClick={() => console.log("finance promo clicked", currentPromo.text)}
+            className="inline-flex h-[24px] w-[175px] items-center justify-start overflow-hidden rounded-full border-0 pl-[var(--space-2)] pr-[var(--space-2)] text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)]"
+            style={{ backgroundColor: currentPromo.bg }}
+            aria-label={currentPromo.text}
+          >
+            <span className="min-w-0 flex-1 truncate whitespace-nowrap">
+              <span
+                className="block truncate whitespace-nowrap"
+                style={{
+                  opacity: promoVisible ? 1 : 0,
+                  transform: promoVisible ? "translateY(0)" : "translateY(4px)",
+                  transition: prefersReducedMotion ? "none" : "opacity 220ms ease, transform 220ms ease",
+                }}
+              >
+                {currentPromo.text}
+              </span>
+            </span>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="ml-[2px] h-[14px] w-[14px] shrink-0 object-contain"
+            />
+          </button>
+        </HStack>
+      <div className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-2)] items-stretch">
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
+          <div className="flex items-center gap-[2px]">
+            <p className="text-title-s text-[var(--color-text-secondary)]">
+              Ozon карта
+            </p>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[14px] w-[14px] object-contain"
+            />
+          </div>
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+            2 450 ₽
+          </p>
+        </div>
+
+        <div className="rounded-[var(--radius-s)] bg-[var(--color-surface-muted)] p-[var(--space-2)] min-w-0 h-full">
+          <div className="flex items-center gap-[2px]">
+            <p className="text-title-s text-[var(--color-text-secondary)]">
+              Рассрочка
+            </p>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[14px] w-[14px] object-contain"
+            />
+          </div>
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] min-w-0 truncate">
+            до 300 000 ₽
+          </p>
+        </div>
       </div>
-    </HStack>
-    <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
-      <VStack className="gap-[var(--space-2)]">
-        {financeCells.map((cell) => (
-          <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <div className="flex items-center gap-[2px]">
-              <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-                {cell.title}
-              </p>
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-                alt=""
-                className="h-[16px] w-[16px] object-contain"
-              />
-            </div>
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              {cell.value}
-            </p>
-          </MutedPill>
-        ))}
-      </VStack>
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <div className="flex w-full">
-          <div className="min-w-0 flex-1">
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              Ozon Premium
-            </p>
-            <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
-              Получить больше привилегий
+    </Island>
+
+    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+      <p className="text-title-l text-[var(--color-text-primary)]">Бонусы и сертификаты</p>
+      <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Сертификаты
+          </p>
+          <p className="mt-[var(--space-2)] text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+            1 000 ₽
+          </p>
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Баллы
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/ozon_points.png"
+              alt=""
+              className="h-[20px] w-[20px] object-contain"
+            />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              3 240
             </p>
           </div>
-          <div className="h-[79px] w-[79px] flex-none self-end">
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(214, 250, 232, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Звёзды
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
             <img
-              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/fintech_stars.png"
               alt=""
-              className="h-full w-full object-contain"
+              className="h-[20px] w-[20px] object-contain"
             />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              128
+            </p>
+          </div>
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(231, 224, 255, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Мили
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/travel_miles.png"
+              alt=""
+              className="h-[20px] w-[20px] object-contain"
+            />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              2 100
+            </p>
+          </div>
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(255, 225, 210, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Бонусы продавцов
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/seller_bonus.png"
+              alt=""
+              className="h-[20px] w-[20px] object-contain"
+            />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              5
+            </p>
           </div>
         </div>
       </div>
+    </Island>
     </div>
-  </Island>
-);
+  );
+};
 
 const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="flex w-[101px] flex-none flex-col">
