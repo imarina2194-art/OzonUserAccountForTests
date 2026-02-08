@@ -22,6 +22,7 @@ const iconRegistry = {
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/favorites_shortcut_icon.png",
   premium:
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/premium_crown_icon.png",
+  cart: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/cart_tab.png",
 };
 
 const Icon = ({ name, alt, className }) => {
@@ -124,53 +125,36 @@ const viewedItems = [
   },
 ];
 
-const baseToday = new Date("2024-09-20T09:30:00");
-
 const reminderItems = [
   {
     id: "reminder-1",
     title: "Ozon Fresh Молоко 3.2% — 2 л",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc250/7155520432.jpg",
-    frequencyDays: 7,
-    lastPurchasedDate: "2024-09-13",
     isRecurrentLikely: true,
-    category: "fresh",
   },
   {
     id: "reminder-2",
     title: "Корм для кошек сухой, 1.5 кг",
     image: "https://ir.ozone.ru/s3/multimedia-1-b/wc250/7815322019.jpg",
-    frequencyDays: 14,
-    lastPurchasedDate: "2024-09-08",
     isRecurrentLikely: true,
-    category: "pet",
   },
   {
     id: "reminder-3",
     title: "Витамин D3, 90 капсул",
     image: "https://ir.ozone.ru/s3/multimedia-1-c/wc250/7115249424.jpg",
-    frequencyDays: 30,
-    lastPurchasedDate: "2024-08-25",
     isRecurrentLikely: true,
-    category: "health",
   },
   {
     id: "reminder-4",
     title: "Средство для мытья посуды, 900 мл",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
-    frequencyDays: 21,
-    lastPurchasedDate: "2024-08-30",
     isRecurrentLikely: true,
-    category: "home",
   },
   {
     id: "reminder-5",
     title: "Премиальные наушники, лимитированная серия",
     image: "https://ir.ozone.ru/s3/multimedia-1-0/wc250/7715502576.jpg",
-    frequencyDays: 90,
-    lastPurchasedDate: "2024-07-01",
     isRecurrentLikely: false,
-    category: "electronics",
   },
 ];
 
@@ -276,22 +260,6 @@ const recommendedItems = [
     reviews: "11",
   },
 ];
-
-const addDays = (date, days) => {
-  const next = new Date(date);
-  next.setDate(next.getDate() + days);
-  return next;
-};
-
-const getDateFromString = (value) => {
-  const [year, month, day] = value.split("-").map(Number);
-  return new Date(year, month - 1, day);
-};
-
-const daysBetween = (from, to) => {
-  const diffMs = to.getTime() - from.getTime();
-  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-};
 
 const bottomTabs = [
   {
@@ -552,208 +520,45 @@ const FinanceSection = ({ debugStyle }) => (
   </Island>
 );
 
-const ReminderCard = ({ item, urgencyLabel, onAdd, onSnooze, onDismiss }) => (
-  <Island className="relative flex w-[200px] flex-none flex-col gap-[var(--space-2)] rounded-[16px] p-[var(--space-3)]">
+const ReminderCard = ({ item, onAdd, onDismiss }) => (
+  <div className="relative flex w-[140px] flex-none flex-col gap-[var(--space-1)]">
     <button
       onClick={() => onDismiss(item.id)}
-      className="absolute right-[8px] top-[8px] flex h-[24px] w-[24px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
+      className="absolute right-0 top-0 flex h-[24px] w-[24px] items-center justify-center rounded-[8px] bg-[var(--color-surface-muted)] text-body-s text-[var(--color-text-secondary)]"
       aria-label="Dismiss reminder"
     >
       ✕
     </button>
-    <div className="flex items-center gap-[var(--space-2)]">
-      <div className="h-[64px] w-[64px] overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
-        <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-      </div>
-      <p className="text-title-s line-clamp-2 flex-1 text-[var(--color-text-primary)]">
-        {item.title}
-      </p>
-    </div>
-    <MutedPill className="inline-flex h-[24px] w-fit items-center justify-center rounded-[999px] px-[10px] text-body-s text-[var(--color-text-secondary)]">
-      {urgencyLabel}
-    </MutedPill>
-    <HStack className="justify-between gap-[var(--space-2)]">
+    <div className="relative h-[140px] w-[140px] overflow-hidden rounded-[14px] bg-[var(--color-surface-muted)]">
+      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
       <button
         onClick={() => onAdd(item.id)}
-        className="text-body-m inline-flex h-[28px] w-[96px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none"
+        className="absolute bottom-[8px] right-[8px] flex h-[28px] w-[28px] items-center justify-center rounded-full border-0 bg-[var(--color-surface)] p-0 shadow-none"
+        aria-label="Add reminder item to cart"
       >
-        В корзину
+        <Icon name="cart" alt="" className="h-[16px] w-[16px]" />
       </button>
-      <button
-        onClick={() => onSnooze(item.id)}
-        className="text-body-m inline-flex h-[28px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-transparent p-0 text-[var(--color-text-secondary)]"
-      >
-        Отложить
-      </button>
-    </HStack>
-  </Island>
+    </div>
+    <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
+      {item.title}
+    </p>
+  </div>
 );
 
-const RemindersEmptyState = ({ onChoose }) => (
+const ReplenishRemindersSection = ({ items, onAdd, onDismiss }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-    <VStack className="gap-[var(--space-2)]">
-      <p className="text-title-l text-[var(--color-text-primary)]">Пора пополнить</p>
-      <p className="text-body-m text-[var(--color-text-secondary)]">
-        Добавьте товары, которые покупаете регулярно — и мы напомним.
+    <HStack className="justify-between">
+      <p className="text-title-l text-[var(--color-text-primary)]">
+        Скоро закончатся — пора купить снова
       </p>
-      <button
-        onClick={onChoose}
-        className="text-body-m inline-flex h-[28px] w-fit items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] px-[12px] font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none"
-      >
-        Выбрать товары
-      </button>
-    </VStack>
+    </HStack>
+    <div className="mt-[var(--space-3)] flex gap-[var(--space-2)] overflow-x-auto">
+      {items.map((item) => (
+        <ReminderCard key={item.id} item={item} onAdd={onAdd} onDismiss={onDismiss} />
+      ))}
+    </div>
   </Island>
 );
-
-const ReplenishRemindersSection = ({
-  items,
-  mode,
-  show,
-  onAdd,
-  onSnooze,
-  onDismiss,
-  onOpenManage,
-  onEmptyChoose,
-  onRetry,
-}) => {
-  if (!show) {
-    return null;
-  }
-
-  if (mode === "empty") {
-    return <RemindersEmptyState onChoose={onEmptyChoose} />;
-  }
-
-  return (
-    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
-      <HStack className="justify-between">
-        <VStack className="gap-[var(--space-0_5)]">
-          <p className="text-title-l text-[var(--color-text-primary)]">Пора пополнить</p>
-          <p className="text-body-m text-[var(--color-text-secondary)]">
-            Мы напомним, когда обычно заканчивается
-          </p>
-        </VStack>
-        <button
-          onClick={onOpenManage}
-          className="text-body-m border-0 bg-transparent p-0 text-[var(--color-text-link)]"
-        >
-          Все
-        </button>
-      </HStack>
-      {mode === "loading" && (
-        <div className="mt-[var(--space-3)] flex gap-[var(--space-2)] overflow-x-auto">
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className="h-[162px] w-[200px] flex-none rounded-[16px] bg-[var(--color-surface-muted)]"
-            />
-          ))}
-        </div>
-      )}
-      {mode === "error" && (
-        <div className="mt-[var(--space-3)] flex items-center justify-between rounded-[12px] bg-[var(--color-surface-muted)] px-[var(--space-3)] py-[var(--space-2)]">
-          <p className="text-body-m text-[var(--color-text-secondary)]">
-            Не удалось загрузить напоминания
-          </p>
-          <button
-            onClick={onRetry}
-            className="text-body-m border-0 bg-transparent p-0 text-[var(--color-text-link)]"
-          >
-            Повторить
-          </button>
-        </div>
-      )}
-      {mode === "default" && (
-        <div className="mt-[var(--space-3)] flex gap-[var(--space-2)] overflow-x-auto">
-          {items.map((item) => (
-            <ReminderCard
-              key={item.id}
-              item={item}
-              urgencyLabel={item.urgencyLabel}
-              onAdd={onAdd}
-              onSnooze={onSnooze}
-              onDismiss={onDismiss}
-            />
-          ))}
-        </div>
-      )}
-    </Island>
-  );
-};
-
-const ReminderDebugPanel = ({
-  visible,
-  mode,
-  showSection,
-  onToggleSection,
-  onModeChange,
-  onResetDismissed,
-  onSimulateDay,
-}) => {
-  if (!visible) {
-    return null;
-  }
-
-  const modes = [
-    { id: "default", label: "default" },
-    { id: "empty", label: "empty" },
-    { id: "loading", label: "loading" },
-    { id: "error", label: "error" },
-  ];
-
-  return (
-    <Island className="fixed bottom-[calc(var(--size-bottomnav-h)+32px)] left-[var(--space-3)] z-40 w-[220px] rounded-[20px] p-[var(--space-3)]">
-      <VStack className="gap-[var(--space-2)]">
-        <p className="text-body-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
-          Replenish reminders (debug)
-        </p>
-        <div className="flex flex-wrap gap-[6px]">
-          {modes.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onModeChange(item.id)}
-              className={`text-body-s inline-flex h-[24px] items-center justify-center rounded-[999px] border-0 px-[10px] ${
-                mode === item.id
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-surface)]"
-                  : "bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)]"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-        <HStack className="justify-between">
-          <span className="text-body-s text-[var(--color-text-secondary)]">Show section</span>
-          <button
-            onClick={onToggleSection}
-            className={`text-body-s inline-flex h-[22px] items-center justify-center rounded-[999px] border-0 px-[10px] ${
-              showSection
-                ? "bg-[var(--color-text-primary)] text-[var(--color-surface)]"
-                : "bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)]"
-            }`}
-          >
-            {showSection ? "On" : "Off"}
-          </button>
-        </HStack>
-        <div className="flex flex-wrap gap-[6px]">
-          <button
-            onClick={onResetDismissed}
-            className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[999px] border-0 bg-[var(--color-surface-muted)] px-[10px] text-[var(--color-text-secondary)]"
-          >
-            Reset dismissed
-          </button>
-          <button
-            onClick={onSimulateDay}
-            className="text-body-s inline-flex h-[24px] items-center justify-center rounded-[999px] border-0 bg-[var(--color-surface-muted)] px-[10px] text-[var(--color-text-secondary)]"
-          >
-            Simulate +1 day
-          </button>
-        </div>
-      </VStack>
-    </Island>
-  );
-};
 
 const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="flex w-[101px] flex-none flex-col">
@@ -914,12 +719,7 @@ const HomeIndicator = () => (
 
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
-  const [reminderMode, setReminderMode] = useState("default");
-  const [showReminders, setShowReminders] = useState(true);
   const [dismissedIds, setDismissedIds] = useState(() => new Set());
-  const [snoozedOffsets, setSnoozedOffsets] = useState({});
-  const [todayOffsetDays, setTodayOffsetDays] = useState(0);
-  const [showReminderDebug, setShowReminderDebug] = useState(false);
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleFavorite = (id) => {
@@ -935,45 +735,11 @@ const App = ({ debug }) => {
     console.log("Toggle favorite", id);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "r" || event.key === "R") {
-        setShowReminderDebug((prev) => !prev);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  const today = addDays(baseToday, todayOffsetDays);
-  const categoryPriority = {
-    fresh: 1,
-    pet: 2,
-    home: 3,
-    health: 4,
-  };
-
   const reminderList = reminderItems
     .filter((item) => item.isRecurrentLikely)
-    .sort((a, b) => (categoryPriority[a.category] || 99) - (categoryPriority[b.category] || 99))
     .filter((item) => !dismissedIds.has(item.id))
-    .map((item) => {
-      const snoozeDays = snoozedOffsets[item.id] || 0;
-      const lastPurchased = getDateFromString(item.lastPurchasedDate);
-      const dueDate = addDays(lastPurchased, item.frequencyDays + snoozeDays);
-      const daysToDue = daysBetween(today, dueDate);
-      const urgencyLabel = daysToDue <= 0 ? "Пора купить" : "Скоро закончится";
-      return {
-        ...item,
-        dueDate,
-        daysToDue,
-        urgencyLabel,
-      };
-    })
     .slice(0, 4);
-
-  const effectiveReminderMode =
-    reminderMode === "default" && reminderList.length === 0 ? "empty" : reminderMode;
+  const showReminders = reminderList.length > 0;
 
   return (
     <div className="flex h-full w-full min-h-0 flex-col">
@@ -1051,33 +817,25 @@ const App = ({ debug }) => {
             <FinanceSection debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
-          <div className="w-[390px] box-border">
-            <ReplenishRemindersSection
-              items={reminderList}
-              mode={effectiveReminderMode}
-              show={showReminders}
-              onAdd={(id) => console.log("reminder_add_to_cart", id)}
-              onSnooze={(id) => {
-                setSnoozedOffsets((prev) => ({
-                  ...prev,
-                  [id]: (prev[id] || 0) + 7,
-                }));
-                console.log("reminder_snooze", id);
-              }}
-              onDismiss={(id) => {
-                setDismissedIds((prev) => {
-                  const next = new Set(prev);
-                  next.add(id);
-                  return next;
-                });
-                console.log("reminder_dismiss", id);
-              }}
-              onOpenManage={() => console.log("reminder_open_manage")}
-              onEmptyChoose={() => console.log("reminder_empty_choose_items")}
-              onRetry={() => console.log("reminder_retry")}
-            />
-          </div>
-          <div className="h-[var(--space-1)]" />
+          {showReminders && (
+            <>
+              <div className="w-[390px] box-border">
+                <ReplenishRemindersSection
+                  items={reminderList}
+                  onAdd={(id) => console.log("reminder_add_to_cart", id)}
+                  onDismiss={(id) => {
+                    setDismissedIds((prev) => {
+                      const next = new Set(prev);
+                      next.add(id);
+                      return next;
+                    });
+                    console.log("reminder_dismiss", id);
+                  }}
+                />
+              </div>
+              <div className="h-[var(--space-1)]" />
+            </>
+          )}
           <div className="w-[390px] box-border">
             <ViewedProductsSection
               items={viewedItems}
@@ -1107,19 +865,6 @@ const App = ({ debug }) => {
       </div>
       <BottomNav debugStyle={debugStyle} />
       <HomeIndicator />
-      <ReminderDebugPanel
-        visible={showReminderDebug}
-        mode={reminderMode}
-        showSection={showReminders}
-        onToggleSection={() => setShowReminders((prev) => !prev)}
-        onModeChange={setReminderMode}
-        onResetDismissed={() => {
-          setDismissedIds(new Set());
-          setSnoozedOffsets({});
-          setTodayOffsetDays(0);
-        }}
-        onSimulateDay={() => setTodayOffsetDays((prev) => prev + 1)}
-      />
     </div>
   );
 };
