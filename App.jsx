@@ -5,6 +5,9 @@ const mockUser = {
   subscribers: 175,
   subscriptions: 4,
   isPremium: true,
+  activeOrdersCount: 2,
+  favoritesCount: 250,
+  waitlistCount: 3,
 };
 
 const iconRegistry = {
@@ -22,6 +25,8 @@ const iconRegistry = {
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/favorites_shortcut_icon.png",
   premium:
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/premium_crown_icon.png",
+  waitlist:
+    "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/waiting_oos_icon.png",
 };
 
 const Icon = ({ name, alt, className }) => {
@@ -34,9 +39,23 @@ const Icon = ({ name, alt, className }) => {
 };
 
 const shortcutItems = [
-  { id: "favorites", title: "Избранное", subtitle: "250 товаров", iconName: "favorites" },
-  { id: "purchases", title: "Покупки", subtitle: "Заказать снова", iconName: "purchases" },
-  { id: "reviews", title: "Ждут отзыва", subtitle: "8 товаров", iconName: "reviews" },
+  {
+    id: "orders",
+    title: ["Заказы", "и покупки"],
+    iconName: "purchases",
+  },
+  {
+    id: "favorites",
+    title: ["Избранное", "и вишлисты"],
+    iconName: "favorites",
+  },
+  {
+    id: "waitlist",
+    title: ["Лист", "ожидания"],
+    titleText: "Лист ожидания",
+    iconName: "waitlist",
+    badgeCount: mockUser.waitlistCount,
+  },
 ];
 
 const orderItems = [
@@ -227,6 +246,57 @@ const recommendedItems = [
   },
 ];
 
+const reviewPendingItems = [
+  {
+    id: "review-1",
+    title: viewedItems[1].title,
+    image: viewedItems[1].image,
+    orderDateLabel: "20 сен",
+    fulfillmentStatus: "выкуплен",
+    deepLink: "/reviews/1",
+  },
+  {
+    id: "review-2",
+    title: viewedItems[3].title,
+    image: viewedItems[3].image,
+    orderDateLabel: "20 сен",
+    fulfillmentStatus: "возвращён",
+    deepLink: "/reviews/2",
+  },
+  {
+    id: "review-3",
+    title: recommendedItems[0].title,
+    image: recommendedItems[0].image,
+    orderDateLabel: "19 сен",
+    fulfillmentStatus: "выкуплен",
+    deepLink: "/reviews/3",
+  },
+  {
+    id: "review-4",
+    title: recommendedItems[2].title,
+    image: recommendedItems[2].image,
+    orderDateLabel: "19 сен",
+    fulfillmentStatus: "выкуплен",
+    deepLink: "/reviews/4",
+  },
+  {
+    id: "review-5",
+    title: viewedItems[6].title,
+    image: viewedItems[6].image,
+    orderDateLabel: "18 сен",
+    fulfillmentStatus: "возвращён",
+    deepLink: "/reviews/5",
+  },
+  {
+    id: "review-6",
+    title: recommendedItems[4].title,
+    image: recommendedItems[4].image,
+    orderDateLabel: "18 сен",
+    fulfillmentStatus: "выкуплен",
+    deepLink: "/reviews/6",
+  },
+];
+
 const bottomTabs = [
   {
     id: "home",
@@ -348,19 +418,40 @@ const IconButton = ({ iconName, badgeIconName, onClick }) => (
   </button>
 );
 
-const ShortcutCard = ({ title, subtitle, iconName }) => (
-  <MutedPill className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]">
+const ShortcutCard = ({ title, titleText, subtitle, iconName, badgeCount, onClick }) => (
+  <MutedPill
+    className="relative h-[var(--size-shortcut-pill-h)] w-[var(--size-shortcut-pill-w)] rounded-[var(--radius-16)]"
+    onClick={onClick}
+    role={onClick ? "button" : undefined}
+  >
+    {badgeCount > 0 && (
+      <span className="absolute right-[6px] top-[6px] inline-flex h-[20px] min-w-[20px] items-center justify-center rounded-[999px] bg-[var(--color-cell-button-bg)] px-[6px] text-body-s font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)]">
+        {badgeCount}
+      </span>
+    )}
     <div className="absolute left-[var(--space-2)] top-[var(--space-2)] text-left">
       <span className="flex h-[var(--size-icon-s)] w-[var(--size-icon-s)] items-center justify-center">
-        <Icon name={iconName} alt={title} className="h-full w-full" />
+        <Icon name={iconName} alt={titleText || title} className="h-full w-full" />
       </span>
       <div className="mt-[var(--space-2)]">
-        <p className="text-title-s text-[var(--color-text-primary)]">
-          {title}
-        </p>
-        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
-          {subtitle}
-        </p>
+        {Array.isArray(title) ? (
+          <p className="text-title-s text-[var(--color-text-primary)] leading-[16px]">
+            {title.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </p>
+        ) : (
+          <p className="text-title-s text-[var(--color-text-primary)]">
+            {title}
+          </p>
+        )}
+        {subtitle && (
+          <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+            {subtitle}
+          </p>
+        )}
       </div>
     </div>
   </MutedPill>
@@ -390,6 +481,48 @@ const OrderTrackingCard = ({ order }) => (
       </p>
     </div>
   </Island>
+);
+
+const ChevronRightIcon = ({ className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
+
+const SeeAllCard = ({ title, subtitle, icon, className, onClick, media, layout = "column" }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={`flex flex-none rounded-[16px] text-left ${layout === "row" ? "items-center" : "flex-col"} ${className || ""}`}
+  >
+    {media}
+    <div
+      className={`flex w-full ${layout === "row" ? "items-center justify-between" : "flex-1 flex-col"} px-[var(--space-2)]`}
+    >
+      <div className={`flex min-w-0 ${layout === "row" ? "flex-1 flex-col" : "flex-col"}`}>
+        <p className="text-title-s text-[var(--color-text-primary)]">
+          {title}
+        </p>
+        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+          {subtitle}
+        </p>
+      </div>
+      {icon && (
+        <span className="ml-[var(--space-2)] text-[var(--color-text-secondary)]">
+          {icon}
+        </span>
+      )}
+    </div>
+  </button>
 );
 
 const MorkovskEntryPoint = ({ debugStyle }) => (
@@ -547,6 +680,118 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
+const StarIcon = ({ filled, className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    fill={filled ? "currentColor" : "none"}
+    stroke="currentColor"
+    strokeWidth="1.6"
+  >
+    <path d="M12 3.5l2.7 5.47 6.03.88-4.36 4.25 1.03 6.02L12 17.4l-5.4 2.77 1.03-6.02-4.36-4.25 6.03-.88L12 3.5z" />
+  </svg>
+);
+
+const StarRating = ({ rating, onRate, labelPrefix }) => (
+  <div className="flex items-center gap-[2px]">
+    {Array.from({ length: 5 }, (_, index) => {
+      const value = index + 1;
+      const isFilled = value <= rating;
+      return (
+        <button
+          key={value}
+          type="button"
+          onClick={() => onRate(value)}
+          className="flex h-[24px] w-[24px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-transparent p-0"
+          aria-label={`${labelPrefix} ${value} out of 5`}
+        >
+          <StarIcon
+            filled={isFilled}
+            className={`h-[16px] w-[16px] ${
+              isFilled ? "text-[var(--color-text-magenta)]" : "text-[var(--color-text-secondary)]"
+            }`}
+          />
+        </button>
+      );
+    })}
+  </div>
+);
+
+const ReviewCard = ({ item, rating, onRate }) => (
+  <div className="flex w-[168px] flex-none flex-col overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
+    <div className="relative h-[156px] w-full overflow-hidden rounded-t-[16px]">
+      <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      <div
+        className="absolute bottom-[var(--space-2)] left-1/2 -translate-x-1/2 rounded-[var(--radius-8)] px-[6px] py-[4px] shadow-sm"
+        style={{
+          backgroundColor: "color-mix(in srgb, var(--color-surface) 70%, transparent)",
+        }}
+      >
+        <StarRating
+          rating={rating}
+          onRate={(value) => onRate(item, value)}
+          labelPrefix="Rating"
+        />
+      </div>
+    </div>
+    <div className="flex flex-1 flex-col px-[var(--space-2)] pb-[var(--space-1)] pt-[var(--space-1)]">
+      <p className="text-title-s line-clamp-2 font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+        {item.title}
+      </p>
+      <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+        {item.orderDateLabel} • {item.fulfillmentStatus || "выкуплен"}
+      </p>
+    </div>
+  </div>
+);
+
+const ReviewsSection = ({ items, onReview, onOpenAllReviews }) => {
+  const [ratings, setRatings] = useState({});
+  if (!items.length) {
+    return null;
+  }
+
+  return (
+    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+      <HStack className="justify-between">
+        <HStack className="gap-[6px]">
+          <p className="text-title-l text-[var(--color-text-primary)]">
+            Ждут отзыва
+          </p>
+          <span className="text-body-s text-[var(--color-text-secondary)]">
+            {items.length}
+          </span>
+        </HStack>
+      </HStack>
+      <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+        {items.map((item) => (
+          <ReviewCard
+            key={item.id}
+            item={item}
+            rating={ratings[item.id] || 0}
+            onRate={(target, value) => {
+              setRatings((prev) => ({ ...prev, [target.id]: value }));
+              onReview(target);
+            }}
+          />
+        ))}
+        <SeeAllCard
+          title="Все отзывы"
+          subtitle="Оценки и комментарии"
+          onClick={onOpenAllReviews}
+          className="w-[168px] bg-[var(--color-surface-muted)]"
+          media={
+            <div className="flex h-[156px] w-full items-center justify-center rounded-t-[16px] bg-[var(--color-surface-muted)]">
+              <StarIcon className="h-[24px] w-[24px] text-[var(--color-text-secondary)]" filled={false} />
+            </div>
+          }
+        />
+      </div>
+    </Island>
+  );
+};
+
 const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
     <div className="relative h-[260px] w-[195px] overflow-hidden rounded-t-[16px]">
@@ -660,6 +905,14 @@ const App = ({ debug }) => {
     console.log("Toggle favorite", id);
   };
 
+  const onOpenAllOrders = () => {
+    console.log("Open all orders", "/orders");
+  };
+
+  const onOpenAllReviews = () => {
+    console.log("Open all reviews", "/reviews");
+  };
+
   return (
     <div className="flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
@@ -707,7 +960,15 @@ const App = ({ debug }) => {
             <Island className="flex h-[var(--size-shortcuts-h)] w-[390px] items-center justify-center rounded-[var(--radius-24)]">
               <div className="flex gap-[var(--space-2)]">
                 {shortcutItems.map((item) => (
-                  <ShortcutCard key={item.id} title={item.title} subtitle={item.subtitle} iconName={item.iconName} />
+                  <ShortcutCard
+                    key={item.id}
+                    title={item.title}
+                    titleText={item.titleText}
+                    subtitle={item.subtitle}
+                    iconName={item.iconName}
+                    badgeCount={item.badgeCount}
+                    onClick={() => console.log("Open shortcut", item.id)}
+                  />
                 ))}
               </div>
             </Island>
@@ -724,9 +985,25 @@ const App = ({ debug }) => {
                 {orderItems.map((order) => (
                   <OrderTrackingCard key={order.id} order={order} />
                 ))}
+                <SeeAllCard
+                  title="Все заказы"
+                  subtitle="История и статусы"
+                  onClick={onOpenAllOrders}
+                  className="h-[80px] w-[264px] bg-[var(--color-surface-muted)]"
+                  layout="row"
+                  icon={<ChevronRightIcon className="h-[16px] w-[16px]" />}
+                />
               </div>
             </div>
           </Section>
+          <div className="h-[var(--space-1)]" />
+          <div className="w-[390px] box-border">
+            <ReviewsSection
+              items={reviewPendingItems}
+              onReview={(item) => console.log("Leave review", item.id)}
+              onOpenAllReviews={onOpenAllReviews}
+            />
+          </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
             <MorkovskEntryPoint debugStyle={debugStyle} />
