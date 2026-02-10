@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const mockUser = {
   name: "Марина И.",
@@ -22,6 +22,7 @@ const iconRegistry = {
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/favorites_shortcut_icon.png",
   premium:
     "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v1/premium_crown_icon.png",
+  cart: "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v2/cart_tab.png",
 };
 
 const Icon = ({ name, alt, className }) => {
@@ -121,6 +122,30 @@ const viewedItems = [
     price: "14 784 ₽",
     oldPrice: "44 000 ₽",
     discount: "−66%",
+  },
+];
+
+const reminderItems = [
+  {
+    title: "Омега 3 1000 мг, 60 капсул / NFO Норвегия / Рыбий жир высокой очистки",
+    image: "https://ir.ozone.ru/s3/multimedia-1-7/wc1000/8227794211.jpg",
+    price: 3220,
+    oldPrice: null,
+    discount: null,
+  },
+  {
+    title: "Сухой диетический корм Farmina Vet Life Renal для собак при почечной недостаточности , 12 кг",
+    image: "https://ir.ozone.ru/s3/multimedia-q/wc1000/6797641346.jpg",
+    price: 11786,
+    oldPrice: 17025,
+    discount: 30,
+  },
+  {
+    title: "Гель для мытья посуды KIX, концентрированный с дозатором, 1 л, Лимон",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc1000/8500870737.jpg",
+    price: 224,
+    oldPrice: 319,
+    discount: 29,
   },
 ];
 
@@ -486,6 +511,111 @@ const FinanceSection = ({ debugStyle }) => (
   </Island>
 );
 
+const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₽`;
+
+const ReminderCard = ({ item, count, onAdd, onDismiss }) => {
+  const reminderIconBtnPrimary =
+    "relative flex h-[40px] w-[40px] items-center justify-center rounded-full border-0 bg-[var(--color-cell-button-bg)] p-0 shadow-none text-[var(--color-cell-button-text)]";
+  const reminderIconBtnSecondary =
+    "relative flex h-[32px] w-[32px] items-center justify-center rounded-full border-0 bg-transparent p-0 shadow-none text-[var(--color-text-secondary)]";
+  const priceRowRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(280);
+
+  useLayoutEffect(() => {
+    const priceRow = priceRowRef.current;
+    if (!priceRow) {
+      return;
+    }
+    const scrollWidth = priceRow.scrollWidth;
+    const clientWidth = priceRow.clientWidth;
+    if (scrollWidth > clientWidth) {
+      const safetyPadding = 12;
+      const nextWidth = Math.min(360, 280 + (scrollWidth - clientWidth) + safetyPadding);
+      if (nextWidth !== cardWidth) {
+        setCardWidth(nextWidth);
+      }
+    } else if (cardWidth !== 280) {
+      setCardWidth(280);
+    }
+  }, [cardWidth, item.discount, item.oldPrice, item.price, item.title]);
+
+  return (
+    <Island
+      className="relative grid w-[280px] min-w-[280px] flex-none grid-cols-[auto_1fr_auto] items-center gap-[var(--space-2)] rounded-[16px] p-[var(--space-2)]"
+      style={{ width: `${cardWidth}px`, minWidth: `${cardWidth}px` }}
+    >
+      <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-[12px] bg-[var(--color-surface-muted)]">
+        <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+      </div>
+      <div className="flex min-w-0 flex-col gap-[var(--space-1)]">
+        <p className="text-title-s line-clamp-2 text-[var(--color-text-primary)]">
+          {item.title}
+        </p>
+        <div
+          ref={priceRowRef}
+          className="flex items-baseline gap-[var(--space-1)] whitespace-nowrap overflow-hidden"
+        >
+          <span className="text-title-s font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+            {formatPrice(item.price)}
+          </span>
+          {item.oldPrice && item.discount && (
+            <>
+              <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-secondary)] line-through">
+                {formatPrice(item.oldPrice)}
+              </span>
+              <span className="text-body-s font-[var(--font-weight-medium)] text-[var(--color-text-magenta)]">
+                −{item.discount}%
+              </span>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col items-end gap-[var(--space-1)]">
+        <button
+          onClick={() => onDismiss(item.title)}
+          className={reminderIconBtnSecondary}
+          aria-label="Dismiss reminder"
+        >
+          ✕
+        </button>
+        <button
+          onClick={() => onAdd(item.title)}
+          className={reminderIconBtnPrimary}
+          aria-label="Add reminder item to cart"
+        >
+          <Icon name="cart" alt="" className="h-[18px] w-[18px]" />
+          {count > 0 && (
+            <span className="absolute -right-[4px] -top-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-text-primary)] px-[4px] text-[11px] font-[var(--font-weight-semibold)] text-[var(--color-surface)]">
+              {count}
+            </span>
+          )}
+        </button>
+      </div>
+    </Island>
+  );
+};
+
+const ReplenishRemindersSection = ({ items, cartCounts, onAdd, onDismiss }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+    <HStack className="justify-between">
+      <p className="text-title-l text-[var(--color-text-primary)]">
+        Скоро закончатся — пора купить
+      </p>
+    </HStack>
+    <div className="mt-[var(--space-3)] flex gap-[var(--space-2)] overflow-x-auto">
+      {items.map((item) => (
+        <ReminderCard
+          key={item.title}
+          item={item}
+          count={cartCounts[item.title] || 0}
+          onAdd={onAdd}
+          onDismiss={onDismiss}
+        />
+      ))}
+    </div>
+  </Island>
+);
+
 const ViewedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="flex w-[101px] flex-none flex-col">
     <div className="relative h-[134px] w-[101px] overflow-hidden rounded-[12px]">
@@ -645,6 +775,8 @@ const HomeIndicator = () => (
 
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
+  const [dismissedTitles, setDismissedTitles] = useState(() => new Set());
+  const [cartCounts, setCartCounts] = useState({});
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleFavorite = (id) => {
@@ -659,6 +791,9 @@ const App = ({ debug }) => {
     });
     console.log("Toggle favorite", id);
   };
+
+  const reminderList = reminderItems.filter((item) => !dismissedTitles.has(item.title)).slice(0, 4);
+  const showReminders = reminderList.length > 0;
 
   return (
     <div className="flex h-full w-full min-h-0 flex-col">
@@ -736,6 +871,32 @@ const App = ({ debug }) => {
             <FinanceSection debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
+          {showReminders && (
+            <>
+              <div className="w-[390px] box-border">
+                <ReplenishRemindersSection
+                  items={reminderList}
+                  cartCounts={cartCounts}
+                  onAdd={(title) => {
+                    setCartCounts((prev) => {
+                      const next = { ...prev, [title]: (prev[title] || 0) + 1 };
+                      console.log("reminder_add_to_cart", { title, count: next[title] });
+                      return next;
+                    });
+                  }}
+                  onDismiss={(title) => {
+                    setDismissedTitles((prev) => {
+                      const next = new Set(prev);
+                      next.add(title);
+                      return next;
+                    });
+                    console.log("reminder_dismiss", title);
+                  }}
+                />
+              </div>
+              <div className="h-[var(--space-1)]" />
+            </>
+          )}
           <div className="w-[390px] box-border">
             <ViewedProductsSection
               items={viewedItems}
