@@ -516,6 +516,24 @@ const FinanceSection = ({ debugStyle }) => {
         </div>
         <div
           className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Морковск
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
+              alt=""
+              className="h-[20px] w-[20px] object-contain"
+            />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              312
+            </p>
+          </div>
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
           style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
           <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
@@ -583,24 +601,6 @@ const FinanceSection = ({ debugStyle }) => {
             />
             <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
               5
-            </p>
-          </div>
-        </div>
-        <div
-          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
-          style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
-        >
-          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
-            Морковск
-          </p>
-          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
-            <img
-              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
-              alt=""
-              className="h-[20px] w-[20px] object-contain"
-            />
-            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
-              312
             </p>
           </div>
         </div>
