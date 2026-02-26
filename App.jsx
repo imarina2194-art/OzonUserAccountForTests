@@ -387,42 +387,6 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
-const MorkovskEntryPoint = ({ debugStyle }) => (
-  <Island
-    className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
-    style={debugStyle}
-  >
-    <VStack className="h-full w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
-      <HStack className="gap-[var(--space-2)]">
-        <p className="text-title-l truncate text-[var(--color-text-primary)]">
-          Морковск
-        </p>
-        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] text-[var(--color-text-primary)]">
-          <span>312</span>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
-            alt=""
-            className="h-[20px] w-[13px] object-contain"
-          />
-        </MutedPill>
-      </HStack>
-      <p className="text-body-m truncate text-[var(--color-text-secondary)]">
-        Суперприз — квартира
-      </p>
-      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none">
-        Узнать больше
-      </button>
-    </VStack>
-    <div className="h-[114px] w-[140px]">
-      <img
-        src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
-        alt=""
-        className="h-full w-full object-cover"
-      />
-    </div>
-  </Island>
-);
-
 const financePromoOffers = [
   { text: "Товары за 1 рубль", bg: "rgba(214, 236, 255, 0.45)" },
   { text: "Новые категории кэшбека", bg: "rgba(214, 250, 232, 0.4)" },
@@ -619,6 +583,24 @@ const FinanceSection = ({ debugStyle }) => {
             />
             <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
               5
+            </p>
+          </div>
+        </div>
+        <div
+          className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
+          style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
+        >
+          <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
+            Морковск
+          </p>
+          <div className="mt-[var(--space-2)] flex items-center gap-[var(--space-2)]">
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
+              alt=""
+              className="h-[20px] w-[20px] object-contain"
+            />
+            <p className="text-title-m font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] whitespace-nowrap">
+              312
             </p>
           </div>
         </div>
@@ -869,10 +851,6 @@ const App = ({ debug }) => {
               </div>
             </div>
           </Section>
-          <div className="h-[var(--space-1)]" />
-          <div className="w-[390px] box-border">
-            <MorkovskEntryPoint debugStyle={debugStyle} />
-          </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
             <FinanceSection debugStyle={debugStyle} />
