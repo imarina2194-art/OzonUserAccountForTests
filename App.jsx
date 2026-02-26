@@ -505,7 +505,7 @@ const FinanceSection = ({ debugStyle }) => {
       <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pb-[var(--space-1)]">
         <div
           className="min-w-[145px] rounded-[var(--radius-s)] p-[var(--space-2)] flex flex-col"
-          style={{ backgroundColor: "rgba(255, 236, 214, 0.4)" }}
+          style={{ backgroundColor: "rgba(214, 236, 255, 0.45)" }}
         >
           <p className="text-title-s truncate whitespace-nowrap overflow-hidden text-[var(--color-text-secondary)]">
             Сертификаты
