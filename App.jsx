@@ -63,6 +63,74 @@ const financeCells = [
   { id: "install", title: "Рассрочка", value: "до 300 000 ₽" },
 ];
 
+const megaPromoCards = [
+  {
+    id: "promo-1rub",
+    type: "Персональная выгода",
+    title: "Товары за 1 ₽",
+    subtitle: "Подборка из любимых категорий по суперцене сегодня",
+    cta: "Открыть подборку",
+    icon: "🛍️",
+    bgClass: "bg-[var(--color-surface-muted)]",
+  },
+  {
+    id: "promo-savings",
+    type: "Финансы",
+    title: "Накопительный счёт 18.5%",
+    subtitle: "Откройте онлайн за 5 минут и получайте доход каждый день",
+    cta: "Подробнее о счёте",
+    icon: "₽",
+    bgClass: "bg-[var(--color-cell-button-bg)]",
+  },
+  {
+    id: "promo-premium",
+    type: "Экосистема",
+    title: "Ozon Premium",
+    subtitle: "Бесплатная доставка и персональные предложения каждый день",
+    cta: "Получить больше привилегий",
+    image:
+      "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png",
+    bgClass: "bg-[var(--color-cell-button-bg)]",
+  },
+  {
+    id: "promo-morkovsk",
+    type: "Экосистема",
+    title: "Морковск",
+    subtitle: "Суперприз — квартира, 312 🥕 уже на вашем счёте",
+    cta: "Узнать больше",
+    image:
+      "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png",
+    bgClass: "bg-[var(--color-surface-muted)]",
+  },
+  {
+    id: "promo-cashback",
+    type: "Персональная выгода",
+    title: "Новые категории кэшбека",
+    subtitle: "До 30% в товарах для дома, спорта и детских покупках",
+    cta: "Выбрать категории",
+    icon: "💳",
+    bgClass: "bg-[var(--color-surface-muted)]",
+  },
+  {
+    id: "promo-b2b",
+    type: "Сезонное предложение",
+    title: "Покупайте как компания",
+    subtitle: "С отсрочкой платежа, возвратом НДС и документами по заказам",
+    cta: "Подключить кабинет",
+    icon: "🏢",
+    bgClass: "bg-[var(--color-surface-muted)]",
+  },
+  {
+    id: "promo-credit",
+    type: "Финансы",
+    title: "Кредит до 3 млн ₽",
+    subtitle: "Решение за 2 минуты, без визита в офис",
+    cta: "Проверить лимит",
+    icon: "📈",
+    bgClass: "bg-[var(--color-cell-button-bg)]",
+  },
+];
+
 const viewedItems = [
   {
     id: "viewed-1",
@@ -392,38 +460,51 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
-const MorkovskEntryPoint = ({ debugStyle }) => (
-  <Island
-    className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
-    style={debugStyle}
+const MegaPromoCard = ({ card }) => (
+  <article
+    className={`h-[156px] w-[294px] flex-none overflow-hidden rounded-[var(--radius-m)] p-[var(--space-3)] ${card.bgClass}`}
   >
-    <VStack className="h-full w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
-      <HStack className="gap-[var(--space-2)]">
-        <p className="text-title-l truncate text-[var(--color-text-primary)]">
-          Морковск
+    <p className="text-body-s text-[var(--color-text-secondary)]">{card.type}</p>
+    <div className="mt-[var(--space-1)] flex h-[105px] gap-[var(--space-2)]">
+      <div className="min-w-0 flex-1">
+        <p className="text-title-m line-clamp-2 font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+          {card.title}
         </p>
-        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] text-[var(--color-text-primary)]">
-          <span>312</span>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
-            alt=""
-            className="h-[20px] w-[13px] object-contain"
-          />
-        </MutedPill>
-      </HStack>
-      <p className="text-body-m truncate text-[var(--color-text-secondary)]">
-        Суперприз — квартира
-      </p>
-      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none">
-        Узнать больше
+        <p className="text-body-m mt-[var(--space-1)] line-clamp-2 text-[var(--color-text-secondary)]">
+          {card.subtitle}
+        </p>
+        <p className="text-body-m mt-[var(--space-1_5)] font-[var(--font-weight-medium)] text-[var(--color-text-link)]">
+          {card.cta}
+        </p>
+      </div>
+      {card.image ? (
+        <div className="h-[92px] w-[92px] flex-none self-end">
+          <img src={card.image} alt="" className="h-full w-full object-contain" />
+        </div>
+      ) : (
+        <div className="flex h-[92px] w-[92px] flex-none items-center justify-center self-end rounded-[var(--radius-m)] bg-[var(--color-surface)] text-[36px]">
+          {card.icon}
+        </div>
+      )}
+    </div>
+  </article>
+);
+
+const MegaPromoSection = ({ debugStyle }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
+    <HStack className="justify-between">
+      <p className="text-title-l text-[var(--color-text-primary)]">Выгоды и предложения</p>
+      <button className="text-body-s rounded-[var(--radius-8)] border-0 bg-[var(--color-surface-muted)] px-[var(--space-2)] py-[var(--space-1)] text-[var(--color-text-secondary)]">
+        Скрыть на 7 дней
       </button>
-    </VStack>
-    <div className="h-[114px] w-[140px]">
-      <img
-        src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
-        alt=""
-        className="h-full w-full object-cover"
-      />
+    </HStack>
+    <p className="text-body-s mt-[var(--space-1)] text-[var(--color-text-secondary)]">
+      Собрали важное для вас в одном месте — без лишнего шума в ленте.
+    </p>
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]">
+      {megaPromoCards.map((card) => (
+        <MegaPromoCard key={card.id} card={card} />
+      ))}
     </div>
   </Island>
 );
@@ -463,25 +544,17 @@ const FinanceSection = ({ debugStyle }) => (
           </MutedPill>
         ))}
       </VStack>
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <div className="flex w-full">
-          <div className="min-w-0 flex-1">
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              Ozon Premium
-            </p>
-            <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
-              Получить больше привилегий
-            </p>
-          </div>
-          <div className="h-[79px] w-[79px] flex-none self-end">
-            <img
-              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
-              alt=""
-              className="h-full w-full object-contain"
-            />
-          </div>
-        </div>
-      </div>
+      <MutedPill className="rounded-[var(--radius-s)] p-[var(--space-2)]">
+        <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+          Кредитный лимит
+        </p>
+        <p className="text-title-m mt-[var(--space-1)] font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+          до 780 000 ₽
+        </p>
+        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
+          Платёж 17 октября
+        </p>
+      </MutedPill>
     </div>
   </Island>
 );
@@ -729,7 +802,7 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <MorkovskEntryPoint debugStyle={debugStyle} />
+            <MegaPromoSection debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
