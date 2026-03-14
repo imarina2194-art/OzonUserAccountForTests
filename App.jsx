@@ -434,7 +434,6 @@ const PromoCard = ({ card }) => (
   >
     <div className="flex h-full w-full items-stretch px-[var(--space-3)] py-[var(--space-3)]">
       <div className="flex w-[62%] min-w-0 flex-col justify-start gap-[var(--space-1)]">
-        <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>
         <p className="text-title-l line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
         <p className="text-body-m line-clamp-2 text-[var(--color-text-secondary)]">{card.subtitle}</p>
       </div>
