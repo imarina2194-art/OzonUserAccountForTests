@@ -658,12 +658,14 @@ const profileMenuGroups = [
     { id: "codes", title: "Коды и сертификаты", icon: "🎟" },
     { id: "balance", title: "Баланс средств", icon: "💳" },
     { id: "premium", title: "Ozon Premium", icon: "👑" },
+    { id: "business", title: "Закупки для бизнеса", icon: "🧾" },
   ],
   [
     { id: "settings", title: "Настройки", icon: "⚙" },
     { id: "family", title: "Моя семья", icon: "👨", badgeLabel: "Новое" },
     { id: "jobs", title: "Вакансии", icon: "🪖" },
     { id: "language", title: "Язык", icon: "🌐" },
+    { id: "help", title: "Помощь и приложение", icon: "❔" },
   ],
 ];
 
@@ -671,29 +673,29 @@ const MenuCell = ({ item, showSeparator }) => (
   <button
     type="button"
     onClick={() => console.log("Navigate menu item", item.id)}
-    className="relative flex h-[52px] w-full items-center justify-between px-[16px] py-[10px] text-left"
+    className="relative flex h-[50px] w-full items-center justify-between px-[16px] py-[8px] text-left"
   >
-    <HStack className="min-w-0 flex-1 gap-[12px]">
-      <MutedPill className="flex h-[32px] w-[32px] flex-none items-center justify-center rounded-[10px] text-[17px] leading-none text-[var(--color-text-secondary)]">
+    <HStack className="min-w-0 flex-1 gap-[10px]">
+      <MutedPill className="flex h-[30px] w-[30px] flex-none items-center justify-center rounded-[10px] text-[15px] leading-none text-[var(--color-text-secondary)]">
         {item.icon}
       </MutedPill>
-      <span className="text-body-m truncate font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+      <span className="truncate text-[13px] font-[var(--font-weight-regular)] leading-[18px] text-[var(--color-text-primary)]">
         {item.title}
       </span>
     </HStack>
 
-    <HStack className="ml-[8px] flex-none gap-[8px]">
+    <HStack className="ml-[8px] flex-none gap-[6px]">
       {item.counter && (
-        <MutedPill className="flex h-[28px] min-w-[28px] items-center justify-center rounded-full px-[8px] text-body-s font-[var(--font-weight-semibold)] text-[var(--color-text-secondary)]">
+        <MutedPill className="flex h-[24px] min-w-[24px] items-center justify-center rounded-full px-[7px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-secondary)]">
           {item.counter}
         </MutedPill>
       )}
       {item.badgeLabel && (
-        <span className="rounded-[12px] bg-[#d7f3df] px-[10px] py-[4px] text-body-s font-[var(--font-weight-semibold)] text-[#11a857]">
+        <span className="rounded-[11px] bg-[#d7f3df] px-[9px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[#12ac58]">
           {item.badgeLabel}
         </span>
       )}
-      <span className="flex h-[24px] w-[24px] items-center justify-center text-[24px] leading-none text-[var(--color-text-tertiary)]">
+      <span className="flex h-[22px] w-[22px] items-center justify-center text-[22px] leading-none text-[var(--color-text-tertiary)]">
         ›
       </span>
     </HStack>
@@ -701,14 +703,14 @@ const MenuCell = ({ item, showSeparator }) => (
     {showSeparator && (
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-[60px] right-[16px] h-[1px] bg-[var(--color-border-subtle)]"
+        className="pointer-events-none absolute bottom-0 left-[56px] right-[14px] h-[1px] bg-[var(--color-border-subtle)]"
       />
     )}
   </button>
 );
 
 const MenuGroup = ({ items }) => (
-  <Island className="overflow-hidden rounded-[24px]">
+  <Island className="overflow-hidden rounded-[22px]">
     {items.map((item, index) => (
       <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
     ))}
@@ -727,22 +729,22 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
       aria-label="Закрыть меню"
       onClick={onClose}
       className={`absolute inset-0 bg-black transition-opacity duration-200 ${
-        isOpen ? "pointer-events-auto opacity-40" : "pointer-events-none opacity-0"
+        isOpen ? "pointer-events-auto opacity-43" : "pointer-events-none opacity-0"
       }`}
     />
 
     <aside
       id="profile-menu-sheet"
-      className={`absolute bottom-0 right-0 top-[70px] flex w-[358px] max-w-full flex-col gap-[8px] overflow-y-auto px-[8px] pb-[10px] pt-[8px] transition-transform duration-200 ease-out ${
+      className={`absolute bottom-0 right-0 top-[72px] flex w-[390px] max-w-full flex-col gap-[5px] overflow-y-auto px-[0] pb-[8px] pt-[6px] transition-transform duration-200 ease-out ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
       role="dialog"
       aria-modal="true"
       aria-label="Меню профиля"
     >
-      <Island className="rounded-[24px] p-[16px]">
+      <Island className="rounded-[22px] px-[16px] py-[10px]">
         <HStack className="justify-between">
-          <p className="text-title-l font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+          <p className="text-[20px] font-[var(--font-weight-semibold)] leading-[24px] text-[var(--color-text-primary)]">
             Меню
           </p>
           <button
@@ -751,8 +753,8 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
             aria-label="Закрыть меню"
             className="border-0 bg-transparent p-0"
           >
-            <MutedPill className="flex h-[40px] w-[40px] items-center justify-center rounded-full">
-              <span className="text-[30px] leading-none text-[var(--color-text-secondary)]">×</span>
+            <MutedPill className="flex h-[32px] w-[32px] items-center justify-center rounded-full">
+              <span className="text-[24px] leading-none text-[var(--color-text-secondary)]">×</span>
             </MutedPill>
           </button>
         </HStack>
