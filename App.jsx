@@ -546,7 +546,7 @@ const MegaPromoWidget = ({ debugStyle, status = "ready", cards = [] }) => {
 
   if (!useIslandLayout) {
     return (
-      <div className="px-[var(--space-4)] pt-[var(--space-1)]" style={debugStyle}>
+      <div className="mt-[var(--space-2)] mb-[var(--space-2)] px-[var(--space-4)]" style={debugStyle}>
         {status === "loading" && <MegaPromoSkeleton />}
 
         {status === "error" && (
