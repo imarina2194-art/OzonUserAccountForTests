@@ -712,7 +712,7 @@ const MenuCell = ({ item, showSeparator }) => (
     {showSeparator && (
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-[56px] right-[14px] h-[1px] bg-[var(--color-border-subtle)]"
+        className="pointer-events-none absolute bottom-0 left-[56px] right-[12px] h-px bg-[#d8dee8]"
       />
     )}
   </button>
