@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const mockUser = {
   name: "Марина И.",
@@ -65,36 +65,36 @@ const financeCells = [
 
 const megaPromoCards = [
   {
-    id: "promo-cashback",
-    type: "Персональная",
-    title: "Новые категории кэшбека",
-    subtitle: "До 30% в товарах для дома и спорта",
-    cta: "Выбрать категории",
-    accent: false,
+    id: "promo-1rub",
+    label: "Персональная выгода",
+    title: "Товары за 1 ₽",
+    subtitle: "Подборка любимых категорий",
+    accent: "linear-gradient(145deg, var(--color-surface) 0%, var(--color-surface-muted) 100%)",
+    icon: "🛍️",
   },
   {
     id: "promo-savings",
-    type: "Финансы",
+    label: "Финансы",
     title: "Накопительный счёт 18.5%",
     subtitle: "Открытие онлайн за 5 минут",
-    cta: "Подробнее",
-    accent: true,
+    accent: "linear-gradient(145deg, var(--color-cell-button-bg) 0%, var(--color-surface) 100%)",
+    icon: "💰",
   },
   {
     id: "promo-premium",
-    type: "Лояльность",
+    label: "Лояльность",
     title: "Ozon Premium",
-    subtitle: "Доставка и закрытые предложения",
-    cta: "Подключить",
-    accent: false,
+    subtitle: "Больше привилегий в каждом заказе",
+    accent: "linear-gradient(145deg, var(--color-surface-muted) 0%, var(--color-surface) 100%)",
+    icon: "👑",
   },
   {
     id: "promo-morkovsk",
-    type: "Механика",
+    label: "Механика",
     title: "Морковск · 312 🥕",
-    subtitle: "Суперприз сезона — квартира",
-    cta: "Узнать условия",
-    accent: false,
+    subtitle: "Суперприз сезона",
+    accent: "linear-gradient(145deg, var(--color-surface) 0%, var(--color-cell-button-bg) 100%)",
+    icon: "🥕",
   },
 ];
 
@@ -427,37 +427,118 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
-const MegaPromoCell = ({ card }) => (
-  <MutedPill
-    className={`rounded-[var(--radius-s)] p-[var(--space-2)] ${
-      card.accent ? "bg-[var(--color-cell-button-bg)]" : ""
-    }`}
+const PromoCard = ({ card }) => (
+  <article
+    className="relative h-[158px] w-[312px] flex-none snap-start overflow-hidden rounded-[var(--radius-24)] p-[var(--space-3)]"
+    style={{ background: card.accent }}
   >
-    <HStack className="justify-between gap-[var(--space-2)]">
-      <div className="min-w-0">
-        <p className="text-body-s text-[var(--color-text-secondary)]">{card.type}</p>
-        <p className="text-title-cell mt-[2px] truncate text-[var(--color-text-primary)]">{card.title}</p>
-      </div>
-      <span className="text-body-s text-[var(--color-text-secondary)]">›</span>
-    </HStack>
-    <p className="text-body-s mt-[var(--space-0_5)] line-clamp-2 text-[var(--color-text-secondary)]">
-      {card.subtitle}
-    </p>
-    <p className="text-body-s mt-[var(--space-1)] font-[var(--font-weight-medium)] text-[var(--color-text-link)]">
-      {card.cta}
-    </p>
-  </MutedPill>
+    <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>
+    <p className="text-title-l mt-[var(--space-1)] line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
+    <p className="text-body-m mt-[var(--space-0_5)] line-clamp-1 text-[var(--color-text-secondary)]">{card.subtitle}</p>
+    <span className="absolute bottom-[var(--space-3)] right-[var(--space-3)] text-[28px] leading-none" aria-hidden>
+      {card.icon}
+    </span>
+  </article>
 );
 
+const PromoCarousel = ({ cards }) => {
+  const trackRef = useRef(null);
+  const resumeTimeoutRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const pauseAutoplay = () => {
+    setIsPaused(true);
+    if (resumeTimeoutRef.current) {
+      window.clearTimeout(resumeTimeoutRef.current);
+    }
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, 8000);
+  };
+
+  useEffect(() => {
+    if (!cards.length || isPaused) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      const nextIndex = (activeIndex + 1) % cards.length;
+      const container = trackRef.current;
+      const nextCard = container?.children?.[nextIndex];
+      if (!container || !nextCard) {
+        return;
+      }
+
+      nextCard.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      setActiveIndex(nextIndex);
+    }, 7000);
+
+    return () => window.clearInterval(timer);
+  }, [activeIndex, cards.length, isPaused]);
+
+  useEffect(() => {
+    const container = trackRef.current;
+    if (!container) {
+      return undefined;
+    }
+
+    const updateActive = () => {
+      const cardWidth = 320;
+      const index = Math.round(container.scrollLeft / cardWidth);
+      const safeIndex = Math.max(0, Math.min(cards.length - 1, index));
+      setActiveIndex(safeIndex);
+    };
+
+    container.addEventListener("scroll", updateActive, { passive: true });
+
+    return () => container.removeEventListener("scroll", updateActive);
+  }, [cards.length]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) {
+        window.clearTimeout(resumeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="mt-[var(--space-2)]">
+      <div
+        ref={trackRef}
+        className="flex snap-x snap-mandatory gap-[var(--space-2)] overflow-x-auto scroll-smooth pr-[var(--space-4)]"
+        onTouchStart={pauseAutoplay}
+        onMouseDown={pauseAutoplay}
+        onWheel={pauseAutoplay}
+      >
+        {cards.map((card) => (
+          <PromoCard key={card.id} card={card} />
+        ))}
+      </div>
+      <HStack className="mt-[var(--space-2)] justify-center gap-[6px]">
+        {cards.map((card, index) => (
+          <span
+            key={card.id}
+            className={`h-[6px] w-[6px] rounded-full ${
+              index === activeIndex ? "bg-[var(--color-text-primary)]" : "bg-[var(--color-border-divider)]"
+            }`}
+          />
+        ))}
+      </HStack>
+    </div>
+  );
+};
+
 const MegaPromoSkeleton = () => (
-  <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]" aria-hidden>
-    {["s1", "s2", "s3", "s4"].map((id) => (
-      <MutedPill key={id} className="h-[84px] animate-pulse rounded-[var(--radius-s)]" />
+  <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]" aria-hidden>
+    {["s1", "s2"].map((id) => (
+      <MutedPill key={id} className="h-[158px] w-[312px] flex-none animate-pulse rounded-[var(--radius-24)]" />
     ))}
   </div>
 );
 
-const MegaPromoSection = ({ debugStyle, status = "ready", cards = [] }) => {
+const MegaPromoWidget = ({ debugStyle, status = "ready", cards = [] }) => {
   if (status === "empty") {
     return null;
   }
@@ -479,15 +560,7 @@ const MegaPromoSection = ({ debugStyle, status = "ready", cards = [] }) => {
         </MutedPill>
       )}
 
-      {status === "ready" && cards.length > 0 && (
-        // Simplified from banner-like cards to compact cells to reduce visual overload.
-        <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
-          {cards.slice(0, 4).map((card) => (
-            // Text-first composition keeps scanning fast and avoids ad-like emphasis.
-            <MegaPromoCell key={card.id} card={card} />
-          ))}
-        </div>
-      )}
+      {status === "ready" && cards.length > 0 && <PromoCarousel cards={cards.slice(0, 4)} />}
     </Island>
   );
 };
@@ -772,7 +845,7 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <MegaPromoSection debugStyle={debugStyle} status="ready" cards={megaPromoCards} />
+            <MegaPromoWidget debugStyle={debugStyle} status="ready" cards={megaPromoCards} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
