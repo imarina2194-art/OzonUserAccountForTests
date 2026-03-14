@@ -647,25 +647,27 @@ const HomeIndicator = () => (
   </div>
 );
 
+const menuIconBaseUrl = "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/";
+
 const profileMenuGroups = [
   [
-    { id: "orders", title: "Заказы", icon: "📦", counter: "2" },
-    { id: "returns", title: "Возвраты", icon: "↩" },
-    { id: "travel", title: "Билеты, отели и туры", icon: "✈" },
-    { id: "feed", title: "Лента обзоров", icon: "▶" },
+    { id: "orders", title: "Заказы", iconName: "order_icon.png", counter: "2" },
+    { id: "returns", title: "Возвраты", iconName: "returns_icon.png" },
+    { id: "travel", title: "Билеты, отели и туры", iconName: "travel_icon.png" },
+    { id: "feed", title: "Лента обзоров", iconName: "media_icon.png" },
   ],
   [
-    { id: "codes", title: "Коды и сертификаты", icon: "🎟" },
-    { id: "balance", title: "Баланс средств", icon: "💳" },
-    { id: "premium", title: "Ozon Premium", icon: "👑" },
-    { id: "business", title: "Закупки для бизнеса", icon: "🧾" },
+    { id: "codes", title: "Коды и сертификаты", iconName: "certificates_icon.png" },
+    { id: "balance", title: "Баланс средств", iconName: "balance_icon.png" },
+    { id: "premium", title: "Ozon Premium", iconName: "premium_icon.png" },
+    { id: "business", title: "Закупки для бизнеса", iconName: "business_icon.png" },
   ],
   [
-    { id: "settings", title: "Настройки", icon: "⚙" },
-    { id: "family", title: "Моя семья", icon: "👨", badgeLabel: "Новое" },
-    { id: "jobs", title: "Вакансии", icon: "🪖" },
-    { id: "language", title: "Язык", icon: "🌐" },
-    { id: "help", title: "Помощь и приложение", icon: "❔" },
+    { id: "settings", title: "Настройки", iconName: "settings_icon.png" },
+    { id: "family", title: "Моя семья", iconName: "family_icon.png", badgeLabel: "Новое" },
+    { id: "jobs", title: "Вакансии", iconName: "vacancies_icon.png" },
+    { id: "language", title: "Язык", iconName: "language_icon.png" },
+    { id: "help", title: "Помощь и приложение", iconName: "help_icon.png" },
   ],
 ];
 
@@ -677,7 +679,11 @@ const MenuCell = ({ item, showSeparator }) => (
   >
     <HStack className="min-w-0 flex-1 gap-[10px]">
       <MutedPill className="flex h-[30px] w-[30px] flex-none items-center justify-center rounded-[10px] text-[15px] leading-none text-[var(--color-text-secondary)]">
-        {item.icon}
+        <img
+          src={`${menuIconBaseUrl}${item.iconName}`}
+          alt=""
+          className="h-[17px] w-[17px] object-contain opacity-90"
+        />
       </MutedPill>
       <span className="truncate text-[13px] font-[var(--font-weight-regular)] leading-[18px] text-[var(--color-text-primary)]">
         {item.title}
