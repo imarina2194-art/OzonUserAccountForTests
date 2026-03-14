@@ -751,7 +751,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
       aria-modal="true"
       aria-label="Меню профиля"
     >
-      <div className="min-h-0 flex-1 overflow-y-auto px-[10px] pb-[10px]">
+      <div className="min-h-0 flex-1 overflow-y-auto px-0 pb-[10px]">
         <div className="rounded-[18px] px-[16px] py-[10px]">
           <HStack className="justify-between">
             <p className="text-[20px] font-[var(--font-weight-semibold)] leading-[24px] text-[var(--color-text-primary)]">
@@ -770,7 +770,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
           </HStack>
         </div>
 
-        <VStack className="gap-[6px] rounded-[16px] bg-[var(--color-bg-page)] p-[2px]">
+        <VStack className="w-[390px] gap-[6px] rounded-[16px] bg-[var(--color-bg-page)] p-[2px]">
           {sections.map((group, groupIndex) => (
             <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
           ))}
