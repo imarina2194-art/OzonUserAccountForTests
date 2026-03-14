@@ -770,7 +770,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
           </HStack>
         </div>
 
-        <VStack className="w-[390px] gap-[6px] rounded-[16px] bg-[var(--color-bg-page)] p-[2px]">
+        <VStack className="w-[390px] gap-[6px] bg-[var(--color-bg-page)]">
           {sections.map((group, groupIndex) => (
             <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
           ))}
