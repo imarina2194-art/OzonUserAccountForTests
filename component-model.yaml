@@ -314,3 +314,30 @@ BottomNavTabItem:
     - unread
   Children:
     - Badge
+
+ProfileMenuSheet:
+  Props:
+    - isOpen (boolean)
+    - groups (array)
+  Variants:
+    - closed
+    - open
+  States:
+    - hidden
+    - visible
+  Children:
+    - Cell
+
+ProfileHomeScreenState:
+  Props:
+    - isMenuOpen (boolean)
+  Variants:
+    - contentOnly
+    - contentWithMenuOverlay
+  States:
+    - default
+  Children:
+    - AccountHeader
+    - ProfileMenuSheet
+    - BottomNavigationBar
+

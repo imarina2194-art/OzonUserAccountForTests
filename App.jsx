@@ -330,12 +330,13 @@ const DeviceFrame = ({ children, debug }) => (
   </div>
 );
 
-const IconButton = ({ iconName, badgeIconName, onClick, ariaLabel, ariaExpanded }) => (
+const IconButton = ({ iconName, badgeIconName, onClick, ariaLabel, ariaExpanded, ariaControls }) => (
   <button
     onClick={onClick}
     type="button"
     aria-label={ariaLabel}
     aria-expanded={ariaExpanded}
+    aria-controls={ariaControls}
     className="relative flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
   >
     <span className="block h-[24px] w-[24px]">
@@ -711,6 +712,7 @@ const ProfileMenuSheet = ({ isOpen, onClose }) => (
     />
 
     <aside
+      id="profile-menu-sheet"
       className={`absolute bottom-[0] right-0 top-[72px] flex w-[358px] max-w-full flex-col gap-[var(--space-1)] overflow-y-auto rounded-tl-[32px] bg-transparent pb-[10px] pt-[10px] shadow-[0_10px_32px_rgba(0,0,0,0.22)] transition-transform duration-200 ease-out ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
@@ -752,6 +754,14 @@ const App = ({ debug }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
     if (!isMenuOpen) {
       return undefined;
@@ -759,7 +769,7 @@ const App = ({ debug }) => {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        setIsMenuOpen(false);
+        closeMenu();
       }
     };
 
@@ -784,7 +794,7 @@ const App = ({ debug }) => {
     <div className="relative flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
       <div
-        className="sticky top-0 z-20 w-full"
+        className={`sticky top-0 w-full ${isMenuOpen ? "z-50" : "z-20"}`}
         style={debugStyle}
       >
         <HStack className="relative box-border h-[var(--size-header-h)] w-[390px] items-center pl-[var(--space-4)] pr-0">
@@ -819,7 +829,8 @@ const App = ({ debug }) => {
               iconName="menu"
               ariaLabel="Открыть меню профиля"
               ariaExpanded={isMenuOpen}
-              onClick={() => setIsMenuOpen((prev) => !prev)}
+              ariaControls="profile-menu-sheet"
+              onClick={toggleMenu}
             />
           </div>
         </HStack>
@@ -891,7 +902,7 @@ const App = ({ debug }) => {
       </div>
       <BottomNav debugStyle={debugStyle} />
       <HomeIndicator />
-      <ProfileMenuSheet isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <ProfileMenuSheet isOpen={isMenuOpen} onClose={closeMenu} />
     </div>
   );
 };
