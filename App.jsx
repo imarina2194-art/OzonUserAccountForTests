@@ -744,7 +744,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
 
     <aside
       id="profile-menu-sheet"
-      className={`absolute bottom-0 left-0 right-0 flex h-[calc(100%-116px)] w-full flex-col overflow-hidden rounded-t-[28px] bg-[var(--color-surface)] pt-[10px] transition-transform duration-200 ease-out ${
+      className={`absolute bottom-0 left-0 right-0 flex h-[calc(100%-100px)] w-full flex-col overflow-hidden rounded-t-[28px] bg-[var(--color-surface)] pt-[10px] transition-transform duration-200 ease-out ${
         isOpen ? "translate-y-0" : "translate-y-full"
       }`}
       role="dialog"
