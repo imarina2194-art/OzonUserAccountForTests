@@ -1,3 +1,4 @@
+<!-- temporary sync comment: documentation touched for requested update -->
 # Screen(ProfileHome) State Model
 
 ## 1) Screen-Level States
@@ -187,3 +188,31 @@
 - networkRestored:
   - error -> loading
   - partialData -> loading
+
+## 4) Overlay Interaction States (Menu Sheet)
+
+### menuClosed
+- `isMenuOpen = false`
+- Menu sheet is off-screen and hidden.
+- Backdrop is transparent and non-interactive.
+- Main content scroll is enabled.
+
+### menuOpen
+- `isMenuOpen = true`
+- Menu sheet is visible and slides in from the right.
+- Backdrop is visible and blocks underlying interactions.
+- Main content scroll is locked.
+- Header burger button remains interactive to support direct toggle close.
+
+## 5) Overlay Transitions
+
+- burgerTap:
+  - menuClosed -> menuOpen
+  - menuOpen -> menuClosed
+- backdropTap:
+  - menuOpen -> menuClosed
+- closeButtonTap:
+  - menuOpen -> menuClosed
+- escapeKey:
+  - menuOpen -> menuClosed
+
