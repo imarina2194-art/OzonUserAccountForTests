@@ -444,7 +444,7 @@ const PromoCard = ({ card }) => (
 const PromoCarousel = ({ cards }) => {
   const trackRef = useRef(null);
   const resumeTimeoutRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const pauseAutoplay = () => {
@@ -463,19 +463,23 @@ const PromoCarousel = ({ cards }) => {
     }
 
     const timer = window.setInterval(() => {
-      const nextIndex = (activeIndex + 1) % cards.length;
       const container = trackRef.current;
-      const nextCard = container?.children?.[nextIndex];
-      if (!container || !nextCard) {
+      if (!container) {
+        return;
+      }
+
+      const nextIndex = (activeIndexRef.current + 1) % cards.length;
+      const nextCard = container.children?.[nextIndex];
+      if (!nextCard) {
         return;
       }
 
       nextCard.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-      setActiveIndex(nextIndex);
+      activeIndexRef.current = nextIndex;
     }, 7000);
 
     return () => window.clearInterval(timer);
-  }, [activeIndex, cards.length, isPaused]);
+  }, [cards.length, isPaused]);
 
   useEffect(() => {
     const container = trackRef.current;
@@ -486,8 +490,7 @@ const PromoCarousel = ({ cards }) => {
     const updateActive = () => {
       const cardWidth = 320;
       const index = Math.round(container.scrollLeft / cardWidth);
-      const safeIndex = Math.max(0, Math.min(cards.length - 1, index));
-      setActiveIndex(safeIndex);
+      activeIndexRef.current = Math.max(0, Math.min(cards.length - 1, index));
     };
 
     container.addEventListener("scroll", updateActive, { passive: true });
@@ -516,16 +519,6 @@ const PromoCarousel = ({ cards }) => {
           <PromoCard key={card.id} card={card} />
         ))}
       </div>
-      <HStack className="mt-[var(--space-2)] justify-center gap-[6px]">
-        {cards.map((card, index) => (
-          <span
-            key={card.id}
-            className={`h-[6px] w-[6px] rounded-full ${
-              index === activeIndex ? "bg-[var(--color-text-primary)]" : "bg-[var(--color-border-divider)]"
-            }`}
-          />
-        ))}
-      </HStack>
     </div>
   );
 };
