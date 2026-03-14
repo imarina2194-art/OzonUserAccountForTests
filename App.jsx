@@ -718,8 +718,12 @@ const MenuCell = ({ item, showSeparator }) => (
   </button>
 );
 
-const MenuGroup = ({ items }) => (
-  <div className="overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
+const MenuGroup = ({ items, isFirstGroup }) => (
+  <div
+    className={`overflow-hidden bg-[var(--color-surface)] ${
+      isFirstGroup ? "rounded-t-none rounded-b-[16px]" : "rounded-[16px]"
+    }`}
+  >
     {items.map((item, index) => (
       <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
     ))}
@@ -772,7 +776,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
 
         <VStack className="w-[390px] gap-[6px] bg-[var(--color-bg-page)]">
           {sections.map((group, groupIndex) => (
-            <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
+            <MenuGroup key={`menu-group-${groupIndex}`} items={group} isFirstGroup={groupIndex === 0} />
           ))}
         </VStack>
       </div>
