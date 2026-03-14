@@ -314,3 +314,84 @@ BottomNavTabItem:
     - unread
   Children:
     - Badge
+
+ProfileMenuSheet:
+  Props:
+    - isOpen (boolean)
+    - groups (array)
+  Variants:
+    - closed
+    - open
+  States:
+    - hidden
+    - visible
+  Children:
+    - Cell
+
+ProfileHomeScreenState:
+  Props:
+    - isMenuOpen (boolean)
+  Variants:
+    - contentOnly
+    - contentWithMenuOverlay
+  States:
+    - default
+  Children:
+    - AccountHeader
+    - ProfileMenuSheet
+    - BottomNavigationBar
+
+
+MenuSheet:
+  Props:
+    - title (string)
+    - isOpen (boolean)
+    - sections (array)
+    - closeButtonAriaLabel (string)
+    - dismissOnBackdropTap (boolean)
+  Variants:
+    - default
+  States:
+    - closed
+    - open
+  Children:
+    - IconButton
+    - MenuGroup
+
+MenuGroup:
+  Props:
+    - items (array)
+    - showSeparators (boolean)
+  Variants:
+    - default
+  States:
+    - default
+  Children:
+    - MenuCell
+
+MenuCell:
+  Props:
+    - leftIconName (string)
+    - title (string)
+    - badgeValue (string)
+    - badgeLabel (string)
+    - badgeStyle (string)
+    - showChevron (boolean)
+    - deepLink (string)
+    - showSeparator (boolean)
+    - isEmphasized (boolean)
+  Variants:
+    - default
+    - withCounter
+    - withLabelBadge
+    - iconTitleChevron
+    - iconTitleCounterChevron
+    - iconTitleLabelBadgeChevron
+  States:
+    - default
+    - pressed
+    - disabled
+  Children:
+    - IconButton
+    - Badge
+    - Text
