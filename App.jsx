@@ -729,7 +729,7 @@ const MenuGroup = ({ items }) => (
 const MenuSheet = ({ isOpen, onClose, sections }) => (
   <div
     className={`absolute inset-0 z-40 transition-[visibility] duration-200 ${
-      isOpen ? "visible" : "invisible"
+      isOpen ? "visible pointer-events-auto" : "invisible pointer-events-none"
     }`}
     aria-hidden={!isOpen}
   >
