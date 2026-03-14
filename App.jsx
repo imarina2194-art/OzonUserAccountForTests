@@ -433,7 +433,6 @@ const PromoCard = ({ card }) => (
     style={{ background: card.accent }}
   >
     <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-1)]">
-      {card.label && <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>}
       <p className="text-title-cell line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
       <p className="text-body-m line-clamp-2 text-[var(--color-text-secondary)]">{card.subtitle}</p>
     </div>
