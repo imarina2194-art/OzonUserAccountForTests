@@ -429,7 +429,7 @@ const OrderTrackingCard = ({ order }) => (
 
 const PromoCard = ({ card }) => (
   <article
-    className="flex h-[104px] w-[312px] flex-none snap-start items-center overflow-hidden rounded-[var(--radius-32)] p-[var(--space-4)] shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+    className="flex h-[104px] w-[312px] flex-none snap-start items-center overflow-hidden rounded-[var(--radius-24)] p-[var(--space-4)]"
     style={{ background: card.accent }}
   >
     <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-1)]">
@@ -534,7 +534,7 @@ const useIslandLayout = false;
 const MegaPromoSkeleton = () => (
   <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]" aria-hidden>
     {["s1", "s2"].map((id) => (
-      <MutedPill key={id} className="h-[104px] w-[312px] flex-none animate-pulse rounded-[var(--radius-32)]" />
+      <MutedPill key={id} className="h-[104px] w-[312px] flex-none animate-pulse rounded-[var(--radius-24)]" />
     ))}
   </div>
 );
