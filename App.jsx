@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// temporary sync comment: no functional changes, update requested for commit flow
 
 const mockUser = {
   name: "Марина И.",

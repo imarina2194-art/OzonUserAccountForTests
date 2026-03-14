@@ -1,3 +1,4 @@
+<!-- temporary sync comment: documentation touched for requested update -->
 # Screen(ProfileHome) State Model
 
 ## 1) Screen-Level States
