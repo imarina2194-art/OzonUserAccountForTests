@@ -695,8 +695,12 @@ const MenuCell = ({ item, showSeparator }) => (
           {item.badgeLabel}
         </span>
       )}
-      <span className="flex h-[22px] w-[22px] items-center justify-center text-[22px] leading-none text-[var(--color-text-tertiary)]">
-        ›
+      <span className="flex h-[22px] w-[22px] items-center justify-center">
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+          alt=""
+          className="h-[22px] w-[22px] object-contain opacity-70"
+        />
       </span>
     </HStack>
 
