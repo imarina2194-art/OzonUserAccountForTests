@@ -862,11 +862,11 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <MegaPromoWidget debugStyle={debugStyle} status="ready" cards={megaPromoCards} />
+            <FinanceSection debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <FinanceSection debugStyle={debugStyle} />
+            <MegaPromoWidget debugStyle={debugStyle} status="ready" cards={megaPromoCards} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
