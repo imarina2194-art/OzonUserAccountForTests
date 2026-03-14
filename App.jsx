@@ -498,9 +498,6 @@ const MegaPromoSection = ({ debugStyle }) => (
         Скрыть на 7 дней
       </button>
     </HStack>
-    <p className="text-body-s mt-[var(--space-1)] text-[var(--color-text-secondary)]">
-      Собрали важное для вас в одном месте — без лишнего шума в ленте.
-    </p>
     <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]">
       {megaPromoCards.map((card) => (
         <MegaPromoCard key={card.id} card={card} />
@@ -525,36 +522,23 @@ const FinanceSection = ({ debugStyle }) => (
       </div>
     </HStack>
     <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
-      <VStack className="gap-[var(--space-2)]">
-        {financeCells.map((cell) => (
-          <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <div className="flex items-center gap-[2px]">
-              <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-                {cell.title}
-              </p>
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-                alt=""
-                className="h-[16px] w-[16px] object-contain"
-              />
-            </div>
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              {cell.value}
+      {financeCells.map((cell) => (
+        <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
+          <div className="flex items-center gap-[2px]">
+            <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+              {cell.title}
             </p>
-          </MutedPill>
-        ))}
-      </VStack>
-      <MutedPill className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-        <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-          Кредитный лимит
-        </p>
-        <p className="text-title-m mt-[var(--space-1)] font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-          до 780 000 ₽
-        </p>
-        <p className="text-body-s mt-[var(--space-0_5)] text-[var(--color-text-secondary)]">
-          Платёж 17 октября
-        </p>
-      </MutedPill>
+            <img
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+              alt=""
+              className="h-[16px] w-[16px] object-contain"
+            />
+          </div>
+          <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+            {cell.value}
+          </p>
+        </MutedPill>
+      ))}
     </div>
   </Island>
 );
