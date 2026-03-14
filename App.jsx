@@ -429,15 +429,24 @@ const OrderTrackingCard = ({ order }) => (
 
 const PromoCard = ({ card }) => (
   <article
-    className="relative h-[158px] w-[312px] flex-none snap-start overflow-hidden rounded-[var(--radius-24)] p-[var(--space-3)]"
+    className="h-[136px] w-[312px] flex-none snap-start overflow-hidden rounded-[var(--radius-24)] p-[var(--space-3)]"
     style={{ background: card.accent }}
   >
-    <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>
-    <p className="text-title-l mt-[var(--space-1)] line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
-    <p className="text-body-m mt-[var(--space-0_5)] line-clamp-1 text-[var(--color-text-secondary)]">{card.subtitle}</p>
-    <span className="absolute bottom-[var(--space-3)] right-[var(--space-3)] text-[28px] leading-none" aria-hidden>
-      {card.icon}
-    </span>
+    <div className="flex h-full items-stretch">
+      <div className="flex w-[62%] min-w-0 flex-col justify-start gap-[var(--space-1)]">
+        <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>
+        <p className="text-title-l line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
+        <p className="text-body-m line-clamp-2 text-[var(--color-text-secondary)]">{card.subtitle}</p>
+      </div>
+      <div className="flex w-[38%] items-center justify-center pl-[var(--space-2)]">
+        <span
+          className="flex h-[52px] w-[52px] items-center justify-center rounded-[var(--radius-l)] bg-[var(--color-surface)] text-[28px] leading-none"
+          aria-hidden
+        >
+          {card.icon}
+        </span>
+      </div>
+    </div>
   </article>
 );
 
@@ -526,7 +535,7 @@ const PromoCarousel = ({ cards }) => {
 const MegaPromoSkeleton = () => (
   <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]" aria-hidden>
     {["s1", "s2"].map((id) => (
-      <MutedPill key={id} className="h-[158px] w-[312px] flex-none animate-pulse rounded-[var(--radius-24)]" />
+      <MutedPill key={id} className="h-[136px] w-[312px] flex-none animate-pulse rounded-[var(--radius-24)]" />
     ))}
   </div>
 );
