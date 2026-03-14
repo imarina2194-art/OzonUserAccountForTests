@@ -330,9 +330,12 @@ const DeviceFrame = ({ children, debug }) => (
   </div>
 );
 
-const IconButton = ({ iconName, badgeIconName, onClick }) => (
+const IconButton = ({ iconName, badgeIconName, onClick, ariaLabel, ariaExpanded }) => (
   <button
     onClick={onClick}
+    type="button"
+    aria-label={ariaLabel}
+    aria-expanded={ariaExpanded}
     className="relative flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
   >
     <span className="block h-[24px] w-[24px]">
@@ -643,9 +646,126 @@ const HomeIndicator = () => (
   </div>
 );
 
+const profileMenuGroups = [
+  [
+    { id: "orders", title: "Заказы", icon: "📦", count: "2" },
+    { id: "returns", title: "Возвраты", icon: "↩︎" },
+    { id: "travel", title: "Билеты, отели и туры", icon: "✈︎" },
+    { id: "feed", title: "Лента обзоров", icon: "▶" },
+  ],
+  [
+    { id: "codes", title: "Коды и сертификаты", icon: "🎟" },
+    { id: "balance", title: "Баланс средств", icon: "💳" },
+    { id: "premium", title: "Ozon Premium", icon: "👑" },
+    { id: "business", title: "Закупки для бизнеса", icon: "🧾" },
+  ],
+  [
+    { id: "settings", title: "Настройки", icon: "⚙" },
+    { id: "family", title: "Моя семья", icon: "👨‍👩‍👧‍👦", badge: "Новое" },
+    { id: "jobs", title: "Вакансии", icon: "🪖" },
+    { id: "language", title: "Язык", icon: "🌐" },
+    { id: "help", title: "Помощь и приложение", icon: "❔" },
+  ],
+];
+
+const ProfileMenuRow = ({ item, isLast }) => (
+  <button
+    type="button"
+    onClick={() => console.log("Navigate menu item", item.id)}
+    className={`flex w-full items-center gap-[12px] px-[var(--space-4)] py-[14px] text-left ${
+      isLast ? "" : "border-b border-[var(--color-border-subtle)]"
+    }`}
+  >
+    <MutedPill className="flex h-[44px] w-[44px] items-center justify-center rounded-[12px] text-[22px] leading-none text-[var(--color-text-secondary)]">
+      {item.icon}
+    </MutedPill>
+    <span className="min-w-0 flex-1 text-title-l text-[var(--color-text-primary)]">{item.title}</span>
+    {item.count && (
+      <MutedPill className="mr-[2px] flex h-[40px] w-[40px] items-center justify-center rounded-full text-title-s text-[var(--color-text-secondary)]">
+        {item.count}
+      </MutedPill>
+    )}
+    {item.badge && (
+      <span className="rounded-[14px] bg-[#d2f3de] px-[12px] py-[5px] text-title-s font-[var(--font-weight-semibold)] text-[#1db954]">
+        {item.badge}
+      </span>
+    )}
+    <span className="text-[40px] leading-[0.65] text-[var(--color-text-tertiary)]">›</span>
+  </button>
+);
+
+const ProfileMenuSheet = ({ isOpen, onClose }) => (
+  <div
+    className={`absolute inset-0 z-40 transition-[visibility] duration-200 ${
+      isOpen ? "visible" : "invisible"
+    }`}
+    aria-hidden={!isOpen}
+  >
+    <button
+      type="button"
+      aria-label="Закрыть меню"
+      onClick={onClose}
+      className={`absolute inset-0 bg-black transition-opacity duration-200 ${
+        isOpen ? "pointer-events-auto opacity-45" : "pointer-events-none opacity-0"
+      }`}
+    />
+
+    <aside
+      className={`absolute bottom-[0] right-0 top-[72px] flex w-[358px] max-w-full flex-col gap-[var(--space-1)] overflow-y-auto rounded-tl-[32px] bg-transparent pb-[10px] pt-[10px] shadow-[0_10px_32px_rgba(0,0,0,0.22)] transition-transform duration-200 ease-out ${
+        isOpen ? "translate-x-0" : "translate-x-full"
+      }`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Меню профиля"
+    >
+      <Island className="rounded-[32px] rounded-br-[20px] p-[var(--space-4)]">
+        <HStack className="justify-between">
+          <p className="text-[44px] leading-[44px] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)]">
+            Меню
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Закрыть меню"
+            className="border-0 bg-transparent p-0"
+          >
+            <MutedPill className="flex h-[56px] w-[56px] items-center justify-center rounded-full">
+              <span className="text-[54px] leading-[0.75] text-[var(--color-text-secondary)]">×</span>
+            </MutedPill>
+          </button>
+        </HStack>
+      </Island>
+
+      {profileMenuGroups.map((group, groupIndex) => (
+        <Island key={`group-${groupIndex}`} className="overflow-hidden rounded-[32px]">
+          {group.map((item, itemIndex) => (
+            <ProfileMenuRow key={item.id} item={item} isLast={itemIndex === group.length - 1} />
+          ))}
+        </Island>
+      ))}
+    </aside>
+  </div>
+);
+
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
 
   const toggleFavorite = (id) => {
     setFavorites((prev) => {
@@ -661,7 +781,7 @@ const App = ({ debug }) => {
   };
 
   return (
-    <div className="flex h-full w-full min-h-0 flex-col">
+    <div className="relative flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
       <div
         className="sticky top-0 z-20 w-full"
@@ -692,13 +812,19 @@ const App = ({ debug }) => {
             <IconButton
               iconName="chat"
               badgeIconName="chat-badge"
+              ariaLabel="Открыть сообщения"
               onClick={() => console.log("Open messages")}
             />
-            <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
+            <IconButton
+              iconName="menu"
+              ariaLabel="Открыть меню профиля"
+              ariaExpanded={isMenuOpen}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+            />
           </div>
         </HStack>
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto" style={debugStyle}>
+      <div className={`min-h-0 flex-1 ${isMenuOpen ? "overflow-hidden" : "overflow-y-auto"}`} style={debugStyle}>
         <div
           className="w-full box-border"
           style={{ paddingBottom: "calc(var(--size-bottomnav-h) + 34px)" }}
@@ -765,6 +891,7 @@ const App = ({ debug }) => {
       </div>
       <BottomNav debugStyle={debugStyle} />
       <HomeIndicator />
+      <ProfileMenuSheet isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </div>
   );
 };
