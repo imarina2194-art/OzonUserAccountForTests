@@ -450,8 +450,10 @@ const PromoCard = ({ card }) => (
 const PromoCarousel = ({ cards }) => {
   const trackRef = useRef(null);
   const resumeTimeoutRef = useRef(null);
-  const activeIndexRef = useRef(0);
+  const virtualIndexRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
+  const cardStep = 320;
+  const loopedCards = [...cards, ...cards, ...cards];
 
   const pauseAutoplay = () => {
     setIsPaused(true);
@@ -464,6 +466,17 @@ const PromoCarousel = ({ cards }) => {
   };
 
   useEffect(() => {
+    const container = trackRef.current;
+    if (!container || !cards.length) {
+      return;
+    }
+
+    const middleOffset = cards.length * cardStep;
+    container.scrollLeft = middleOffset;
+    virtualIndexRef.current = cards.length;
+  }, [cards.length]);
+
+  useEffect(() => {
     if (!cards.length || isPaused) {
       return undefined;
     }
@@ -474,14 +487,8 @@ const PromoCarousel = ({ cards }) => {
         return;
       }
 
-      const nextIndex = (activeIndexRef.current + 1) % cards.length;
-      const nextCard = container.children?.[nextIndex];
-      if (!nextCard) {
-        return;
-      }
-
-      nextCard.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-      activeIndexRef.current = nextIndex;
+      virtualIndexRef.current += 1;
+      container.scrollTo({ left: virtualIndexRef.current * cardStep, behavior: "smooth" });
     }, 7000);
 
     return () => window.clearInterval(timer);
@@ -489,19 +496,33 @@ const PromoCarousel = ({ cards }) => {
 
   useEffect(() => {
     const container = trackRef.current;
-    if (!container) {
+    if (!container || !cards.length) {
       return undefined;
     }
 
-    const updateActive = () => {
-      const cardWidth = 320;
-      const index = Math.round(container.scrollLeft / cardWidth);
-      activeIndexRef.current = Math.max(0, Math.min(cards.length - 1, index));
+    const segment = cards.length * cardStep;
+
+    const syncLoopPosition = () => {
+      const index = Math.round(container.scrollLeft / cardStep);
+      virtualIndexRef.current = index;
+
+      if (index < cards.length) {
+        const shiftedIndex = index + cards.length;
+        container.scrollLeft = shiftedIndex * cardStep;
+        virtualIndexRef.current = shiftedIndex;
+      } else if (index >= cards.length * 2) {
+        const shiftedIndex = index - cards.length;
+        container.scrollLeft = shiftedIndex * cardStep;
+        virtualIndexRef.current = shiftedIndex;
+      }
+
+      if (container.scrollLeft < segment * 0.25 || container.scrollLeft > segment * 2.75) {
+        container.scrollLeft = (cards.length + (virtualIndexRef.current % cards.length)) * cardStep;
+      }
     };
 
-    container.addEventListener("scroll", updateActive, { passive: true });
-
-    return () => container.removeEventListener("scroll", updateActive);
+    container.addEventListener("scroll", syncLoopPosition, { passive: true });
+    return () => container.removeEventListener("scroll", syncLoopPosition);
   }, [cards.length]);
 
   useEffect(() => {
@@ -521,8 +542,8 @@ const PromoCarousel = ({ cards }) => {
         onMouseDown={pauseAutoplay}
         onWheel={pauseAutoplay}
       >
-        {cards.map((card) => (
-          <PromoCard key={card.id} card={card} />
+        {loopedCards.map((card, index) => (
+          <PromoCard key={`${card.id}-${index}`} card={card} />
         ))}
       </div>
     </div>
