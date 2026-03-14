@@ -529,6 +529,8 @@ const PromoCarousel = ({ cards }) => {
   );
 };
 
+const useIslandLayout = false;
+
 const MegaPromoSkeleton = () => (
   <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]" aria-hidden>
     {["s1", "s2"].map((id) => (
@@ -540,6 +542,22 @@ const MegaPromoSkeleton = () => (
 const MegaPromoWidget = ({ debugStyle, status = "ready", cards = [] }) => {
   if (status === "empty") {
     return null;
+  }
+
+  if (!useIslandLayout) {
+    return (
+      <div className="px-[var(--space-4)] pt-[var(--space-1)]" style={debugStyle}>
+        {status === "loading" && <MegaPromoSkeleton />}
+
+        {status === "error" && (
+          <MutedPill className="mt-[var(--space-2)] rounded-[var(--radius-s)] p-[var(--space-2)]">
+            <p className="text-body-s text-[var(--color-text-secondary)]">Не удалось загрузить предложения</p>
+          </MutedPill>
+        )}
+
+        {status === "ready" && cards.length > 0 && <PromoCarousel cards={cards.slice(0, 4)} />}
+      </div>
+    );
   }
 
   return (
