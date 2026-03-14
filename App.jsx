@@ -678,13 +678,11 @@ const MenuCell = ({ item, showSeparator }) => (
     className="relative flex h-[50px] w-full items-center justify-between px-[16px] py-[8px] text-left"
   >
     <HStack className="min-w-0 flex-1 gap-[10px]">
-      <MutedPill className="flex h-[30px] w-[30px] flex-none items-center justify-center rounded-[10px] text-[15px] leading-none text-[var(--color-text-secondary)]">
-        <img
-          src={`${menuIconBaseUrl}${item.iconName}`}
-          alt=""
-          className="h-[17px] w-[17px] object-contain opacity-90"
-        />
-      </MutedPill>
+      <img
+        src={`${menuIconBaseUrl}${item.iconName}`}
+        alt=""
+        className="h-[32px] w-[32px] flex-none object-contain"
+      />
       <span className="truncate text-[13px] font-[var(--font-weight-regular)] leading-[18px] text-[var(--color-text-primary)]">
         {item.title}
       </span>
