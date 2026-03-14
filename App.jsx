@@ -710,11 +710,11 @@ const MenuCell = ({ item, showSeparator }) => (
 );
 
 const MenuGroup = ({ items }) => (
-  <Island className="overflow-hidden rounded-[22px]">
+  <div className="overflow-hidden rounded-[16px] bg-[var(--color-surface-muted)]">
     {items.map((item, index) => (
       <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
     ))}
-  </Island>
+  </div>
 );
 
 const MenuSheet = ({ isOpen, onClose, sections }) => (
@@ -728,41 +728,45 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
       type="button"
       aria-label="Закрыть меню"
       onClick={onClose}
-      className={`absolute inset-0 bg-black transition-opacity duration-200 ${
-        isOpen ? "pointer-events-auto opacity-43" : "pointer-events-none opacity-0"
+      className={`absolute inset-0 transition-opacity duration-200 ${
+        isOpen ? "pointer-events-auto bg-[rgba(20,31,46,0.10)] opacity-100" : "pointer-events-none opacity-0"
       }`}
     />
 
     <aside
       id="profile-menu-sheet"
-      className={`absolute bottom-0 right-0 top-[72px] flex w-[390px] max-w-full flex-col gap-[5px] overflow-y-auto px-[0] pb-[8px] pt-[6px] transition-transform duration-200 ease-out ${
-        isOpen ? "translate-x-0" : "translate-x-full"
+      className={`absolute bottom-0 left-0 right-0 flex h-[calc(100%-116px)] w-full flex-col overflow-hidden rounded-t-[28px] bg-[var(--color-surface)] pt-[10px] transition-transform duration-200 ease-out ${
+        isOpen ? "translate-y-0" : "translate-y-full"
       }`}
       role="dialog"
       aria-modal="true"
       aria-label="Меню профиля"
     >
-      <Island className="rounded-[22px] px-[16px] py-[10px]">
-        <HStack className="justify-between">
-          <p className="text-[20px] font-[var(--font-weight-semibold)] leading-[24px] text-[var(--color-text-primary)]">
-            Меню
-          </p>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Закрыть меню"
-            className="border-0 bg-transparent p-0"
-          >
-            <MutedPill className="flex h-[32px] w-[32px] items-center justify-center rounded-full">
-              <span className="text-[24px] leading-none text-[var(--color-text-secondary)]">×</span>
-            </MutedPill>
-          </button>
-        </HStack>
-      </Island>
+      <div className="min-h-0 flex-1 overflow-y-auto px-[10px] pb-[10px]">
+        <div className="rounded-[18px] px-[16px] py-[10px]">
+          <HStack className="justify-between">
+            <p className="text-[20px] font-[var(--font-weight-semibold)] leading-[24px] text-[var(--color-text-primary)]">
+              Меню
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Закрыть меню"
+              className="border-0 bg-transparent p-0"
+            >
+              <MutedPill className="flex h-[32px] w-[32px] items-center justify-center rounded-full">
+                <span className="text-[24px] leading-none text-[var(--color-text-secondary)]">×</span>
+              </MutedPill>
+            </button>
+          </HStack>
+        </div>
 
-      {sections.map((group, groupIndex) => (
-        <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
-      ))}
+        <VStack className="gap-[6px]">
+          {sections.map((group, groupIndex) => (
+            <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
+          ))}
+        </VStack>
+      </div>
     </aside>
   </div>
 );
