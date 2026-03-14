@@ -719,7 +719,7 @@ const MenuCell = ({ item, showSeparator }) => (
 );
 
 const MenuGroup = ({ items }) => (
-  <div className="overflow-hidden rounded-[16px] bg-[var(--color-surface-muted)]">
+  <div className="overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
     {items.map((item, index) => (
       <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
     ))}
@@ -770,7 +770,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
           </HStack>
         </div>
 
-        <VStack className="gap-[6px]">
+        <VStack className="gap-[6px] rounded-[16px] bg-[var(--color-bg-page)] p-[2px]">
           {sections.map((group, groupIndex) => (
             <MenuGroup key={`menu-group-${groupIndex}`} items={group} />
           ))}
