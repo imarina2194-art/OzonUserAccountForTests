@@ -429,10 +429,10 @@ const OrderTrackingCard = ({ order }) => (
 
 const PromoCard = ({ card }) => (
   <article
-    className="h-[136px] w-[312px] flex-none snap-start overflow-hidden rounded-[var(--radius-24)] p-[var(--space-3)]"
+    className="h-[136px] w-[312px] flex-none snap-start overflow-hidden rounded-[var(--radius-24)]"
     style={{ background: card.accent }}
   >
-    <div className="flex h-full items-stretch">
+    <div className="flex h-full w-full items-stretch px-[var(--space-3)] py-[var(--space-3)]">
       <div className="flex w-[62%] min-w-0 flex-col justify-start gap-[var(--space-1)]">
         <p className="text-body-s text-[var(--color-text-secondary)]">{card.label}</p>
         <p className="text-title-l line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
