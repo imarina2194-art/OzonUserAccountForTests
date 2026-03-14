@@ -450,10 +450,12 @@ const PromoCard = ({ card }) => (
 const PromoCarousel = ({ cards }) => {
   const trackRef = useRef(null);
   const resumeTimeoutRef = useRef(null);
-  const virtualIndexRef = useRef(0);
+  const scrollEndTimeoutRef = useRef(null);
+  const resetTimeoutRef = useRef(null);
+  const currentIndexRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
   const cardStep = 320;
-  const loopedCards = [...cards, ...cards, ...cards];
+  const loopedCards = cards.length > 0 ? [...cards, cards[0]] : [];
 
   const pauseAutoplay = () => {
     setIsPaused(true);
@@ -465,15 +467,24 @@ const PromoCarousel = ({ cards }) => {
     }, 8000);
   };
 
+  const jumpToFirstWithoutBackScroll = () => {
+    const container = trackRef.current;
+    if (!container) {
+      return;
+    }
+
+    container.scrollTo({ left: 0, behavior: "auto" });
+    currentIndexRef.current = 0;
+  };
+
   useEffect(() => {
     const container = trackRef.current;
     if (!container || !cards.length) {
       return;
     }
 
-    const middleOffset = cards.length * cardStep;
-    container.scrollLeft = middleOffset;
-    virtualIndexRef.current = cards.length;
+    container.scrollTo({ left: 0, behavior: "auto" });
+    currentIndexRef.current = 0;
   }, [cards.length]);
 
   useEffect(() => {
@@ -487,8 +498,18 @@ const PromoCarousel = ({ cards }) => {
         return;
       }
 
-      virtualIndexRef.current += 1;
-      container.scrollTo({ left: virtualIndexRef.current * cardStep, behavior: "smooth" });
+      const nextIndex = currentIndexRef.current + 1;
+      container.scrollTo({ left: nextIndex * cardStep, behavior: "smooth" });
+      currentIndexRef.current = nextIndex;
+
+      if (nextIndex === cards.length) {
+        if (resetTimeoutRef.current) {
+          window.clearTimeout(resetTimeoutRef.current);
+        }
+        resetTimeoutRef.current = window.setTimeout(() => {
+          jumpToFirstWithoutBackScroll();
+        }, 520);
+      }
     }, 7000);
 
     return () => window.clearInterval(timer);
@@ -500,35 +521,35 @@ const PromoCarousel = ({ cards }) => {
       return undefined;
     }
 
-    const segment = cards.length * cardStep;
-
-    const syncLoopPosition = () => {
-      const index = Math.round(container.scrollLeft / cardStep);
-      virtualIndexRef.current = index;
-
-      if (index < cards.length) {
-        const shiftedIndex = index + cards.length;
-        container.scrollLeft = shiftedIndex * cardStep;
-        virtualIndexRef.current = shiftedIndex;
-      } else if (index >= cards.length * 2) {
-        const shiftedIndex = index - cards.length;
-        container.scrollLeft = shiftedIndex * cardStep;
-        virtualIndexRef.current = shiftedIndex;
+    const handleScroll = () => {
+      if (scrollEndTimeoutRef.current) {
+        window.clearTimeout(scrollEndTimeoutRef.current);
       }
 
-      if (container.scrollLeft < segment * 0.25 || container.scrollLeft > segment * 2.75) {
-        container.scrollLeft = (cards.length + (virtualIndexRef.current % cards.length)) * cardStep;
-      }
+      scrollEndTimeoutRef.current = window.setTimeout(() => {
+        const index = Math.round(container.scrollLeft / cardStep);
+        currentIndexRef.current = index;
+
+        if (index >= cards.length) {
+          jumpToFirstWithoutBackScroll();
+        }
+      }, 120);
     };
 
-    container.addEventListener("scroll", syncLoopPosition, { passive: true });
-    return () => container.removeEventListener("scroll", syncLoopPosition);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [cards.length]);
 
   useEffect(() => {
     return () => {
       if (resumeTimeoutRef.current) {
         window.clearTimeout(resumeTimeoutRef.current);
+      }
+      if (scrollEndTimeoutRef.current) {
+        window.clearTimeout(scrollEndTimeoutRef.current);
+      }
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current);
       }
     };
   }, []);
