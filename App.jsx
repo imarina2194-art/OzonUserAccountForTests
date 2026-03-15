@@ -130,18 +130,21 @@ const reviewDiscoveryItems = [
     title: "Видео покупателей",
     subtitle: "Для товаров, которые вы смотрели",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
+    meta: "120+ отзывов",
   },
   {
     id: "how-they-use",
     title: "Как используют",
     subtitle: "Реальные обзоры и примеры",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
+    meta: "Красота и уход",
   },
   {
     id: "buyers-show",
     title: "Покупатели показывают",
     subtitle: "Видео о товарах из ваших категорий",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
+    meta: "Обувь и аксессуары",
   },
 ];
 
@@ -576,16 +579,20 @@ const ReviewDiscoveryCard = ({ item }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className="flex h-[132px] w-[176px] flex-none flex-col overflow-hidden rounded-[14px] border-0 bg-[var(--color-surface-muted)] p-0 text-left"
+    className="flex h-[152px] w-[196px] flex-none flex-col overflow-hidden rounded-[14px] border-0 bg-[var(--color-surface-muted)] p-0 text-left"
   >
-    <div className="relative h-[70px] w-full overflow-hidden">
+    <div className="relative h-[84px] w-full overflow-hidden">
       <img src={item.image} alt="" className="h-full w-full object-cover" />
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.22)_100%)]" />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0.32)_100%)]" />
+      <span className="absolute left-[8px] top-[8px] rounded-[10px] bg-[rgba(255,255,255,0.92)] px-[7px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-primary)]">
+        ▶ Видео
+      </span>
     </div>
     <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[10px]">
       <div className="min-w-0">
         <p className="text-title-s text-[var(--color-text-primary)]">{item.title}</p>
         <p className="text-body-s mt-[2px] line-clamp-2 text-[var(--color-text-secondary)]">{item.subtitle}</p>
+        <p className="text-body-s mt-[4px] text-[var(--color-text-secondary)]">{item.meta}</p>
       </div>
       <span className="mt-[2px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
@@ -595,18 +602,18 @@ const ReviewDiscoveryCard = ({ item }) => (
 const ReviewsDiscoverySection = ({ items }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
     <HStack className="justify-between">
-      <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
+      <div>
+        <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
+        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам и категориям</p>
+      </div>
       <button
         type="button"
         onClick={() => console.log("Open all buyer videos")}
         className="text-body-s border-0 bg-transparent p-0 text-[var(--color-text-secondary)]"
       >
-        Смотреть все
+        Все
       </button>
     </HStack>
-    <p className="text-body-s mt-[4px] text-[var(--color-text-secondary)]">
-      Реальный опыт и примеры использования
-    </p>
     <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
       {items.map((item) => (
         <ReviewDiscoveryCard key={item.id} item={item} />
