@@ -128,7 +128,7 @@ const reviewDiscoveryItems = [
   {
     id: "buyers-video-viewed",
     title: "Покупатели показывают",
-    subtitle: "Для товаров, которые вы смотрели",
+    subtitle: "Товар, который вы смотрели",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
     previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
@@ -580,7 +580,7 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className={`flex ${isFeatured ? "w-[148px]" : "w-[126px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+    className={`flex snap-start ${isFeatured ? "w-[148px]" : "w-[126px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
     <div className="relative aspect-[3/4] w-full overflow-hidden">
       {isFeatured && item.previewVideo ? (
@@ -616,7 +616,10 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   </button>
 );
 
-const ReviewsDiscoverySection = ({ items }) => (
+const ReviewsDiscoverySection = ({ items }) => {
+  const discoveryFlowItems = items.slice(0, 3);
+
+  return (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
     <HStack className="justify-between">
       <div>
@@ -631,13 +634,14 @@ const ReviewsDiscoverySection = ({ items }) => (
         Все
       </button>
     </HStack>
-    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
-      {items.map((item, index) => (
+    <div className="mt-[var(--space-2)] flex snap-x snap-mandatory gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
+      {discoveryFlowItems.map((item, index) => (
         <ReviewDiscoveryCard key={item.id} item={item} isFeatured={index === 0} />
       ))}
     </div>
   </Island>
-);
+  );
+};
 
 const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
