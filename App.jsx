@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// temporary sync comment: no functional changes, update requested for commit flow
 
 const mockUser = {
   name: "Марина И.",
@@ -122,6 +121,27 @@ const viewedItems = [
     price: "14 784 ₽",
     oldPrice: "44 000 ₽",
     discount: "−66%",
+  },
+];
+
+const reviewDiscoveryItems = [
+  {
+    id: "buyers-video-viewed",
+    title: "Видео покупателей",
+    subtitle: "Для товаров, которые вы смотрели",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
+  },
+  {
+    id: "how-they-use",
+    title: "Как используют",
+    subtitle: "Реальные обзоры и примеры",
+    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
+  },
+  {
+    id: "buyers-show",
+    title: "Покупатели показывают",
+    subtitle: "Видео о товарах из ваших категорий",
+    image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
   },
 ];
 
@@ -552,6 +572,49 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
+const ReviewDiscoveryCard = ({ item }) => (
+  <button
+    type="button"
+    onClick={() => console.log("Open review discovery", item.id)}
+    className="flex h-[132px] w-[176px] flex-none flex-col overflow-hidden rounded-[14px] border-0 bg-[var(--color-surface-muted)] p-0 text-left"
+  >
+    <div className="relative h-[70px] w-full overflow-hidden">
+      <img src={item.image} alt="" className="h-full w-full object-cover" />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.22)_100%)]" />
+    </div>
+    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[10px]">
+      <div className="min-w-0">
+        <p className="text-title-s text-[var(--color-text-primary)]">{item.title}</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 text-[var(--color-text-secondary)]">{item.subtitle}</p>
+      </div>
+      <span className="mt-[2px] text-body-s text-[var(--color-text-secondary)]">›</span>
+    </div>
+  </button>
+);
+
+const ReviewsDiscoverySection = ({ items }) => (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+    <HStack className="justify-between">
+      <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
+      <button
+        type="button"
+        onClick={() => console.log("Open all buyer videos")}
+        className="text-body-s border-0 bg-transparent p-0 text-[var(--color-text-secondary)]"
+      >
+        Смотреть все
+      </button>
+    </HStack>
+    <p className="text-body-s mt-[4px] text-[var(--color-text-secondary)]">
+      Реальный опыт и примеры использования
+    </p>
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+      {items.map((item) => (
+        <ReviewDiscoveryCard key={item.id} item={item} />
+      ))}
+    </div>
+  </Island>
+);
+
 const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
     <div className="relative h-[260px] w-[195px] overflow-hidden rounded-t-[16px]">
@@ -914,6 +977,10 @@ const App = ({ debug }) => {
               favorites={favorites}
               onToggle={toggleFavorite}
             />
+          </div>
+          <div className="h-[var(--space-1)]" />
+          <div className="w-[390px] box-border">
+            <ReviewsDiscoverySection items={reviewDiscoveryItems} />
           </div>
           <div className="h-[32px]" />
           <div className="w-[390px] box-border">
