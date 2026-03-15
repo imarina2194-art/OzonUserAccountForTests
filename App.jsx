@@ -916,6 +916,9 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
 
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
+  const [dismissedTitles, setDismissedTitles] = useState(() => new Set());
+  const [cartCounts, setCartCounts] = useState({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
 
   const toggleMenu = () => {
