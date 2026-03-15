@@ -131,6 +131,7 @@ const reviewDiscoveryItems = [
     subtitle: "Для ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
+    previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
   },
   {
     id: "how-they-use",
@@ -579,14 +580,28 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className={`flex h-[118px] ${isFeatured ? "w-[190px]" : "w-[154px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+    className={`flex h-[148px] ${isFeatured ? "w-[196px]" : "w-[162px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
-    <div className="relative h-[74px] w-full overflow-hidden">
-      <img src={item.image} alt="" className="h-full w-full object-cover" />
-      <span className="absolute inset-x-0 bottom-0 h-[24px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.26)_100%)]" />
-      <span className="absolute left-1/2 top-1/2 flex h-[22px] w-[22px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[rgba(20,31,46,0.52)] text-[10px] leading-none text-white">
-        ▶
-      </span>
+    <div className="relative h-[102px] w-full overflow-hidden">
+      {isFeatured && item.previewVideo ? (
+        <video
+          className="h-full w-full object-cover"
+          src={item.previewVideo}
+          poster={item.image}
+          muted
+          autoPlay
+          loop
+          playsInline
+        />
+      ) : (
+        <img src={item.image} alt="" className="h-full w-full object-cover" />
+      )}
+      <span className="absolute inset-x-0 bottom-0 h-[26px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.26)_100%)]" />
+      {!isFeatured && (
+        <span className="absolute left-1/2 top-1/2 flex h-[22px] w-[22px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[rgba(20,31,46,0.52)] text-[10px] leading-none text-white">
+          ▶
+        </span>
+      )}
       <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.54)] px-[5px] py-[2px] text-[10px] leading-none text-white">
         {item.duration}
       </span>
