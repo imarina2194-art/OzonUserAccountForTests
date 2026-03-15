@@ -128,7 +128,7 @@ const reviewDiscoveryItems = [
   {
     id: "buyers-video-viewed",
     title: "Покупатели показывают",
-    subtitle: "Товар, который вы смотрели",
+    subtitle: "RHODE и Summer Fridays из ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
     previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
@@ -136,14 +136,14 @@ const reviewDiscoveryItems = [
   {
     id: "how-they-use",
     title: "Как используют",
-    subtitle: "Из ваших категорий",
+    subtitle: "Красота и аксессуары из ваших категорий",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
     duration: "0:35",
   },
   {
     id: "buyers-show",
     title: "Что выбирают",
-    subtitle: "По вашим интересам",
+    subtitle: "Похожие товары после ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
     duration: "0:51",
   },
@@ -624,7 +624,7 @@ const ReviewsDiscoverySection = ({ items }) => {
     <HStack className="justify-between">
       <div>
         <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
-        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам</p>
+        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">Для товаров из ваших просмотров</p>
       </div>
       <button
         type="button"
