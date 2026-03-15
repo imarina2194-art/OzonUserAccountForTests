@@ -130,7 +130,6 @@ const reviewDiscoveryItems = [
     title: "Видео покупателей",
     subtitle: "Для ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
-    activity: "128 отзывов",
     duration: "0:42",
   },
   {
@@ -138,7 +137,6 @@ const reviewDiscoveryItems = [
     title: "Как используют",
     subtitle: "Красота и уход",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
-    activity: "23 видео",
     duration: "0:35",
   },
   {
@@ -146,7 +144,6 @@ const reviewDiscoveryItems = [
     title: "Покупатели показывают",
     subtitle: "Товары из ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
-    activity: "Популярно",
     duration: "0:51",
   },
 ];
@@ -582,28 +579,22 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className={`flex h-[118px] ${isFeatured ? "w-[186px]" : "w-[158px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+    className={`flex h-[118px] ${isFeatured ? "w-[190px]" : "w-[154px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
-    <div className="relative h-[58px] w-full overflow-hidden">
+    <div className="relative h-[74px] w-full overflow-hidden">
       <img src={item.image} alt="" className="h-full w-full object-cover" />
-      <span className="absolute inset-x-0 bottom-0 h-[30px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.28)_100%)]" />
-      <span className="absolute left-[8px] top-[8px] rounded-[10px] bg-[rgba(255,255,255,0.92)] px-[7px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-primary)]">
-        ▶ Видео
-      </span>
-      <span className="absolute left-1/2 top-1/2 h-[20px] w-[20px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[rgba(20,31,46,0.62)] text-[10px] leading-[20px] text-white">
+      <span className="absolute inset-x-0 bottom-0 h-[24px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.26)_100%)]" />
+      <span className="absolute left-1/2 top-1/2 flex h-[22px] w-[22px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[rgba(20,31,46,0.52)] text-[10px] leading-none text-white">
         ▶
       </span>
-      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.62)] px-[5px] py-[2px] text-[10px] leading-none text-white">
+      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.54)] px-[5px] py-[2px] text-[10px] leading-none text-white">
         {item.duration}
       </span>
-      <span className="absolute bottom-[6px] left-[6px] rounded-[8px] bg-[rgba(255,255,255,0.92)] px-[5px] py-[2px] text-[10px] leading-none text-[var(--color-text-secondary)]">
-        {item.activity}
-      </span>
     </div>
-    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[7px]">
+    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[6px]">
       <div className="min-w-0">
         <p className="text-title-s truncate text-[var(--color-text-primary)]">{item.title}</p>
-        <p className="text-body-s mt-[2px] line-clamp-1 text-[var(--color-text-secondary)]">{item.subtitle}</p>
+        <p className="text-body-s mt-[1px] line-clamp-1 text-[var(--color-text-secondary)]">{item.subtitle}</p>
       </div>
       <span className="mt-[1px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
