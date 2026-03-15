@@ -128,23 +128,23 @@ const reviewDiscoveryItems = [
   {
     id: "buyers-video-viewed",
     title: "Видео покупателей",
-    subtitle: "Для товаров, которые вы смотрели",
+    subtitle: "Для ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
-    meta: "120+ отзывов",
+    meta: "120+ видеоотзывов",
   },
   {
     id: "how-they-use",
     title: "Как используют",
-    subtitle: "Реальные обзоры и примеры",
+    subtitle: "Красота и уход",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
-    meta: "Красота и уход",
+    meta: "Советы покупателей",
   },
   {
     id: "buyers-show",
     title: "Покупатели показывают",
-    subtitle: "Видео о товарах из ваших категорий",
+    subtitle: "Товары из ваших категорий",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
-    meta: "Обувь и аксессуары",
+    meta: "Что выбирают чаще",
   },
 ];
 
@@ -579,20 +579,20 @@ const ReviewDiscoveryCard = ({ item }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className="flex h-[152px] w-[196px] flex-none flex-col overflow-hidden rounded-[14px] border-0 bg-[var(--color-surface-muted)] p-0 text-left"
+    className="flex h-[126px] w-[170px] flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left shadow-[0_1px_2px_rgba(20,31,46,0.06)]"
   >
-    <div className="relative h-[84px] w-full overflow-hidden">
+    <div className="relative h-[62px] w-full overflow-hidden">
       <img src={item.image} alt="" className="h-full w-full object-cover" />
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0.32)_100%)]" />
+      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.03)_0%,rgba(0,0,0,0.2)_100%)]" />
       <span className="absolute left-[8px] top-[8px] rounded-[10px] bg-[rgba(255,255,255,0.92)] px-[7px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-primary)]">
         ▶ Видео
       </span>
     </div>
-    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[10px]">
+    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[8px]">
       <div className="min-w-0">
         <p className="text-title-s text-[var(--color-text-primary)]">{item.title}</p>
-        <p className="text-body-s mt-[2px] line-clamp-2 text-[var(--color-text-secondary)]">{item.subtitle}</p>
-        <p className="text-body-s mt-[4px] text-[var(--color-text-secondary)]">{item.meta}</p>
+        <p className="text-body-s mt-[2px] line-clamp-1 text-[var(--color-text-secondary)]">{item.subtitle}</p>
+        <p className="mt-[2px] text-[11px] leading-[13px] text-[var(--color-text-secondary)]">{item.meta}</p>
       </div>
       <span className="mt-[2px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
@@ -604,7 +604,7 @@ const ReviewsDiscoverySection = ({ items }) => (
     <HStack className="justify-between">
       <div>
         <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
-        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам и категориям</p>
+        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам</p>
       </div>
       <button
         type="button"
