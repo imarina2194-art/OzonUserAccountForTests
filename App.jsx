@@ -130,21 +130,24 @@ const reviewDiscoveryItems = [
     title: "Видео покупателей",
     subtitle: "Для ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
-    meta: "120+ видеоотзывов",
+    activity: "128 отзывов",
+    duration: "0:42",
   },
   {
     id: "how-they-use",
     title: "Как используют",
     subtitle: "Красота и уход",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
-    meta: "Советы покупателей",
+    activity: "23 видео",
+    duration: "0:35",
   },
   {
     id: "buyers-show",
     title: "Покупатели показывают",
-    subtitle: "Товары из ваших категорий",
+    subtitle: "Товары из ваших просмотров",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
-    meta: "Что выбирают чаще",
+    activity: "Популярно",
+    duration: "0:51",
   },
 ];
 
@@ -575,26 +578,34 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
   </Island>
 );
 
-const ReviewDiscoveryCard = ({ item }) => (
+const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className="flex h-[126px] w-[170px] flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left shadow-[0_1px_2px_rgba(20,31,46,0.06)]"
+    className={`flex h-[118px] ${isFeatured ? "w-[186px]" : "w-[158px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
-    <div className="relative h-[62px] w-full overflow-hidden">
+    <div className="relative h-[58px] w-full overflow-hidden">
       <img src={item.image} alt="" className="h-full w-full object-cover" />
-      <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.03)_0%,rgba(0,0,0,0.2)_100%)]" />
+      <span className="absolute inset-x-0 bottom-0 h-[30px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.28)_100%)]" />
       <span className="absolute left-[8px] top-[8px] rounded-[10px] bg-[rgba(255,255,255,0.92)] px-[7px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-primary)]">
         ▶ Видео
       </span>
+      <span className="absolute left-1/2 top-1/2 h-[20px] w-[20px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[rgba(20,31,46,0.62)] text-[10px] leading-[20px] text-white">
+        ▶
+      </span>
+      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.62)] px-[5px] py-[2px] text-[10px] leading-none text-white">
+        {item.duration}
+      </span>
+      <span className="absolute bottom-[6px] left-[6px] rounded-[8px] bg-[rgba(255,255,255,0.92)] px-[5px] py-[2px] text-[10px] leading-none text-[var(--color-text-secondary)]">
+        {item.activity}
+      </span>
     </div>
-    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[8px]">
+    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[7px]">
       <div className="min-w-0">
-        <p className="text-title-s text-[var(--color-text-primary)]">{item.title}</p>
+        <p className="text-title-s truncate text-[var(--color-text-primary)]">{item.title}</p>
         <p className="text-body-s mt-[2px] line-clamp-1 text-[var(--color-text-secondary)]">{item.subtitle}</p>
-        <p className="mt-[2px] text-[11px] leading-[13px] text-[var(--color-text-secondary)]">{item.meta}</p>
       </div>
-      <span className="mt-[2px] text-body-s text-[var(--color-text-secondary)]">›</span>
+      <span className="mt-[1px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
   </button>
 );
@@ -615,8 +626,8 @@ const ReviewsDiscoverySection = ({ items }) => (
       </button>
     </HStack>
     <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
-      {items.map((item) => (
-        <ReviewDiscoveryCard key={item.id} item={item} />
+      {items.map((item, index) => (
+        <ReviewDiscoveryCard key={item.id} item={item} isFeatured={index === 0} />
       ))}
     </div>
   </Island>
