@@ -131,7 +131,7 @@ const reviewDiscoveryItems = [
     subtitle: "RHODE и Summer Fridays",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
-    previewVideo: "https://cdn.coverr.co/videos/coverr-applying-makeup-1579/1080p.mp4",
+    previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
   },
   {
     id: "how-they-use",
@@ -592,6 +592,10 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
           autoPlay
           loop
           playsInline
+          preload="auto"
+          onLoadedData={(event) => {
+            event.currentTarget.play().catch(() => {});
+          }}
         />
       ) : (
         <img src={item.image} alt="" className="h-full w-full object-cover" />
@@ -608,8 +612,8 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
     </div>
     <div className="flex items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[7px]">
       <div className="min-w-0">
-        <p className="text-title-s truncate text-[var(--color-text-primary)]">{item.title}</p>
-        <p className="text-body-s mt-[2px] truncate text-[var(--color-text-secondary)]">{item.subtitle}</p>
+        <p className="text-title-s line-clamp-2 break-words text-[var(--color-text-primary)]">{item.title}</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 break-words text-[var(--color-text-secondary)]">{item.subtitle}</p>
       </div>
       <span className="mt-[1px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
@@ -624,7 +628,7 @@ const ReviewsDiscoverySection = ({ items }) => {
     <HStack className="justify-between">
       <div>
         <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
-        <p className="text-body-s mt-[2px] truncate text-[var(--color-text-secondary)]">Для товаров из ваших просмотров</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 break-words text-[var(--color-text-secondary)]">Для товаров из ваших просмотров</p>
       </div>
       <button
         type="button"
