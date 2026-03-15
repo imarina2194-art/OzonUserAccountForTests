@@ -128,7 +128,7 @@ const reviewDiscoveryItems = [
   {
     id: "buyers-video-viewed",
     title: "Видео покупателей",
-    subtitle: "Для ваших просмотров",
+    subtitle: "Для товаров, которые вы смотрели",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
     previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
@@ -136,14 +136,14 @@ const reviewDiscoveryItems = [
   {
     id: "how-they-use",
     title: "Как используют",
-    subtitle: "Красота и уход",
+    subtitle: "Из ваших категорий",
     image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
     duration: "0:35",
   },
   {
     id: "buyers-show",
-    title: "Покупатели показывают",
-    subtitle: "Товары из ваших просмотров",
+    title: "Что выбирают",
+    subtitle: "По вашим интересам",
     image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
     duration: "0:51",
   },
@@ -580,9 +580,9 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className={`flex h-[148px] ${isFeatured ? "w-[196px]" : "w-[162px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+    className={`flex ${isFeatured ? "w-[146px]" : "w-[128px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
-    <div className="relative h-[102px] w-full overflow-hidden">
+    <div className="relative aspect-[3/4] w-full overflow-hidden">
       {isFeatured && item.previewVideo ? (
         <video
           className="h-full w-full object-cover"
@@ -606,10 +606,10 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
         {item.duration}
       </span>
     </div>
-    <div className="flex flex-1 items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[6px]">
+    <div className="flex items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[7px]">
       <div className="min-w-0">
         <p className="text-title-s truncate text-[var(--color-text-primary)]">{item.title}</p>
-        <p className="text-body-s mt-[1px] line-clamp-1 text-[var(--color-text-secondary)]">{item.subtitle}</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 text-[var(--color-text-secondary)]">{item.subtitle}</p>
       </div>
       <span className="mt-[1px] text-body-s text-[var(--color-text-secondary)]">›</span>
     </div>
@@ -621,7 +621,7 @@ const ReviewsDiscoverySection = ({ items }) => (
     <HStack className="justify-between">
       <div>
         <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
-        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам</p>
+        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">На основе ваших просмотров и категорий</p>
       </div>
       <button
         type="button"
