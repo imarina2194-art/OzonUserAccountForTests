@@ -651,25 +651,47 @@ const HomeIndicator = () => (
 const menuIconBaseUrl = "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/";
 
 const profileMenuGroups = [
-  [
-    { id: "orders", title: "Заказы", iconName: "order_icon.png", counter: "2" },
-    { id: "returns", title: "Возвраты", iconName: "returns_icon.png" },
-    { id: "travel", title: "Билеты, отели и туры", iconName: "travel_icon.png" },
-    { id: "feed", title: "Лента обзоров", iconName: "media_icon.png" },
-  ],
-  [
-    { id: "codes", title: "Коды и сертификаты", iconName: "certificates_icon.png" },
-    { id: "balance", title: "Баланс средств", iconName: "balance_icon.png" },
-    { id: "premium", title: "Ozon Premium", iconName: "premium_icon.png" },
-    { id: "business", title: "Закупки для бизнеса", iconName: "business_icon.png" },
-  ],
-  [
-    { id: "settings", title: "Настройки", iconName: "settings_icon.png" },
-    { id: "family", title: "Моя семья", iconName: "family_icon.png", badgeLabel: "Новое" },
-    { id: "jobs", title: "Вакансии", iconName: "vacancies_icon.png" },
-    { id: "language", title: "Язык", iconName: "language_icon.png" },
-    { id: "help", title: "Помощь и приложение", iconName: "help_icon.png" },
-  ],
+  {
+    id: "purchases",
+    title: "Покупки",
+    items: [
+      { id: "orders", title: "Заказы", iconName: "order_icon.png", counter: "2" },
+      { id: "returns", title: "Возвраты", iconName: "returns_icon.png" },
+      { id: "travel", title: "Билеты, отели и туры", iconName: "travel_icon.png" },
+    ],
+  },
+  {
+    id: "finance",
+    title: "Финансы",
+    items: [
+      { id: "codes", title: "Коды и сертификаты", iconName: "certificates_icon.png" },
+      { id: "balance", title: "Баланс средств", iconName: "balance_icon.png" },
+      { id: "premium", title: "Ozon Premium", iconName: "premium_icon.png" },
+    ],
+  },
+  {
+    id: "content",
+    title: "Контент",
+    items: [{ id: "feed", title: "Видео покупателей", iconName: "media_icon.png" }],
+  },
+  {
+    id: "account",
+    title: "Аккаунт",
+    items: [
+      { id: "settings", title: "Настройки", iconName: "settings_icon.png" },
+      { id: "family", title: "Моя семья", iconName: "family_icon.png", badgeLabel: "Новое" },
+      { id: "companies", title: "Мои компании", iconName: "business_icon.png" },
+      { id: "language", title: "Язык", iconName: "language_icon.png" },
+    ],
+  },
+  {
+    id: "other",
+    title: "Другое",
+    items: [
+      { id: "jobs", title: "Вакансии", iconName: "vacancies_icon.png" },
+      { id: "help", title: "Помощь и приложение", iconName: "help_icon.png" },
+    ],
+  },
 ];
 
 const MenuCell = ({ item, showSeparator }) => (
@@ -718,15 +740,20 @@ const MenuCell = ({ item, showSeparator }) => (
   </button>
 );
 
-const MenuGroup = ({ items, isFirstGroup }) => (
-  <div
-    className={`overflow-hidden bg-[var(--color-surface)] ${
-      isFirstGroup ? "rounded-t-none rounded-b-[16px]" : "rounded-[16px]"
-    }`}
-  >
-    {items.map((item, index) => (
-      <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
-    ))}
+const MenuGroup = ({ group, isFirstGroup }) => (
+  <div>
+    <p className="px-[16px] pb-[6px] text-[12px] font-[var(--font-weight-medium)] leading-[16px] text-[var(--color-text-secondary)]">
+      {group.title}
+    </p>
+    <div
+      className={`overflow-hidden bg-[var(--color-surface)] ${
+        isFirstGroup ? "rounded-t-none rounded-b-[16px]" : "rounded-[16px]"
+      }`}
+    >
+      {group.items.map((item, index) => (
+        <MenuCell key={item.id} item={item} showSeparator={index !== group.items.length - 1} />
+      ))}
+    </div>
   </div>
 );
 
@@ -776,7 +803,7 @@ const MenuSheet = ({ isOpen, onClose, sections }) => (
 
         <VStack className="w-[390px] gap-[6px] bg-[var(--color-bg-page)]">
           {sections.map((group, groupIndex) => (
-            <MenuGroup key={`menu-group-${groupIndex}`} items={group} isFirstGroup={groupIndex === 0} />
+            <MenuGroup key={group.id} group={group} isFirstGroup={groupIndex === 0} />
           ))}
         </VStack>
       </div>
