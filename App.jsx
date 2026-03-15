@@ -131,7 +131,7 @@ const reviewDiscoveryItems = [
     subtitle: "RHODE и Summer Fridays",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
-    previewVideo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    previewGif: "https://marianainla.com/wp-content/uploads/2023/12/00-story2022.gif",
   },
   {
     id: "how-they-use",
@@ -583,20 +583,8 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
     className={`flex snap-start ${isFeatured ? "w-[148px]" : "w-[126px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
     <div className="relative aspect-[3/4] w-full overflow-hidden">
-      {isFeatured && item.previewVideo ? (
-        <video
-          className="h-full w-full object-cover"
-          src={item.previewVideo}
-          poster={item.image}
-          muted
-          autoPlay
-          loop
-          playsInline
-          preload="auto"
-          onLoadedData={(event) => {
-            event.currentTarget.play().catch(() => {});
-          }}
-        />
+      {isFeatured && item.previewGif ? (
+        <img src={item.previewGif} alt="" className="h-full w-full object-cover" />
       ) : (
         <img src={item.image} alt="" className="h-full w-full object-cover" />
       )}
