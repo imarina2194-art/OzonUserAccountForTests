@@ -127,7 +127,7 @@ const viewedItems = [
 const reviewDiscoveryItems = [
   {
     id: "buyers-video-viewed",
-    title: "Видео покупателей",
+    title: "Покупатели показывают",
     subtitle: "Для товаров, которые вы смотрели",
     image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
     duration: "0:42",
@@ -563,7 +563,7 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
     <HStack className="justify-between">
       <p className="text-title-l text-[var(--color-text-primary)]">Вы смотрели</p>
     </HStack>
-    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
       {items.map((item) => (
         <ViewedProductCard
           key={item.id}
@@ -580,7 +580,7 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
   <button
     type="button"
     onClick={() => console.log("Open review discovery", item.id)}
-    className={`flex ${isFeatured ? "w-[146px]" : "w-[128px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+    className={`flex ${isFeatured ? "w-[148px]" : "w-[126px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
   >
     <div className="relative aspect-[3/4] w-full overflow-hidden">
       {isFeatured && item.previewVideo ? (
@@ -602,7 +602,7 @@ const ReviewDiscoveryCard = ({ item, isFeatured }) => (
           ▶
         </span>
       )}
-      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.54)] px-[5px] py-[2px] text-[10px] leading-none text-white">
+      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.4)] px-[5px] py-[2px] text-[10px] leading-none text-white/85">
         {item.duration}
       </span>
     </div>
@@ -621,7 +621,7 @@ const ReviewsDiscoverySection = ({ items }) => (
     <HStack className="justify-between">
       <div>
         <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
-        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">На основе ваших просмотров и категорий</p>
+        <p className="text-body-s mt-[2px] text-[var(--color-text-secondary)]">По вашим просмотрам</p>
       </div>
       <button
         type="button"
@@ -631,7 +631,7 @@ const ReviewsDiscoverySection = ({ items }) => (
         Все
       </button>
     </HStack>
-    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
       {items.map((item, index) => (
         <ReviewDiscoveryCard key={item.id} item={item} isFeatured={index === 0} />
       ))}
