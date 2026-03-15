@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+// temporary sync comment: no functional changes, update requested for commit flow
 
 const mockUser = {
   name: "Марина И.",
@@ -365,9 +366,13 @@ const DeviceFrame = ({ children, debug }) => (
   </div>
 );
 
-const IconButton = ({ iconName, badgeIconName, onClick }) => (
+const IconButton = ({ iconName, badgeIconName, onClick, ariaLabel, ariaExpanded, ariaControls }) => (
   <button
     onClick={onClick}
+    type="button"
+    aria-label={ariaLabel}
+    aria-expanded={ariaExpanded}
+    aria-controls={ariaControls}
     className="relative flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 shadow-none outline-none"
   >
     <span className="block h-[24px] w-[24px]">
@@ -818,9 +823,169 @@ const HomeIndicator = () => (
   </div>
 );
 
+const menuIconBaseUrl = "https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/";
+
+const profileMenuGroups = [
+  [
+    { id: "orders", title: "Заказы", iconName: "order_icon.png", counter: "2" },
+    { id: "returns", title: "Возвраты", iconName: "returns_icon.png" },
+    { id: "travel", title: "Билеты, отели и туры", iconName: "travel_icon.png" },
+    { id: "feed", title: "Лента обзоров", iconName: "media_icon.png" },
+  ],
+  [
+    { id: "codes", title: "Коды и сертификаты", iconName: "certificates_icon.png" },
+    { id: "balance", title: "Баланс средств", iconName: "balance_icon.png" },
+    { id: "premium", title: "Ozon Premium", iconName: "premium_icon.png" },
+    { id: "business", title: "Закупки для бизнеса", iconName: "business_icon.png" },
+  ],
+  [
+    { id: "settings", title: "Настройки", iconName: "settings_icon.png" },
+    { id: "family", title: "Моя семья", iconName: "family_icon.png", badgeLabel: "Новое" },
+    { id: "jobs", title: "Вакансии", iconName: "vacancies_icon.png" },
+    { id: "language", title: "Язык", iconName: "language_icon.png" },
+    { id: "help", title: "Помощь и приложение", iconName: "help_icon.png" },
+  ],
+];
+
+const MenuCell = ({ item, showSeparator }) => (
+  <button
+    type="button"
+    onClick={() => console.log("Navigate menu item", item.id)}
+    className="relative flex h-[50px] w-full items-center justify-between px-[16px] py-[8px] text-left"
+  >
+    <HStack className="min-w-0 flex-1 gap-[10px]">
+      <img
+        src={`${menuIconBaseUrl}${item.iconName}`}
+        alt=""
+        className="h-[32px] w-[32px] flex-none object-contain"
+      />
+      <span className="truncate text-[13px] font-[var(--font-weight-regular)] leading-[18px] text-[var(--color-text-primary)]">
+        {item.title}
+      </span>
+    </HStack>
+
+    <HStack className="ml-[8px] flex-none gap-[6px]">
+      {item.counter && (
+        <MutedPill className="flex h-[24px] min-w-[24px] items-center justify-center rounded-full px-[7px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[var(--color-text-secondary)]">
+          {item.counter}
+        </MutedPill>
+      )}
+      {item.badgeLabel && (
+        <span className="rounded-[11px] bg-[#d7f3df] px-[9px] py-[3px] text-[11px] font-[var(--font-weight-semibold)] leading-none text-[#12ac58]">
+          {item.badgeLabel}
+        </span>
+      )}
+      <span className="flex h-[22px] w-[22px] items-center justify-center">
+        <img
+          src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
+          alt=""
+          className="h-[22px] w-[22px] object-contain opacity-70"
+        />
+      </span>
+    </HStack>
+
+    {showSeparator && (
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-[56px] right-[12px] h-px bg-[#d8dee8]"
+      />
+    )}
+  </button>
+);
+
+const MenuGroup = ({ items, isFirstGroup }) => (
+  <div
+    className={`overflow-hidden bg-[var(--color-surface)] ${
+      isFirstGroup ? "rounded-t-none rounded-b-[16px]" : "rounded-[16px]"
+    }`}
+  >
+    {items.map((item, index) => (
+      <MenuCell key={item.id} item={item} showSeparator={index !== items.length - 1} />
+    ))}
+  </div>
+);
+
+const MenuSheet = ({ isOpen, onClose, sections }) => (
+  <div
+    className={`absolute inset-0 z-40 transition-[visibility] duration-200 ${
+      isOpen ? "visible pointer-events-auto" : "invisible pointer-events-none"
+    }`}
+    aria-hidden={!isOpen}
+  >
+    <button
+      type="button"
+      aria-label="Закрыть меню"
+      onClick={onClose}
+      className={`absolute inset-0 transition-opacity duration-200 ${
+        isOpen ? "pointer-events-auto bg-[rgba(20,31,46,0.10)] opacity-100" : "pointer-events-none opacity-0"
+      }`}
+    />
+
+    <aside
+      id="profile-menu-sheet"
+      className={`absolute bottom-0 left-0 right-0 flex h-[calc(100%-100px)] w-full flex-col overflow-hidden rounded-t-[28px] bg-[var(--color-surface)] pt-[10px] transition-transform duration-200 ease-out ${
+        isOpen ? "translate-y-0" : "translate-y-full"
+      }`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Меню профиля"
+    >
+      <div className="min-h-0 flex-1 overflow-y-auto px-0 pb-[10px]">
+        <div className="rounded-[18px] px-[16px] py-[10px]">
+          <HStack className="justify-between">
+            <p className="text-[20px] font-[var(--font-weight-semibold)] leading-[24px] text-[var(--color-text-primary)]">
+              Меню
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Закрыть меню"
+              className="border-0 bg-transparent p-0"
+            >
+              <MutedPill className="flex h-[32px] w-[32px] items-center justify-center rounded-full">
+                <span className="text-[24px] leading-none text-[var(--color-text-secondary)]">×</span>
+              </MutedPill>
+            </button>
+          </HStack>
+        </div>
+
+        <VStack className="w-[390px] gap-[6px] bg-[var(--color-bg-page)]">
+          {sections.map((group, groupIndex) => (
+            <MenuGroup key={`menu-group-${groupIndex}`} items={group} isFirstGroup={groupIndex === 0} />
+          ))}
+        </VStack>
+      </div>
+    </aside>
+  </div>
+);
+
 const App = ({ debug }) => {
   const [favorites, setFavorites] = useState(() => new Set());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const debugStyle = debug ? { outline: "1px dashed var(--color-text-secondary)" } : undefined;
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
 
   const toggleFavorite = (id) => {
     setFavorites((prev) => {
@@ -836,10 +1001,10 @@ const App = ({ debug }) => {
   };
 
   return (
-    <div className="flex h-full w-full min-h-0 flex-col">
+    <div className="relative flex h-full w-full min-h-0 flex-col">
       <StatusBar debugStyle={debugStyle} />
       <div
-        className="sticky top-0 z-20 w-full"
+        className={`sticky top-0 w-full ${isMenuOpen ? "z-50" : "z-20"}`}
         style={debugStyle}
       >
         <HStack className="relative box-border h-[var(--size-header-h)] w-[390px] items-center pl-[var(--space-4)] pr-0">
@@ -867,13 +1032,20 @@ const App = ({ debug }) => {
             <IconButton
               iconName="chat"
               badgeIconName="chat-badge"
+              ariaLabel="Открыть сообщения"
               onClick={() => console.log("Open messages")}
             />
-            <IconButton iconName="menu" onClick={() => console.log("Open menu")} />
+            <IconButton
+              iconName="menu"
+              ariaLabel="Открыть меню профиля"
+              ariaExpanded={isMenuOpen}
+              ariaControls="profile-menu-sheet"
+              onClick={toggleMenu}
+            />
           </div>
         </HStack>
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto" style={debugStyle}>
+      <div className={`min-h-0 flex-1 ${isMenuOpen ? "overflow-hidden" : "overflow-y-auto"}`} style={debugStyle}>
         <div
           className="w-full box-border"
           style={{ paddingBottom: "calc(var(--size-bottomnav-h) + 34px)" }}
@@ -940,6 +1112,7 @@ const App = ({ debug }) => {
       </div>
       <BottomNav debugStyle={debugStyle} />
       <HomeIndicator />
+      <MenuSheet isOpen={isMenuOpen} onClose={closeMenu} sections={profileMenuGroups} />
     </div>
   );
 };
