@@ -70,7 +70,7 @@ _Данная гипотеза и её визуализация также кл�
 
 
 4️⃣ **Mega Promo Widget — единый центр выгод и предложений**  
-🔗 https://imarina2194-art.github.io/OzonUserAccountForTests/previews/codex-mega-promo-widget/
+🔗 https://imarina2194-art.github.io/OzonUserAccountForTests/previews/codex-codex-create-mega-promo-widget-for-user-account-page/
 
 **Проблема:**
 Промо в личном кабинете Ozon (морковск, финансовые продукты, сервисы экосистемы и др.) распределены по странице без единой структуры и представления. 
