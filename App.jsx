@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// temporary sync comment: no functional changes, update requested for commit flow
 
 const mockUser = {
   name: "Марина И.",
@@ -122,6 +121,31 @@ const viewedItems = [
     price: "14 784 ₽",
     oldPrice: "44 000 ₽",
     discount: "−66%",
+  },
+];
+
+const reviewDiscoveryItems = [
+  {
+    id: "buyers-video-viewed",
+    title: "Покупатели показывают",
+    subtitle: "RHODE и Summer Fridays",
+    image: "https://ir.ozone.ru/s3/multimedia-1-9/wc250/7729411041.jpg",
+    duration: "0:42",
+    previewGif: "https://marianainla.com/wp-content/uploads/2023/12/00-story2022.gif",
+  },
+  {
+    id: "how-they-use",
+    title: "Как используют",
+    subtitle: "Красота и аксессуары",
+    image: "https://ir.ozone.ru/s3/multimedia-1-l/wc250/7539167829.jpg",
+    duration: "0:35",
+  },
+  {
+    id: "buyers-show",
+    title: "Что выбирают",
+    subtitle: "Похожие товары после ваших просмотров",
+    image: "https://ir.ozone.ru/s3/multimedia-1-g/wc300/7155520432.jpg",
+    duration: "0:51",
   },
 ];
 
@@ -539,7 +563,7 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
     <HStack className="justify-between">
       <p className="text-title-l text-[var(--color-text-primary)]">Вы смотрели</p>
     </HStack>
-    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto">
+    <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
       {items.map((item) => (
         <ViewedProductCard
           key={item.id}
@@ -551,6 +575,65 @@ const ViewedProductsSection = ({ items, favorites, onToggle }) => (
     </div>
   </Island>
 );
+
+const ReviewDiscoveryCard = ({ item, isFeatured }) => (
+  <button
+    type="button"
+    onClick={() => console.log("Open review discovery", item.id)}
+    className={`flex snap-start ${isFeatured ? "w-[148px]" : "w-[126px]"} flex-none flex-col overflow-hidden rounded-[14px] border border-[rgba(20,31,46,0.08)] bg-[var(--color-surface)] p-0 text-left`}
+  >
+    <div className="relative aspect-[3/4] w-full overflow-hidden">
+      {isFeatured && item.previewGif ? (
+        <img src={item.previewGif} alt="" className="h-full w-full object-cover" />
+      ) : (
+        <img src={item.image} alt="" className="h-full w-full object-cover" />
+      )}
+      <span className="absolute inset-x-0 bottom-0 h-[26px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.26)_100%)]" />
+      {!isFeatured && (
+        <span className="absolute left-1/2 top-1/2 flex h-[22px] w-[22px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[rgba(20,31,46,0.52)] text-[10px] leading-none text-white">
+          ▶
+        </span>
+      )}
+      <span className="absolute bottom-[6px] right-[6px] rounded-[8px] bg-[rgba(20,31,46,0.4)] px-[5px] py-[2px] text-[10px] leading-none text-white/85">
+        {item.duration}
+      </span>
+    </div>
+    <div className="flex items-start justify-between gap-[var(--space-1)] px-[var(--space-2)] py-[7px]">
+      <div className="min-w-0">
+        <p className="text-title-s line-clamp-2 break-words text-[var(--color-text-primary)]">{item.title}</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 break-words text-[var(--color-text-secondary)]">{item.subtitle}</p>
+      </div>
+      <span className="mt-[1px] text-body-s text-[var(--color-text-secondary)]">›</span>
+    </div>
+  </button>
+);
+
+const ReviewsDiscoverySection = ({ items }) => {
+  const discoveryFlowItems = items.slice(0, 3);
+
+  return (
+  <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]">
+    <HStack className="justify-between">
+      <div>
+        <p className="text-title-l text-[var(--color-text-primary)]">Видео покупателей</p>
+        <p className="text-body-s mt-[2px] line-clamp-2 break-words text-[var(--color-text-secondary)]">Для товаров из ваших просмотров</p>
+      </div>
+      <button
+        type="button"
+        onClick={() => console.log("Open all buyer videos")}
+        className="text-body-s border-0 bg-transparent p-0 text-[var(--color-text-secondary)]"
+      >
+        Все
+      </button>
+    </HStack>
+    <div className="mt-[var(--space-2)] flex snap-x snap-mandatory gap-[var(--space-2)] overflow-x-auto pr-[var(--space-1)]">
+      {discoveryFlowItems.map((item, index) => (
+        <ReviewDiscoveryCard key={item.id} item={item} isFeatured={index === 0} />
+      ))}
+    </div>
+  </Island>
+  );
+};
 
 const RecommendedProductCard = ({ item, isFavorite, onToggle }) => (
   <div className="h-[360px] w-[195px] flex-none overflow-hidden rounded-[16px] bg-[var(--color-surface)]">
@@ -914,6 +997,10 @@ const App = ({ debug }) => {
               favorites={favorites}
               onToggle={toggleFavorite}
             />
+          </div>
+          <div className="h-[var(--space-1)]" />
+          <div className="w-[390px] box-border">
+            <ReviewsDiscoverySection items={reviewDiscoveryItems} />
           </div>
           <div className="h-[32px]" />
           <div className="w-[390px] box-border">
