@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // temporary sync comment: no functional changes, update requested for commit flow
 
 const mockUser = {
@@ -62,6 +62,41 @@ const orderItems = [
 const financeCells = [
   { id: "card", title: "Ozon Карта", value: "3 845,41 ₽" },
   { id: "install", title: "Рассрочка", value: "до 300 000 ₽" },
+];
+
+const megaPromoCards = [
+  {
+    id: "promo-1rub",
+    label: "Персональная выгода",
+    title: "Товары за 1 ₽",
+    subtitle: "Подборка любимых категорий",
+    accent: "linear-gradient(145deg, var(--color-surface) 0%, var(--color-surface-muted) 100%)",
+    icon: "🛍️",
+  },
+  {
+    id: "promo-savings",
+    label: "Финансы",
+    title: "Накопительный счёт 18.5%",
+    subtitle: "Открытие онлайн за 5 минут",
+    accent: "linear-gradient(145deg, var(--color-cell-button-bg) 0%, var(--color-surface) 100%)",
+    icon: "💰",
+  },
+  {
+    id: "promo-premium",
+    label: "Лояльность",
+    title: "Ozon Premium",
+    subtitle: "Больше привилегий в каждом заказе",
+    accent: "linear-gradient(145deg, var(--color-surface-muted) 0%, var(--color-surface) 100%)",
+    icon: "👑",
+  },
+  {
+    id: "promo-morkovsk",
+    label: "Механика",
+    title: "Морковск · 312 🥕",
+    subtitle: "Суперприз сезона",
+    accent: "linear-gradient(145deg, var(--color-surface) 0%, var(--color-cell-button-bg) 100%)",
+    icon: "🥕",
+  },
 ];
 
 const viewedItems = [
@@ -397,41 +432,202 @@ const OrderTrackingCard = ({ order }) => (
   </Island>
 );
 
-const MorkovskEntryPoint = ({ debugStyle }) => (
-  <Island
-    className="flex h-[114px] w-[390px] overflow-hidden rounded-[var(--radius-l)] bg-[var(--color-surface)]"
-    style={debugStyle}
+const PromoCard = ({ card }) => (
+  <article
+    className="flex h-[104px] w-[312px] flex-none snap-start items-center overflow-hidden rounded-[var(--radius-24)] p-[var(--space-4)]"
+    style={{ background: card.accent }}
   >
-    <VStack className="h-full w-[250px] gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-4)]">
-      <HStack className="gap-[var(--space-2)]">
-        <p className="text-title-l truncate text-[var(--color-text-primary)]">
-          Морковск
-        </p>
-        <MutedPill className="text-body-s inline-flex h-[24px] w-[52px] items-center justify-center gap-[2px] rounded-[var(--radius-8)] text-[var(--color-text-primary)]">
-          <span>312</span>
-          <img
-            src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/carrot_icon.png"
-            alt=""
-            className="h-[20px] w-[13px] object-contain"
-          />
-        </MutedPill>
-      </HStack>
-      <p className="text-body-m truncate text-[var(--color-text-secondary)]">
-        Суперприз — квартира
-      </p>
-      <button className="text-body-m inline-flex h-[24px] w-[118px] items-center justify-center rounded-[var(--radius-8)] border-0 bg-[var(--color-cell-button-bg)] p-0 font-[var(--font-weight-medium)] text-[var(--color-cell-button-text)] shadow-none">
-        Узнать больше
-      </button>
-    </VStack>
-    <div className="h-[114px] w-[140px]">
-      <img
-        src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/zahar_banner.png"
-        alt=""
-        className="h-full w-full object-cover"
-      />
+    <div className="flex min-w-0 flex-1 flex-col gap-[var(--space-1)]">
+      <p className="text-title-cell line-clamp-1 text-[var(--color-text-primary)]">{card.title}</p>
+      <p className="text-body-m line-clamp-2 text-[var(--color-text-secondary)]">{card.subtitle}</p>
     </div>
-  </Island>
+    <div className="ml-[var(--space-2)] flex h-full w-[88px] items-center justify-center">
+      <span
+        className="flex h-[44px] w-[44px] items-center justify-center rounded-[var(--radius-l)] bg-[var(--color-surface)] text-[24px] leading-none"
+        aria-hidden
+      >
+        {card.icon}
+      </span>
+    </div>
+  </article>
 );
+
+const PromoCarousel = ({ cards }) => {
+  const trackRef = useRef(null);
+  const resumeTimeoutRef = useRef(null);
+  const scrollEndTimeoutRef = useRef(null);
+  const resetTimeoutRef = useRef(null);
+  const currentIndexRef = useRef(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const cardStep = 320;
+  const loopedCards = cards.length > 0 ? [...cards, cards[0]] : [];
+
+  const pauseAutoplay = () => {
+    setIsPaused(true);
+    if (resumeTimeoutRef.current) {
+      window.clearTimeout(resumeTimeoutRef.current);
+    }
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, 8000);
+  };
+
+  const jumpToFirstWithoutBackScroll = () => {
+    const container = trackRef.current;
+    if (!container) {
+      return;
+    }
+
+    container.scrollTo({ left: 0, behavior: "auto" });
+    currentIndexRef.current = 0;
+  };
+
+  useEffect(() => {
+    const container = trackRef.current;
+    if (!container || !cards.length) {
+      return;
+    }
+
+    container.scrollTo({ left: 0, behavior: "auto" });
+    currentIndexRef.current = 0;
+  }, [cards.length]);
+
+  useEffect(() => {
+    if (!cards.length || isPaused) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      const container = trackRef.current;
+      if (!container) {
+        return;
+      }
+
+      const nextIndex = currentIndexRef.current + 1;
+      container.scrollTo({ left: nextIndex * cardStep, behavior: "smooth" });
+      currentIndexRef.current = nextIndex;
+
+      if (nextIndex === cards.length) {
+        if (resetTimeoutRef.current) {
+          window.clearTimeout(resetTimeoutRef.current);
+        }
+        resetTimeoutRef.current = window.setTimeout(() => {
+          jumpToFirstWithoutBackScroll();
+        }, 520);
+      }
+    }, 7000);
+
+    return () => window.clearInterval(timer);
+  }, [cards.length, isPaused]);
+
+  useEffect(() => {
+    const container = trackRef.current;
+    if (!container || !cards.length) {
+      return undefined;
+    }
+
+    const handleScroll = () => {
+      if (scrollEndTimeoutRef.current) {
+        window.clearTimeout(scrollEndTimeoutRef.current);
+      }
+
+      scrollEndTimeoutRef.current = window.setTimeout(() => {
+        const index = Math.round(container.scrollLeft / cardStep);
+        currentIndexRef.current = index;
+
+        if (index >= cards.length) {
+          jumpToFirstWithoutBackScroll();
+        }
+      }, 120);
+    };
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [cards.length]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) {
+        window.clearTimeout(resumeTimeoutRef.current);
+      }
+      if (scrollEndTimeoutRef.current) {
+        window.clearTimeout(scrollEndTimeoutRef.current);
+      }
+      if (resetTimeoutRef.current) {
+        window.clearTimeout(resetTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="mt-[var(--space-2)]">
+      <div
+        ref={trackRef}
+        className="flex snap-x snap-mandatory gap-[var(--space-2)] overflow-x-auto scroll-smooth pr-[var(--space-4)]"
+        onTouchStart={pauseAutoplay}
+        onMouseDown={pauseAutoplay}
+        onWheel={pauseAutoplay}
+      >
+        {loopedCards.map((card, index) => (
+          <PromoCard key={`${card.id}-${index}`} card={card} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const useIslandLayout = false;
+
+const MegaPromoSkeleton = () => (
+  <div className="mt-[var(--space-2)] flex gap-[var(--space-2)] overflow-x-auto pr-[var(--space-4)]" aria-hidden>
+    {["s1", "s2"].map((id) => (
+      <MutedPill key={id} className="h-[104px] w-[312px] flex-none animate-pulse rounded-[var(--radius-24)]" />
+    ))}
+  </div>
+);
+
+const MegaPromoWidget = ({ debugStyle, status = "ready", cards = [] }) => {
+  if (status === "empty") {
+    return null;
+  }
+
+  if (!useIslandLayout) {
+    return (
+      <div className="mt-[var(--space-2)] mb-[var(--space-2)] px-[var(--space-4)]" style={debugStyle}>
+        {status === "loading" && <MegaPromoSkeleton />}
+
+        {status === "error" && (
+          <MutedPill className="mt-[var(--space-2)] rounded-[var(--radius-s)] p-[var(--space-2)]">
+            <p className="text-body-s text-[var(--color-text-secondary)]">Не удалось загрузить предложения</p>
+          </MutedPill>
+        )}
+
+        {status === "ready" && cards.length > 0 && <PromoCarousel cards={cards.slice(0, 4)} />}
+      </div>
+    );
+  }
+
+  return (
+    <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
+      <HStack className="justify-between">
+        <p className="text-title-l text-[var(--color-text-primary)]">Выгоды и предложения</p>
+        <button className="text-body-s rounded-[var(--radius-8)] border-0 bg-[var(--color-surface-muted)] px-[var(--space-2)] py-[var(--space-1)] text-[var(--color-text-secondary)]">
+          Скрыть
+        </button>
+      </HStack>
+
+      {status === "loading" && <MegaPromoSkeleton />}
+
+      {status === "error" && (
+        <MutedPill className="mt-[var(--space-2)] rounded-[var(--radius-s)] p-[var(--space-2)]">
+          <p className="text-body-s text-[var(--color-text-secondary)]">Не удалось загрузить предложения</p>
+        </MutedPill>
+      )}
+
+      {status === "ready" && cards.length > 0 && <PromoCarousel cards={cards.slice(0, 4)} />}
+    </Island>
+  );
+};
 
 const FinanceSection = ({ debugStyle }) => (
   <Island className="rounded-[var(--radius-l)] p-[var(--space-4)]" style={debugStyle}>
@@ -449,44 +645,23 @@ const FinanceSection = ({ debugStyle }) => (
       </div>
     </HStack>
     <div className="mt-[var(--space-2)] grid grid-cols-2 gap-[var(--space-2)]">
-      <VStack className="gap-[var(--space-2)]">
-        {financeCells.map((cell) => (
-          <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
-            <div className="flex items-center gap-[2px]">
-              <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
-                {cell.title}
-              </p>
-              <img
-                src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
-                alt=""
-                className="h-[16px] w-[16px] object-contain"
-              />
-            </div>
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              {cell.value}
+      {financeCells.map((cell) => (
+        <MutedPill key={cell.id} className="rounded-[var(--radius-s)] p-[var(--space-2)]">
+          <div className="flex items-center gap-[2px]">
+            <p className="text-title-cell font-[var(--font-weight-regular)] text-[var(--color-text-secondary)]">
+              {cell.title}
             </p>
-          </MutedPill>
-        ))}
-      </VStack>
-      <div className="rounded-[var(--radius-s)] bg-[var(--color-cell-button-bg)] p-[var(--space-2)]">
-        <div className="flex w-full">
-          <div className="min-w-0 flex-1">
-            <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
-              Ozon Premium
-            </p>
-            <p className="text-body-m mt-[var(--space-1)] text-[var(--color-cell-button-text)]">
-              Получить больше привилегий
-            </p>
-          </div>
-          <div className="h-[79px] w-[79px] flex-none self-end">
             <img
-              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v3/premium_banner.png"
+              src="https://github.com/imarina2194-art/OzonUserAccountForTests/releases/download/design-system-assets-v4/chevron_icon.png"
               alt=""
-              className="h-full w-full object-contain"
+              className="h-[16px] w-[16px] object-contain"
             />
           </div>
-        </div>
-      </div>
+          <p className="text-title-m font-[var(--font-weight-medium)] text-[var(--color-text-primary)]">
+            {cell.value}
+          </p>
+        </MutedPill>
+      ))}
     </div>
   </Island>
 );
@@ -901,11 +1076,11 @@ const App = ({ debug }) => {
           </Section>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <MorkovskEntryPoint debugStyle={debugStyle} />
+            <FinanceSection debugStyle={debugStyle} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
-            <FinanceSection debugStyle={debugStyle} />
+            <MegaPromoWidget debugStyle={debugStyle} status="ready" cards={megaPromoCards} />
           </div>
           <div className="h-[var(--space-1)]" />
           <div className="w-[390px] box-border">
